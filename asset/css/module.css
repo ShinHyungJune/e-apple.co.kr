@@ -1,0 +1,312 @@
+@import url('https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css');
+.m-input-error.type01 {
+    margin-top:8px;
+    font-size:14px; color:red;
+}
+
+.m-input-help.type01 {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #4995FD; /* 파란색 */
+}
+
+
+.m-pop.type01 {
+    display: flex; align-items: center; justify-content: center;
+    width:100%; height:100%;
+    position:fixed; top:0; left:0;
+    z-index:10000;
+    background-color:rgba(0,0,0,0.7);
+}
+.m-pop.type01 .m-pop-inner {
+    width:300px; padding:20px; padding-top:40px;
+    background-color:#fff;
+    border-radius:10px;
+}
+.m-pop.type01 .m-pop-description {
+    text-align: center; font-size:18px; font-weight:500;
+}
+.m-pop.type01 .m-pop-btns {
+    display: flex; align-items: center; justify-content: center;
+    margin-top:20px;
+}
+.m-pop.type01 .m-pop-btn {
+    padding:12px 24px;
+    font-size:16px;
+    background-color:#0075A9;
+    color:#fff;
+    border-radius:5px;
+}
+
+
+
+.m-input-objects.type01 {}
+.m-input-objects.type01 th {
+    padding:8px;
+    background-color:#efefef;
+}
+.m-input-objects.type01 td {
+    padding:8px;
+}
+.m-input-objects.type01 .btn-add {
+    display: block; width:100%;
+    margin-top:12px; padding:12px;
+    background-color:black; color:#fff;
+    border-radius:10px;
+}
+.m-input-objects.type01 .btn {
+    padding:4px 12px;
+    font-size:12px;
+    background-color:black; color:#fff;
+    border-radius:5px;
+    white-space: nowrap;
+}
+.m-input-objects.type01 .btn-remove {
+    background-color:red;
+}
+
+
+
+/* 페이지네이션 */
+.m-pagination.type01 {
+    margin-top: 55px;
+}
+.m-pagination.type01 .m-pages {
+    display: flex; justify-content: center;
+    margin:-4px;
+}
+.m-pagination.type01 .m-page-wrap {
+    padding:4px;
+}
+.m-pagination.type01 .m-page {
+    display: flex; align-items: center; justify-content: center;
+    width:30px; height:30px;
+    font-size:14px;
+    background-color:#fff; color:rgb(120, 130, 157);
+    border-radius:5px;
+    transition: all .3s;
+}
+.m-pagination.type01 .m-page:hover {
+    transform:translate(-4px, -4px);
+    box-shadow:0px 3px 6px rgb(0,0,0,0.16);
+}
+.m-pagination.type01 .m-page i {
+    margin:0 -4px;
+    font-size:14px; color:rgb(120, 130, 157);
+}
+.m-pagination.type01 .m-page.active {
+    background-color:#3e97fe; color:#fff;
+
+}
+
+
+
+.m-pagination.type02 {
+    margin-top: 55px;
+}
+.m-pagination.type02 .m-pages {
+    display: flex; justify-content: center;
+    margin:-4px;
+}
+.m-pagination.type02 .m-page-wrap {
+    /* padding:4px; */
+    /* margin-right: 8px; */
+}
+ .m-pagination.type02 .m-page-wrap:last-child {
+    margin: unset;
+}
+
+.m-pagination.type02 .m-page {
+    display: flex; align-items: center; justify-content: center;
+    width:30px; height:30px;
+    font-size:13px;
+    /* background-color:#fff; color:rgb(120, 130, 157); */
+    border-radius:100%;
+    transition: all .3s;
+    /* background: #F7F7F7; */
+    font-weight: 500;
+}
+
+.m-pagination.type02 .m-page-wrap:first-child .m-page , .m-pagination.type02 .m-page-wrap:last-child .m-page {
+    background-color: #fff;
+    /* border: 1px solid #e4e4e4; */
+}
+
+.m-pagination.type02 .m-page:hover {
+    /* transform:translate(-4px, -4px); */
+    box-shadow:0px 3px 6px rgb(0,0,0,0.16);
+}
+.m-pagination.type02 .m-page i {
+    margin:0 -4px;
+    font-size:14px; color:rgb(120, 130, 157);
+}
+.m-pagination.type02 .m-page.active {
+    background: #333333; color:#fff;
+}
+
+
+
+
+
+/* 리스트에서 아이템이 없을때 */
+.m-noListData.type01 {
+    width: 100%; /* 가로값 100% */
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    margin-bottom: 80px;
+    padding: 40px; /* 패딩을 더 넉넉하게 */
+    background-color: #f9f9f9; /* 연한 회색 배경 */
+    border-radius: 12px; /* 모서리를 더 부드럽게 */
+    border: 1px solid #ececec; /* 연한 테두리 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* 부드러운 그림자 */
+}
+
+.m-noListData.type01 .m-noListData-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* 텍스트 중앙 정렬 */
+    max-width: 500px; /* 더 넓은 최대 가로값 설정 */
+    width: 100%; /* 부모 요소의 가로값을 따름 */
+    padding: 30px; /* 내부 패딩을 더 넉넉하게 */
+    background-color: white; /* 안쪽 박스 배경을 흰색으로 */
+    border-radius: 12px; /* 둥근 모서리 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* 부드러운 그림자 */
+}
+
+.m-noListData.type01 .m-noListData-box p {
+    font-weight: 600; /* 폰트 두께를 더 두껍게 */
+    font-size: 18px; /* 폰트 크기를 크게 */
+    color: #555; /* 좀 더 진한 색상으로 텍스트 가독성 향상 */
+}
+
+.m-input-images.type01 {
+    display: flex; width:100%;
+}
+.m-input-images.type01 .m-input {
+    margin-right:10px;
+}
+.m-input-images.type01 .m-input input {
+    display: none;
+}
+.m-input-images.type01 .m-input .m-btn {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    gap: 8px;
+    width: 110px;
+    height: 110px;
+    background-color: #f5f5f5;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #a7a7a7;
+    border: dashed 1px #a7a7a7; cursor:pointer;
+}
+
+.m-input-images.type01 .m-input .m-btn i {
+    font-size:32px; color:#a7a7a7;
+}
+.m-input-images.type01 .m-files-wrap {
+
+}
+.m-input-images.type01 .m-files {
+    display: flex; flex-wrap:wrap;
+    margin:-4px;
+}
+.m-input-images.type01 .m-file-wrap {
+    padding:4px;
+}
+.m-input-images.type01 .m-file {
+    width:110px; height:110px;
+    position:relative;
+    background-size:cover; background-position: center center;
+    border:1px solid #e1e1e1;
+}
+.m-input-images.type01 .m-file .m-btn-remove {
+    width: 20px; height:20px;
+    position: absolute; top:10px; right:10px;
+    border-radius:5px;
+    background-color:red;
+    box-shadow:0px 3px 6px rgba(0,0,0,0.16);
+}
+.m-input-images.type01 .m-file .m-btn-remove i {
+    color:#fff;
+}
+
+
+
+
+
+.m-input-files { display: flex; padding: 4px; max-width: 560px; border: 1px solid #e4e4e4; border-radius: 4px; }
+.m-input-files .m-input { width: 100px; }
+.m-input-files .m-input .m-btn { width: 100px; height: 32px; display: flex; justify-content: center; align-items: center; background: #202020; color: #fff; border-radius: 4px; font-weight: bold; cursor: pointer; }
+.m-input-files .m-files-wrap { width: calc(100% - 100px); }
+.m-input-files .m-files { display: flex; flex-direction: column; width: 100%; }
+.m-input-files .m-files .m-file-wrap { display: flex; padding: 0 8px 0 16px; }
+.m-input-files .m-files .m-file-wrap .m-file { display: flex; height: 32px; width: 100%; align-items: center; }
+.m-input-files .m-files .m-file-wrap .m-file span { display: block; width: calc(100% - 32px); white-space: nowrap; overflow: hidden;  text-overflow: ellipsis;  }
+.m-input-files .m-files .m-file-wrap .m-file .m-btn-remove { width: 32px; height: 32px; }
+.m-input-files .m-noFile { display: flex; height: 32px; width: calc(100% - 100px); align-items: center; padding-left: 16px; font-size: 17px; color: rgba(0, 0, 0, 0.4); font-weight: bold; }
+
+
+.m-contents-section { background-color: #F5F5F5; }
+.m-contents-wrap.type01 { white-space:pre-line; line-height: 1.5; font-size: 16px; }
+.m-contents-wrap.type01 h2 { margin-bottom: 40px; font-size: 40px; font-weight: bold; }
+
+
+/* 로딩 */
+.m-loading.type01 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    /* background-color: rgba(0, 0, 0, 0.7); */
+}
+
+.m-loading.type01 .m-loading__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.m-loading.type01 .m-loading__spinner {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #4995FD; /* 브랜드 색상 적용 */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin-bottom: 40px;
+}
+
+.m-tabs.type01 {
+    display: flex; flex-wrap:wrap; gap:8px;
+}
+.m-tabs.type01 .m-tab {
+    padding:8px 16px;
+    font-size:14px;
+    border-radius:5px;
+    background-color:#fff; color:#999; border:1px solid #e1e1e1;
+    transition:all .3s;
+}
+.m-tabs.type01 .m-tab.active {
+    color:#000; border-color:#000;
+}
+.m-tabs.type01 .m-tab:hover {
+    color:#000; border-color:#000;
+}

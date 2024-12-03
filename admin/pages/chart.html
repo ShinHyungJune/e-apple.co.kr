@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>메인</title>
+
+    <!--  검색엔진 -->
+    <meta name="naver-site-verification" content="" /> <!-- 네이버 -->
+    <meta name="google-site-verification" content="" /> <!--구글 -->
+    <meta name="og:site_name" content="" />
+    <meta name="description" content="">
+    <meta property="og:type" content="">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="">
+    <meta property="og:image" content=""> <!-- 주소 공유 이미지-->
+    <meta property="og:url" content="">
+    <meta name="keywords" content="" />
+    <!-- // -->
+
+    <link rel="stylesheet" type="text/css" href="../css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+
+    <!-- 파비콘 -->
+    <link rel="shortcut icon" href="../images/favicon.ico">
+
+    <script src="../js/jquery.js"></script>
+    <!-- <script src="../../js/script.js"></script> -->
+    <script src="../js/script.js"></script>
+
+    <script src="../js/swiper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+</head>
+<body>
+    <div id="wrap">
+        <header class="header">
+            <div class="fragment">
+                <h3 class="title">
+                    안녕하세요, <span class="point">신형준</span>님.
+                </h3>
+            </div>
+            <div class="fragment">
+                <a href="#" class="" style="text-decoration: underline; color:#777;">로그아웃</a>
+            </div>
+        </header>
+        <!-- //header -->
+
+        <main id="main" class="main">
+            <div class="m-spaces type01">
+                <div class="m-space-wrap" style="width:50%;">
+                    <div class="m-space">
+                        <div class="m-box type01">
+
+                            <h3 class="m-title type01 align-center">교육훈련비지원 활용률</h3>
+
+                            <div class="mt-12"></div>
+                            <div class="m-spaces type01 large" style="justify-content: center">
+                                <div class="m-space-wrap">
+                                    <div class="m-label type01">
+                                        <span class="deco bg1"></span>
+                                        컨텐츠 진흥본부
+                                    </div>
+                                </div>
+                                <div class="m-space-wrap">
+                                    <div class="m-label type01">
+                                        <span class="deco bg2"></span>
+                                        소양교육
+                                    </div>
+                                </div>
+                                <div class="m-space-wrap">
+                                    <div class="m-label type01">
+                                        <span class="deco bg3"></span>
+                                        직무교육
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-12"></div>
+                            <canvas id="barChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="m-space-wrap" style="width:50%;">
+                    <div class="m-space">
+                        <div class="m-box type01">
+                            <h3 class="m-title type01 align-center">부서별 승인현황</h3>
+
+                            <div class="mt-12"></div>
+                            <div class="m-spaces type01 large" style="justify-content: center">
+                                <div class="m-space-wrap">
+                                    <div class="m-label type01">
+                                        <span class="deco bg1"></span>
+                                        컨텐츠 진흥본부
+                                    </div>
+                                </div>
+                                <div class="m-space-wrap">
+                                    <div class="m-label type01">
+                                        <span class="deco bg2"></span>
+                                        소양교육
+                                    </div>
+                                </div>
+                                <div class="m-space-wrap">
+                                    <div class="m-label type01">
+                                        <span class="deco bg3"></span>
+                                        직무교육
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-12"></div>
+
+                            <canvas id="bar-chart-horizontal" width="600" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="m-space-wrap" style="width:50%;">
+                    <div class="m-space">
+                        <div class="m-box type01">
+                            <h3 class="m-title type01 align-center">교육별 현황(평균)</h3>
+
+                            <div class="mt-12"></div>
+                            <div class="m-spaces type01 large" style="justify-content: center">
+                                <div class="m-space-wrap">
+                                    <div class="m-label type01">
+                                        <span class="deco bg1"></span>
+                                        신청
+                                    </div>
+                                </div>
+                                <div class="m-space-wrap">
+                                    <div class="m-label type01">
+                                        <span class="deco bg2"></span>
+                                        미신청
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-12"></div>
+
+                            <div class="m-pie type01">
+                                <div class="label">전직원 100명</div>
+                                <canvas id="pie-chart"></canvas>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <canvas id="doughnut-chart"></canvas>
+        </main>
+        <!-- //main -->
+
+        <footer class="footer"></footer>
+        <!-- //footer -->
+    </div>
+    <script>
+        let colors = [
+            "#3e97ff",
+            "#f1416c",
+            "#50cd89",
+            "#ffc700",
+            "#dc67ab",
+            "#c767dc",
+            "#dcaf67",
+        ]
+        // 수직바 차트
+        let chart = new Chart(document.getElementById("barChart"), {
+            type: 'bar',
+            data: {
+                labels: ['컨텐츠 진흥본부', '기획팀', '박물관경영팀'],
+                datasets: [
+                    {
+                        label: '법정교육',
+                        yAxisID: 'y-first',
+                        data: [10, 20, 30],
+                        backgroundColor: [
+                            colors[0],
+                        ],
+                        borderRadius: 3, // 바 border radius
+                        borderSkipped: false,
+                    },
+                    {
+                        label: '소양교육',
+                        yAxisID: 'y-second',
+                        data: [100, 50, 150],
+                        backgroundColor: [
+                            colors[1],
+                        ],
+                        borderRadius: 3, // 바 border radius
+                        borderSkipped: false,
+
+                    },
+                    {
+                        label: '직무교육',
+                        yAxisID: 'y-third',
+                        data: [10000000, 5000000, 3000000],
+                        backgroundColor: [
+                            colors[2],
+                        ],
+                        borderRadius: 3, // 바 border radius
+                        borderSkipped: false,
+                    }
+                ]
+            },
+            options: {
+                barPercentage: 0.7,
+                responsive:true,
+                "plugins": {
+                    "legend": { // 라벨 위치
+                        "display": false,
+                        "position": "bottom",
+                        "align": "center",
+                        title: { // 라벨 간격 넓히기
+                            display: true,
+                            padding: 0,
+                        },
+                    },
+                },
+                // maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        display: false,
+                    },
+                    'y-first': {
+                        type: 'linear',
+                        position: 'left',
+                        title: {
+                            display: false,
+                            text: 'Y Axis Left'
+                        },
+                        grid: {
+                            display: false
+                        }
+                    },
+                    'y-second': {
+                        display: false,
+
+                        type: 'linear',
+                        position: 'center',
+                        title: {
+                            display: false,
+                        },
+                        ticks: {
+                            display:false
+                        },
+                        grid: {
+                            display: false
+                        }
+                    },
+                    'y-third': {
+                        display: false,
+
+                        type: 'linear',
+                        position: 'right',
+                        title: {
+                            display: false,
+                        },
+                        ticks: {
+                            display:false
+                        },
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        })
+
+
+        // 수평바 차트
+        new Chart(document.getElementById("bar-chart-horizontal"), {
+            type: 'bar',
+            data: {
+                labels: ['교육비용', '달성도', '이수시간'],
+                datasets: [
+                    {
+                        label: '교육비용',
+                        xAxisID: 'first',
+                        data: [10, 20, 30],
+                        backgroundColor: [
+                            colors[0],
+                        ],
+                        borderRadius: 3, // 바 border radius
+                        borderSkipped: false,
+                    },
+                    {
+                        label: '달성도',
+                        xAxisID: 'second',
+                        data: [100, 50, 150],
+                        backgroundColor: [
+                            colors[1],
+                        ],
+                        borderRadius: 3, // 바 border radius
+                        borderSkipped: false,
+
+                    },
+                    {
+                        label: '이수시간',
+                        xAxisID: 'third',
+                        data: [10000000, 5000000, 3000000],
+                        backgroundColor: [
+                            colors[2],
+                        ],
+                        borderRadius: 3, // 바 border radius
+                        borderSkipped: false,
+                    }
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                barPercentage: 0.7,
+                responsive:true,
+                "plugins": {
+                    "legend": { // 라벨 위치
+                        "display": false,
+                    },
+                },
+                // maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+                        barThickness: 6,  // number (pixels) or 'flex'
+                        maxBarThickness: 8 // number (pixels)
+                    }],
+                    'first': {
+                        type: 'linear',
+                        title: {
+                            display: false,
+                            text: 'Y Axis Left'
+                        },
+                        grid: {
+                            display: false
+                        }
+                    },
+                    'second': {
+                        display: false,
+
+                        type: 'linear',
+                        title: {
+                            display: false,
+                        },
+                        ticks: {
+                            display:false
+                        },
+                        grid: {
+                            display: false
+                        }
+                    },
+                    'third': {
+                        display: false,
+
+                        type: 'linear',
+                        title: {
+                            display: false,
+                        },
+                        ticks: {
+                            display:false
+                        },
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // 파이 차트
+        new Chart(document.getElementById("pie-chart"), {
+            type: 'pie',
+            data: {
+                labels: ["신청", "미신청"],
+                datasets: [{
+                    backgroundColor: [colors[0], colors[1]],
+                    data: [100,40]
+                }]
+            },
+            options: {
+                responsive:true,
+                "plugins": {
+                    "legend": { // 라벨 위치
+                        "display": false,
+                    },
+                },
+            }
+
+        });
+
+        // 도넛 차트
+        new Chart(document.getElementById("doughnut-chart"), {
+            type: 'doughnut',
+            data: {
+                labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+                datasets: [
+                    {
+                        label: "Population (millions)",
+                        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                        data: [2478,5267,734,784,433]
+                    }
+                ]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Predicted world population (millions) in 2050'
+                }
+            }
+        });
+    </script>
+</body>
+</html>

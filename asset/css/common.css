@@ -1,0 +1,113 @@
+/*===========================================================================
+	웹폰트
+============================================================================*/
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+/*===========================================================================
+	CSS 초기화
+============================================================================*/
+* { font-family: "Pretendard", sans-serif; box-sizing:border-box; margin:0; padding:0; }
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, em, img, strong, b, i, dl, dt, dd, ol, ul, li, form, label, legend, caption, article, aside, footer, header, menu, nav, section, video, a {border:0; outline:0; font-size:100%; color:#303030; line-height:normal;}
+html { width: 100vw; overflow-x: hidden; scroll-behavior: smooth;}
+body { line-height: normal; width: 100vw; -ms-overflow-style: none; height: 100%; }
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {display:block;}
+ul, ol, li {list-style:none;}
+strong {display: inline-block;}
+a {margin:0; padding:0; font-size:100%; display: block; }
+pre { font-family: "Pretendard", sans-serif; white-space: pre-line; line-height: 1.5; }
+input, select {vertical-align:middle; outline:0; border: 0; background: none; font-family: "Pretendard", sans-serif;}
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+input[type="file"], input[type="checkbox"], input[type="radio"] { display: none; }
+select { appearance: none; background-image: url(../images/icon_arrow_down.svg); background-repeat: no-repeat; background-position: right 8px center; background-size: 24px; }
+select option[value="disabled"][disabled] {display: none;}
+label { cursor: pointer; }
+button {cursor:pointer; border: 0; outline: 0; background: none;}
+a {text-decoration: none; display: block;}
+textarea { border: 0; outline: 0; resize: none; font-family: "Pretendard", sans-serif;}
+
+/* 컨텐츠 공통 */
+.col-group {display:flex;}
+.row-group {display:flex; flex-flow: column;}
+.container { width: 100%; margin: 0 auto; padding: 0 20px; max-width: 1312px; }
+.container.w1600 { max-width: 1600px; }
+.container.w1280 { max-width: 1280px; }
+.container.w768 { max-width: 768px; }
+.gb { font-family: "Giants-Bold", sans-serif; }
+.gr { font-family: "Giants-Regular", sans-serif; }
+.blue { color: #1968ff; }
+.red { color: #ff0000; }
+.green { color: #2bb27c; }
+.orange { color: #E94F35; }
+.img-container { width: 100%; position: relative; }
+.img-container img { width: 100%; height: 100%; position: absolute; top: 0; left: 0; right: 0; bottom: 0; object-fit: cover; object-position: center; }
+.video-container { width: 100%; padding-top: 56.25%; position: relative; }
+.video-container iframe { width: 100%; height: 100%; position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #e4e4e4; }
+::-webkit-scrollbar-thumb { background: #484848; border-radius: 4px;}
+.null-txt { font-size: 20px; font-weight: 300; text-align: center; color: #9f9b9b; padding: 96px 0; }
+.pc { display: block; }
+.mb { display: none; }
+i { color: unset; }
+img { object-fit: cover; }
+@media screen and (max-width: 1024px) {
+    .null-txt { font-size: 14px; padding: 64px; }
+    .pc { display: none; }
+    .mb { display: block; }
+}
+
+/* Margin classes */
+.mt-10 { margin-top: 10px; }
+.mb-10 { margin-bottom: 10px; }
+.mt-20 { margin-top: 20px; }
+.mb-20 { margin-bottom: 20px; }
+.mt-30 { margin-top: 30px; }
+.mb-30 { margin-bottom: 30px; }
+.mt-35 { margin-top: 35px; }
+.mt-40 { margin-top: 40px; }
+.mb-40 { margin-bottom: 40px; }
+.mt-50 { margin-top: 50px; }
+.mb-50 { margin-bottom: 50px; }
+.mt-60 { margin-top: 60px; }
+.mb-60 { margin-bottom: 60px; }
+.mt-70 { margin-top: 70px; }
+.mb-70 { margin-bottom: 70px; }
+.mt-80 { margin-top: 80px; }
+.mb-80 { margin-bottom: 80px; }
+
+/* Padding classes */
+.px-20 { padding-left: 20px; padding-right: 20px; }
+
+.pt-10 { padding-top: 10px; }
+.pb-10 { padding-bottom: 10px; }
+.pt-20 { padding-top: 20px; }
+.pb-20 { padding-bottom: 20px; }
+.pt-30 { padding-top: 30px; }
+.pb-30 { padding-bottom: 30px; }
+.pt-40 { padding-top: 40px; }
+.pb-40 { padding-bottom: 40px; }
+.pt-50 { padding-top: 50px; }
+.pb-50 { padding-bottom: 50px; }
+.pt-60 { padding-top: 60px; }
+.pb-60 { padding-bottom: 60px; }
+.pt-70 { padding-top: 70px; }
+.pb-70 { padding-bottom: 70px; }
+.pt-80 { padding-top: 80px; }
+.pb-80 { padding-bottom: 80px; }
+
+.ratio-box { position: relative; }
+.ratio-box:before { display: block; width: 100%; padding-top: 100%; content: ''; }
+
+
+#wrap { width: 100%; margin: 0 auto; }
+
+.body { min-height: calc(100vh - 76px - 370px); position: relative; width: 100%; padding-bottom: 56px; }
+
+.gradient-bg {
+    position: absolute;
+    background: linear-gradient(to bottom, rgba(255, 137, 0, 0.3), transparent);
+    height: 294px;
+    width: 100%; 
+    left: 0; top: 0;
+    z-index: -1;
+}

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ko">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=0" />
+
+<title>열매나무</title>
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<meta property="og:image" content="./images/thumb.png">
+<link rel="stylesheet" type="text/css" href="/asset/css/common.css">
+<link rel="stylesheet" type="text/css" href="/asset/css/module.css">
+<link rel="stylesheet" type="text/css" href="/asset/css/style.css">
+<link rel="stylesheet" type="text/css" href="/asset/css/swiper.min.css">
+<script src="./asset/js/jquery.js"></script>
+<script src="./asset/js/common.js"></script>
+<script src="./asset/js/swiper.min.js"></script>
+
+<body>
+    <div id="wrap">
+        <div id="header"></div>
+
+        <div class="body">
+            <div class="buy-cart-items-btn-wrap">
+                <p class="price">205,500원</p>
+                <a href="/success-order.html" class="buy-cart-items-btn">결제하기</a>
+            </div>
+            <section class="bd-bt">
+                <div class="input-list-type2 pt-20 pb-20 px-20">
+                    <div class="input-list-title-wrap">
+                        <p class="input-list-title">주문자</p>
+                    </div>
+                    <div>
+                        <div class="input-txt-box-type1">
+                            <input type="text" placeholder="주문자명을 입력해주세요.">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input-txt-box-type1">
+                            <input type="text" placeholder="휴대폰번호를 입력해주세요. (“-“제외)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-list-type2 pt-20 pb-20 px-20">
+                    <div class="input-list-title-wrap">
+                        <p class="input-list-title">배송지</p>
+                        <button class="change-address-btn">배송지 변경 <i class="xi-angle-right-min"></i></button>
+                    </div>
+                    <div>
+                        <div class="input-txt-box-type1">
+                            <input type="text" placeholder="배송지명을 입력해주세요.">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input-txt-box-type1">
+                            <input type="text" placeholder="휴대폰번호를 입력해주세요. (“-“제외)">
+                        </div>
+                    </div>
+                    <div class="address-input-wrap-type1">
+                        <div>
+                            <div class="input-txt-btn-box ">
+                                <div class="input-txt-box-type1 disabled">
+                                    <input type="text" placeholder="우편번호">
+                                </div>
+                                <button class="btn type2 wht">우편번호</button>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="input-txt-box-type1 disabled">
+                                <input type="text" placeholder="주소">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="input-txt-box-type1">
+                                <input type="text" placeholder="상세주소를 입력해주세요.">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="select-box-type1">
+                            <select name="" id="" class="">
+                                <option value="">배송시 요청사항을 선택해주세요.</option>
+                            </select>
+                            <i class="xi-angle-down"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-list-type2 pt-20 pb-20 px-20">
+                    <div class="input-list-title-wrap">
+                        <p class="input-list-title">공동현관 출입방법</p>
+                    </div>
+                    <div>
+                        <div class="select-box-type1">
+                            <select name="" id="" class="">
+                                <option value="">출입방법을 선택해 주세요.</option>
+                            </select>
+                            <i class="xi-angle-down"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-list-type2 pt-20 pb-20 px-20">
+                    <div class="input-list-title-wrap">
+                        <p class="input-list-title">주의사항</p>
+                    </div>
+                    <div>
+                        <div class="info-message-type2">
+                            <p class="mb-20 info-message-txt">
+                                다음의 경우 공동현관 앞 또는 경비실 앞으로 배송이 될 수 있습니다.
+                                이로 인한 상품의 분실 및 파손은 책임지지 않습니다.
+                            </p>
+                            <ul class="info-message-list">
+                                <li>
+                                    <div class="num">01.</div>
+                                    <p>입력해 주신 비밀번호가 없거나 일치하지 않는 경우.</p>
+                                </li>
+                                <li>
+                                    <div class="num">02.</div>
+                                    <p>기기 오작동 또는 경비원의 부재로 공동현관 출입이 원활하지 않을 경우.</p>
+                                </li>
+                                <li>
+                                    <div class="num">03.</div>
+                                    <p>6층 이상의 배송지 건물에 엘리베이터가 없거나 오작동하여 <br>
+                                        이용할 수 없는 경우.</p>
+                                </li>
+                                <li>
+                                    <div class="num">04.</div>
+                                    <p>기타 공동현관 출입이 불가하여 자택 앞으로 배송할 수 없는 경우.</p>
+                                </li>
+                                <li>
+                                    <div class="num">05.</div>
+                                    <p>비밀번호는 배송 목적으로만 사용 후 안전하게 폐기합니다.</p>
+                                </li>
+                                <li>
+                                    <div class="num">06.</div>
+                                    <p>공동현관 출입 방법을 정확하게 입력해 주세요.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bd-bt">
+                <div class="input-list-type2 pt-20 pb-20 px-20">
+                    <div class="input-list-title-wrap">
+                        <p class="input-list-title">배송일</p>
+                    </div>
+                    <div>
+                        <div class="radiobox-list-type1">
+                            <label class="option">
+                                <input type="radio" name="delivery" value="default" checked />
+                                <span>기본배송</span>
+                            </label>
+                            <label class="option selected">
+                                <input type="radio" name="delivery" value="scheduled" />
+                                <span>지정일 배송</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div class="input-txt-box-type1">
+                                <input type="date" name="" id="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-list-title-wrap mt-10">
+                        <p class="input-list-title">주의사항</p>
+                    </div>
+                    <div>
+                        <div class="info-message-type2">
+                            <ul class="info-message-list">
+                                <li>
+                                    <div class="num">01.</div>
+                                    <p>주문일 기준 2일 이후부터 선택 가능합니다.</p>
+                                </li>
+                                <li>
+                                    <div class="num">02.</div>
+                                    <p>오늘On 배송 상품의 경우 토요일 도착으로 지정 시 새벽 배송으로 진행되어, <br>
+                                        토요일 아침 7시 전 도착합니다.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bd-bt pt-20 pb-20">
+                <div class="agreement-checkbox-list px-20">
+                    <div class="agreement-checkbox-list-all">
+                        <div class="checkbox-type1">
+                            <input type="checkbox" id="checkbox-01">
+                            <label for="checkbox-01">전체 동의하기</label>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>
+                            <div class="checkbox-type1">
+                                <input type="checkbox" id="checkbox-02">
+                                <label for="checkbox-02">[필수] 개인정보 수집 및 이용 동의</label>
+                            </div>
+                            <a href="">상세보기</a>
+                        </li>
+                        <li>
+                            <div class="checkbox-type1">
+                                <input type="checkbox" id="checkbox-02">
+                                <label for="checkbox-02">[필수] 개인정보 수집 및 이용 동의</label>
+                            </div>
+                            <a href="">상세보기</a>
+                        </li>
+                        <li>
+                            <div class="checkbox-type1">
+                                <input type="checkbox" id="checkbox-02">
+                                <label for="checkbox-02">[필수] 개인정보 수집 및 이용 동의</label>
+                            </div>
+                            <a href="">상세보기</a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="bd-bt pt-20 pb-20">
+                <div class="price-information-list mb-20 px-20">
+                    <ul>
+                        <li>
+                            <div class="price-information">
+                                <p class="label">상품금액</p>
+                                <p class="price">199,500원</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="price-information">
+                                <p class="label">할인금액</p>
+                                <p class="price minus">-9,430원</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="price-information sub">
+                                <p class="label">가격인하/할인</p>
+                                <p class="price minus">-6,500원</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="price-information sub">
+                                <p class="label">상품쿠폰</p>
+                                <p class="price minus">-2,930원</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="price-information">
+                                <p class="label">배송비</p>
+                                <p class="price">6,000원</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="price-information final">
+                        <p class="label">총 상품금액</p>
+                        <p class="price">30,170원</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="footer"></div>
+    </div>
+</body>
+
+</html>
