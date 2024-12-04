@@ -1,0 +1,25 @@
+{
+  "name": "suhorang_next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.2.8",
+    "axios": "^1.7.7",
+    "jquery": "^3.7.1",
+    "js-cookie": "^3.0.5",
+    "next": "14.2.14",
+    "quill": "^2.0.2",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-quill": "^2.0.0",
+    "react-redux": "^9.1.2",
+    "swiper": "^4.5.1",
+    "zustand": "^5.0.0-rc.2"
+  }
+}
