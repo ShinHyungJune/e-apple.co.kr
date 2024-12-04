@@ -9,35 +9,39 @@ import Error from "@/components/Error";
 // 리덕스
 import { useDispatch, useSelector } from "react-redux";
 
+import Header from "@/components/Header";
+import MainTabMenu from "@/components/library/MainTabMenu";
 import Section01 from "@/components/mainComponents/Section01";
-
+import Section02 from "@/components/mainComponents/Section02";
+import Section03 from "@/components/mainComponents/Section03";
+import Section04 from "@/components/mainComponents/Section04";
+import Section05 from "@/components/mainComponents/Section05";
+import Section06 from "@/components/mainComponents/Section06";
+import Section07 from "@/components/mainComponents/Section07";
+import Section08 from "@/components/mainComponents/Section08";
 
 export default function Start() {
     const router = useRouter();
     // const categories = useSelector(state => state.app.categories);
-
-    const [loading, setLoading] = useState(false)
 
 
     return (
         <>
             <div className="gradient-bg"></div>
 
-            
+            <Header/>
 
             <div className="body main-page">
-                <div className="main-tab-menu">
-                    <div className="tab-menu-bar">
-                        <a href="/" className="tab-item">전체</a>
-                        <a href="/" className="tab-item">추천</a>
-                        <a href="/bast.html" className="tab-item">베스트</a>
-                        <a href="/gift.html" className="tab-item">선물</a>
-                        <a href="/story.html" className="tab-item">스토리</a>
-                        <a href="/event.html" className="tab-item ">이벤트</a>
-                    </div>
-                </div>
+                <MainTabMenu activeTab="전체"/>
 
                 <Section01/>
+                <Section02/>
+                <Section03/>
+                <Section04/>
+                <Section05/>
+                <Section06/>
+                <Section07/>
+                <Section08/>
             </div>
         </>
     );

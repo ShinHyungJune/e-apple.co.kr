@@ -139,13 +139,13 @@
 .swiper-type1 .swiper .swiper-slide .content-box .txt-wrap .txt-bt::before { content: ''; position: absolute; left: 50%; top: 0; transform: translate(-50%, -50%); width: 260px; height: 1px; background-color: #FFFFFF; }
 
 /* 스와이퍼 타입2 */
-.swiper-type2 { padding: 0 20px; }
+.swiper-type2 { padding: 0 20px; overflow: hidden; }
 
 /* 스와이퍼 타입3 */
-.swiper-type3 { padding: 0 20px; }
+.swiper-type3 { padding: 0 20px; overflow: hidden; }
 
 /* 스와이퍼 타입4 */
-.swiper-type4 { padding: 0 20px; }
+.swiper-type4 { padding: 0 20px; overflow: hidden; }
 
 
 /* 섹션별 타이틀 */
@@ -180,7 +180,7 @@
 .item-list-type1 > ul > li { width: calc((100% - 10px) /2); }
 
 /* 아이템 리스트 타입3 */
-.item-list-type3 { display: block; padding: 0 20px; }
+.item-list-type3 { display: block; }
 .item-list-type3 > ul { display: flex; gap: 15px; flex-direction: column; }
 .item-list-type3 > ul > li { width: 100%; }
 
@@ -192,7 +192,7 @@
 .item-type1 .item-img-wrap .img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
 .item-type1 .item-img-wrap .img img { width: 100%; height: 100%; background-color: rgb(134, 14, 14); }
 .item-type1 .item-img-wrap .new { position: absolute; top: 0; left: 0; border-radius: 0 0 16px 0; background-color: #000; padding: 0 10px; height: 20px; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 12px; }
-.item-type1 .item-img-wrap .cart-btn { position: absolute; right: 10px; bottom: 10px; width: 40px; height: 40px; border-radius: 100%; display: flex; justify-content: center; align-items: center; background-image: url(/asset/images/cart-off.png); }
+.item-type1 .item-img-wrap .cart-btn { position: absolute; right: 10px; bottom: 10px; width: 40px; height: 40px; border-radius: 100%; display: flex; justify-content: center; align-items: center; background-image: url(/images/cart-off.png); }
 .item-type1 .item-img-wrap .cart-btn.active { background-image: url(/asset/images/cart-on.png); }
 .item-type1 .item-content-wrap { display: block; }
 .item-type1 .item-content-wrap .item-name { font-size: 14px; color: #303030; margin-bottom: 5px; }
@@ -266,7 +266,7 @@
 
 /* 후기 */
 .main-review-title-wrap { padding: 0 20px; }
-.main-review-title-wrap > p { width: 100%; display: flex; padding: 35px; color: #fff; border-radius: 10px; background-color: red; font-size: 25px; font-weight: bold; margin-bottom: 20px; }
+.main-review-title-wrap > p { width: 100%; display: flex; padding: 35px; color: #fff; border-radius: 10px; font-size: 25px; font-weight: bold; margin-bottom: 20px; background-image: url("/images/main-review-title-wrap-bg-img.png"); }
 
 /* 후기 타입1 */
 .review-list-type1 { display: block; padding: 0 20px; }
