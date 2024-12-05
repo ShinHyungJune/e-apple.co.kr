@@ -20,7 +20,7 @@ import ProductItemType3 from "@/components/library/ProductItemType3";
 import productsApi from "@/lib/api/productsApi";
 
 
-export default function Start() {
+export default function page() {
     const router = useRouter();
     const [isFirstRender, setIsFirstRender] = useState(true);
 
@@ -70,9 +70,9 @@ export default function Start() {
 
     // 가격대별 인기 선물 api
     useEffect(() => {
-        getPriceProducts()
+        priceProductsIndex()
     }, [priceProductsForm])
-    function getPriceProducts() {
+    function priceProductsIndex() {
         productsApi.index("gift", priceProductsForm, (response) => {
             setPriceProducts(response.data);
         })
@@ -81,9 +81,9 @@ export default function Start() {
 
     // 어느분에게 선물하시나요? api
     useEffect(() => {
-        getGiftProducts()
+        giftProductsIndex()
     }, [giftProductsForm])
-    function getGiftProducts() {
+    function giftProductsIndex() {
         const params = new URLSearchParams();
 
         // `giftProductsForm` 데이터를 쿼리 파라미터로 변환
@@ -101,11 +101,12 @@ export default function Start() {
 
     // md 추천 선물 상품 api
     useEffect(() => {
-        getMdGiftProducts()
+        mdGiftProductsIndex()
     }, [])
-    function getMdGiftProducts() {
-        productsApi.index("md_suggestion_gift", {}, (response) => {
+    function mdGiftProductsIndex() {
+        productsApi.index("md_packages", {}, (response) => {
             setMdGiftProducts(response.data);
+            console.log(response.data);
         })
     }
 

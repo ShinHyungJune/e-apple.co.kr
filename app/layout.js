@@ -1,10 +1,10 @@
 
 export const metadata = {
-    title: 'title',
+    title: '열매나무',
     description: 'description',
     // Open Graph 태그 및 다른 메타 정보
     openGraph: {
-        title: 'title',
+        title: '열매나무',
         description: 'description',
         // images: ['/image/thumbnail-wide.png'],
         // url: 'https://janginart.co.kr',

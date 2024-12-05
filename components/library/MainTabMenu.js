@@ -7,7 +7,7 @@ export default function MainTabMenu({ activeTab }) {
                 <Link href="/" className={`tab-item ${activeTab === '전체' ? 'active' : ''}`}>
                     전체
                 </Link>
-                <Link href="/" className={`tab-item ${activeTab === '추천' ? 'active' : ''}`}>
+                <Link href="/suggestion" className={`tab-item ${activeTab === '추천' ? 'active' : ''}`}>
                     추천
                 </Link>
                 <Link href="/bast" className={`tab-item ${activeTab === '베스트' ? 'active' : ''}`}>
@@ -16,10 +16,10 @@ export default function MainTabMenu({ activeTab }) {
                 <Link href="/gift" className={`tab-item ${activeTab === '선물' ? 'active' : ''}`}>
                     선물
                 </Link>
-                <Link href="/story" className={`tab-item ${activeTab === '스토리' ? 'active' : ''}`}>
+                <Link href="/storys" className={`tab-item ${activeTab === '스토리' ? 'active' : ''}`}>
                     스토리
                 </Link>
-                <Link href="/event" className={`tab-item ${activeTab === '이벤트' ? 'active' : ''}`}>
+                <Link href="/events" className={`tab-item ${activeTab === '이벤트' ? 'active' : ''}`}>
                     이벤트
                 </Link>
             </div>

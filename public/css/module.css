@@ -106,6 +106,7 @@
 }
 .m-pagination.type02 .m-pages {
     display: flex; justify-content: center;
+    max-width: 100%;
     margin:-4px;
 }
 .m-pagination.type02 .m-page-wrap {

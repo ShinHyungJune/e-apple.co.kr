@@ -25,8 +25,8 @@ export const viewport = {
 
 // api
 import usersApi from "@/lib/api/usersApi";
-import BottomNav from "@/components/library/bottomNav";
 
+import BottomNav from "@/components/library/BottomNav";
 
 export default function Layout({ children }) {
 
@@ -50,9 +50,11 @@ export default function Layout({ children }) {
             {/* 아이포트 */}
             <Script src="//cdn.iamport.kr/v1/iamport.js" />
             {/* <Header /> */}
-            <BottomNav/>
-            {children}
-            <Footer />
+            <div className="body-wrap">
+                {children}
+                <BottomNav/>
+                <Footer />
+            </div>
         </>
     );
 }

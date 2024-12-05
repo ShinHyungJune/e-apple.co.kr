@@ -40,7 +40,7 @@ export default function page() {
         ProductsIndex()
     }, [form])
     function ProductsIndex() {
-        productsApi.index("best", form, (response) => {
+        productsApi.index("suggestion", form, (response) => {
             setProducts(response.data);
         })
     }
@@ -54,11 +54,11 @@ export default function page() {
             <Header />
 
             <div className="body main-page">
-                <MainTabMenu activeTab="베스트" />
+                <MainTabMenu activeTab="추천" />
 
                 <section className="mb-60 mt-35">
                     <div className="section-title-wrap-type1">
-                        <p className="section-title">베스트 20</p>
+                        <p className="section-title">추천 상품</p>
                     </div>
                     <div className="item-list-type1">
                         {
