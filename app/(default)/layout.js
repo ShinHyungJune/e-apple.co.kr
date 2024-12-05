@@ -33,13 +33,15 @@ export default function Layout({ children }) {
     const dispatch = useDispatch(); // Redux dispatch 사용
 
     // 유저 정보 관리
-    // const user = useSelector(state => state.app.user);
-    // useEffect(()=>{
-    //     dispatch(actions.setGuestId());
+    const user = useSelector(state => state.app.user);
+    useEffect(()=>{
+        dispatch(actions.setGuestId());
 
-    //     if (user)
-    //         usersApi.show();
-    // },[])
+        if (user)
+            usersApi.show();
+    },[])
+
+    
 
 
 

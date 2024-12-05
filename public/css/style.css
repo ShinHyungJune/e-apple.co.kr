@@ -66,6 +66,11 @@
 .header-type1 .header-box .header-btn-wrap { display: flex; gap: 16px; }
 .header-type1 .header-box .header-btn-wrap .header-btn { font-size: 24px; }
 .header-type1 .header-box .header-btn-wrap .header-btn.search-btn i { color: #FF990D; }
+.header-type1 .header-box .back-btn-wrap { display: flex; }
+.header-type1 .header-box .back-btn-wrap button i { font-size: 24px; color: #202020; }
+
+.header-type1 .header-box .header-subTitle-wrap { position: absolute; left: 50%; transform: translateX(-50%); }
+.header-type1 .header-box .header-subTitle-wrap .header-subTitle { font-size: 17px; font-weight: 500; }
 
 /* 해드 type2 */
 .header-type2 { width: 100%; }

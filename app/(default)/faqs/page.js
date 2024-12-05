@@ -138,38 +138,6 @@ export default function page() {
                                             )
                                         })
                                     }
-                                    {/* <li>
-                                        <div className="qna-item-type1">
-                                            <div className="qna-item-top">
-                                                <div className="category-wrap">
-                                                    <p className="category-txt">교환문의</p>
-                                                </div>
-                                                <div className="content-txt-wrap">
-                                                    <div className="content-txt">
-                                                        출고는 언제해주시는건가요? <br />
-                                                        올 생각을 안해요.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="qna-item-bt">
-                                                <div className="category-wrap">
-                                                    <p className="category">A</p>
-                                                </div>
-                                                <div className="content-txt-wrap">
-                                                    <p>
-                                                        안녕하세요. <br />
-                                                        싱그러운 하루를 전달하는 열매나무입니다.
-                                                        <br />
-                                                        <br />
-                                                        주문해주신 과일은 금일 출고 예정입니다.
-                                                        <br />
-                                                        <br />
-                                                        감사합니다.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li> */}
                                 </ul>
                             ) : (
                                 <NoListData message="공지사항이 없습니다." />
