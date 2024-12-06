@@ -110,6 +110,8 @@ img { object-fit: cover; }
     background: linear-gradient(to bottom, rgba(255, 137, 0, 0.3), transparent);
     height: 294px;
     width: 100%; 
-    left: 0; top: 0;
+    max-width: 475px;
+    left: calc(100vw / 2); top: 0;
+    transform: translateX(-50%);
     z-index: -1;
 }

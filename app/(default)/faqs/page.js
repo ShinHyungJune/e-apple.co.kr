@@ -70,7 +70,7 @@ export default function page() {
 
     return (
         <>
-            <Header />
+            <Header subTitle={"공지사항"}/>
 
             <div className="body">
                 <div className="tab-menu-type2">

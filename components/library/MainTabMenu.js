@@ -10,7 +10,7 @@ export default function MainTabMenu({ activeTab }) {
                 <Link href="/suggestion" className={`tab-item ${activeTab === '추천' ? 'active' : ''}`}>
                     추천
                 </Link>
-                <Link href="/bast" className={`tab-item ${activeTab === '베스트' ? 'active' : ''}`}>
+                <Link href="/basts" className={`tab-item ${activeTab === '베스트' ? 'active' : ''}`}>
                     베스트
                 </Link>
                 <Link href="/gift" className={`tab-item ${activeTab === '선물' ? 'active' : ''}`}>

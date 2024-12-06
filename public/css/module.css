@@ -287,7 +287,7 @@
 
 .m-loading.type01 .m-loading__spinner {
     border: 16px solid #f3f3f3;
-    border-top: 16px solid #4995FD; /* 브랜드 색상 적용 */
+    border-top: 16px solid #ff990d; /* 브랜드 색상 적용 */
     border-radius: 50%;
     width: 120px;
     height: 120px;

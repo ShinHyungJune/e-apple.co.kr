@@ -29,7 +29,7 @@ export default function Start() {
         <>
             <div className="gradient-bg"></div>
 
-            <Header/>
+            <Header />
 
             <div className="body main-page">
                 <MainTabMenu activeTab="전체"/>

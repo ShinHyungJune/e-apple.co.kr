@@ -5,7 +5,7 @@ export default function ProductItemType1({product}) {
     return (
         <div className="item-type1">
             <div className="item-img-wrap">
-                <Link href="/productDetails.html" className="img">
+                <Link href={`/products/${product.id}`} className="img">
                     <img src={product.product_images[0].original_url} alt={product.file_name} />
                 </Link>
                 {product.is_new ?
@@ -24,7 +24,7 @@ export default function ProductItemType1({product}) {
                     <p className="original-price">{product.original_price.toLocaleString()}원</p>
                 </div>
                 <div className="sub-content">
-                    <p><i className="xi-star-o"></i>{ product.average_rating ? parseFloat(product.average_rating).toFixed(1) :"0"}</p>
+                    <p><i className="xi-star-o"></i>{product.average_rating ? parseFloat(product.average_rating).toFixed(1) :"0"}</p>
                     <p><i className="xi-eye-o"></i>{product.view_count}</p>
                 </div>
             </div>

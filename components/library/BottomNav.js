@@ -7,8 +7,6 @@ const BottomNav = () => {
     // 유저 정보 관리
     const user = useSelector(state => state.app.user);
 
-    console.log(user);
-
     return (
         <div className="bottomNav-type1">
             <ul>
