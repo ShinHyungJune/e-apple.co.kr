@@ -21,18 +21,19 @@ export default function Page() {
 
     function login(e) {
         e.preventDefault();
-
         usersApi.login(
             {
-                ids: ids,
+                email: ids,
                 password: password,
             },
             (response) => {
-                dispatch(actions.setUser(response.data.data.user));
-                dispatch(actions.setToken(response.data.data.token));
+                // dispatch(actions.setUser(response.data.data.user));
+                // dispatch(actions.setToken(response.data.data.token));
+
+                dispatch(actions.setToken(response.data.access_token));
 
                 const redirectUrl = searchParams.get('redirect') || "/";
-
+                
                 router.push(redirectUrl);
             },
             (error) => {
