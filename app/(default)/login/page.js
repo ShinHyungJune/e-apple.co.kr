@@ -61,7 +61,7 @@ export default function Page() {
                                     value={ids}
                                     onChange={(e) => setIds(e.target.value)}
                                     onKeyDown={(e) => {
-                                        if (e.key === 'Enter') {
+                                        if (e.key == 'Enter') {
                                             login(e); // 엔터키 누르면 login 함수 호출
                                         }
                                     }}
@@ -77,7 +77,7 @@ export default function Page() {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     onKeyDown={(e) => {
-                                        if (e.key === 'Enter') {
+                                        if (e.key == 'Enter') {
                                             login(e); // 엔터키 누르면 login 함수 호출
                                         }
                                     }}

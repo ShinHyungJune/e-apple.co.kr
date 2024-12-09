@@ -26,7 +26,7 @@ export default function page() {
 
     const [form, setForm] = useState({
         page: 1,
-        id: "",
+        category_id: "",
     });
 
     const [storys, setStorys] = useState({
@@ -75,11 +75,11 @@ export default function page() {
                     <div className="tab-menu-type1">
                         <ul>
                             <li
-                                className={form.id === "" ? "active" : ""}
+                                className={form.category_id == "" ? "active" : ""}
                                 onClick={() =>
                                     setForm((prevForm) => ({
                                         ...prevForm,
-                                        id: "",
+                                        category_id: "",
                                     }))
                                 }
                             >
@@ -88,11 +88,11 @@ export default function page() {
                             {initStorys.map((initStory) => (
                                 <li
                                     key={initStory.value}
-                                    className={form.id === initStory.value ? "active" : ""}
+                                    className={form.category_id == initStory.value ? "active" : ""}
                                     onClick={() =>
                                         setForm((prevForm) => ({
                                             ...prevForm,
-                                            id: initStory.value,
+                                            category_id: initStory.value,
                                         }))
                                     }
                                 >

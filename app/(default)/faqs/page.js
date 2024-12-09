@@ -100,7 +100,7 @@ export default function page() {
                                 <ul>
                                     {
                                         faqs.data.map((faq)=>{
-                                            const isVisible = visibleItemId === faq.id;
+                                            const isVisible = visibleItemId == faq.id;
 
                                             return(
                                                 <li key={faq.id}>

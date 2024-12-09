@@ -168,25 +168,25 @@ export default function page() {
                                 전체
                             </li>
                             <li
-                                className={priceProductsForm.min_price === "0" && priceProductsForm.max_price === "40000" ? "active" : ""}
+                                className={priceProductsForm.min_price == "0" && priceProductsForm.max_price == "40000" ? "active" : ""}
                                 onClick={() => handlePriceFilterClick("0", "40000")}
                             >
                                 4만원대 이하
                             </li>
                             <li
-                                className={priceProductsForm.min_price === "50000" && priceProductsForm.max_price === "70000" ? "active" : ""}
+                                className={priceProductsForm.min_price == "50000" && priceProductsForm.max_price == "70000" ? "active" : ""}
                                 onClick={() => handlePriceFilterClick("50000", "70000")}
                             >
                                 5-7만원
                             </li>
                             <li
-                                className={priceProductsForm.min_price === "80000" && priceProductsForm.max_price === "90000" ? "active" : ""}
+                                className={priceProductsForm.min_price == "80000" && priceProductsForm.max_price == "90000" ? "active" : ""}
                                 onClick={() => handlePriceFilterClick("80000", "90000")}
                             >
                                 8-9만원
                             </li>
                             <li
-                                className={priceProductsForm.min_price === "100000" ? "active" : ""}
+                                className={priceProductsForm.min_price == "100000" ? "active" : ""}
                                 onClick={() => handlePriceFilterClick("100000", "")}
                             >
                                 10만원 이상

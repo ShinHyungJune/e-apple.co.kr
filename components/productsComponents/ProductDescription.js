@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Swiper from "swiper";
 import PopupCoupon from "../popups/PopupCoupon";
+import EditorContent from "@/components/EditorContent";
 
 const ProductDescription = ({ product }) => {
     const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
@@ -34,6 +35,8 @@ const ProductDescription = ({ product }) => {
         };
     }, [product]);
 
+
+    
 
     return (
         <>
@@ -135,7 +138,9 @@ const ProductDescription = ({ product }) => {
                     <div
                         className={`product-description ${isDescriptionOpen ? "active" : ""}`}
                     >
-                        <img src="/images/test-img2.png" alt="추가 설명 이미지" />
+                        <div className="">
+                            <EditorContent description={product.description} />
+                        </div>
                         <button className="more-btn" onClick={toggleDescription}>
                             상품 성명 더보기 <i className="xi-angle-down-thin"></i>
                         </button>

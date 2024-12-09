@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import productsApi from "@/lib/api/productsApi";
 import Pagination from "@/components/Pagination";
 import Swiper from "swiper";
-import ReviewPhotoItemType1 from "../library/reviewPhotoItemType1";
+import ReviewPhotoItemType1 from "@/components/library/ReviewPhotoItemType1";
 import StarScore from "../library/StarScore";
 import NoListData from "../NoListData";
 import PopupReview from "../popups/PopupReview";
@@ -12,6 +12,7 @@ const ProductReview = ({ product }) => {
     const [form, setForm] = useState({
         page: 1,
         type: "",
+        take:"4",
     });
 
     const [reviews, setReviews] = useState({
@@ -97,7 +98,6 @@ const ProductReview = ({ product }) => {
 
     // 리뷰팝업
     const [targetReview, setTargetReview] = useState(null);
-    console.log(targetReview)
 
     return (
         <>
@@ -113,8 +113,8 @@ const ProductReview = ({ product }) => {
                         photoReviews.data.length > 0 ? (
                             <div className="swiper mySwiper2">
                                 <div className="swiper-wrapper">
-                                    {photoReviews.data.map((photoReview) => (
-                                        <div className="swiper-slide" key={photoReview.id}>
+                                    {photoReviews.data.map((photoReview, index) => (
+                                        <div className="swiper-slide" key={index}>
                                             <ReviewPhotoItemType1
                                                 review={photoReview}
                                                 onClick={() => setTargetReview(photoReview)} // 클릭 시 실행
@@ -173,7 +173,10 @@ const ProductReview = ({ product }) => {
                                                         {
                                                             review.images.length > 0 ? (
                                                                 <div className="img-wrap">
-                                                                    <ReviewPhotoItemType1 review={review} />
+                                                                    <ReviewPhotoItemType1 
+                                                                        review={review}
+                                                                        onClick={() => setTargetReview(review)} 
+                                                                    />
                                                                 </div>
                                                             ) : null
                                                         }
@@ -197,7 +200,7 @@ const ProductReview = ({ product }) => {
                 />
             </section>
             {
-                targetReview ? <PopupReview review={targetReview} /> : null
+                targetReview ? <PopupReview review={targetReview} setReview={setTargetReview} /> : null
             }
 
         </>
