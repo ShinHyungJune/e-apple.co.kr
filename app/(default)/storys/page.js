@@ -112,7 +112,7 @@ export default function page() {
                                                 <li key={story.id}>
                                                     <div className="info-item-type1">
                                                         <Link href={`/storys/${story.id}`} className="info-item-img-wrap">
-                                                            <img src="/asset/images/test-img.png" alt="" />
+                                                            <img src={story.file.url} alt={story.title} />
                                                         </Link>
                                                         <div className="info-item-content-wrap">
                                                             <Link href={`/storys/${story.id}`} className="item-name">{story.title}</Link>
@@ -128,7 +128,6 @@ export default function page() {
                                 <NoListData message="스토리가 없습니다." />
                             )
                         }
-                       
                     </div>
 
                     <Pagination

@@ -51,11 +51,18 @@ export default function page() {
     };
 
 
+
     const store = () => {
         
         // 필수 약관 동의가 false일 때
         if (!form.agreeTerms || !form.agreePrivacy) {
             dispatch(actions.setMessage("필수 약관에 동의해 주세요."));
+            return; // 전송 중단
+        }
+
+        // 번호 인증이 완료되지 않았을 때
+        if (!verifyNumberState) {
+            dispatch(actions.setMessage("번호 인증을 완료해 주세요."));
             return; // 전송 중단
         }
 
@@ -115,6 +122,7 @@ export default function page() {
                                     placeholder="비밀번호 (영문+숫자+특수문자 조합의 비밀번호 8자 이상)"
                                 />
                             </div>
+                            <Error name={'password'} />
                         </div>
                         <div>
                             <div className="input-txt-box-type1">
@@ -168,6 +176,7 @@ export default function page() {
                                     placeholder="성명을 입력해주세요."
                                 />
                             </div>
+                            <Error name={'name'} />
                         </div>
                     </div>
                     <div className="input-list-type2 mt-20 mb-20 px-20">
@@ -184,6 +193,7 @@ export default function page() {
                                     placeholder="닉네임을 입력해주세요."
                                 />
                             </div>
+                            <Error name={'nickname'} />
                         </div>
                     </div>
                 </section>

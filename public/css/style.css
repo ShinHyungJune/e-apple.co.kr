@@ -65,12 +65,20 @@
 .header-type1 .header-box .logo { display: flex; }
 .header-type1 .header-box .header-btn-wrap { display: flex; gap: 16px; }
 .header-type1 .header-box .header-btn-wrap .header-btn { font-size: 24px; }
-.header-type1 .header-box .header-btn-wrap .header-btn.search-btn i { color: #FF990D; }
+.header-type1 .header-box .header-btn-wrap .header-btn.search-open-btn i { color: #FF990D; }
 .header-type1 .header-box .back-btn-wrap { display: flex; }
 .header-type1 .header-box .back-btn-wrap button i { font-size: 24px; color: #202020; }
 
 .header-type1 .header-box .header-subTitle-wrap { position: absolute; left: 50%; transform: translateX(-50%); }
 .header-type1 .header-box .header-subTitle-wrap .header-subTitle { font-size: 17px; font-weight: 500; }
+
+.header-type1 .header-box .search-bar { border-bottom: 1px solid #FF990D; display: flex; }
+
+
+
+
+
+
 
 /* 해드 type2 */
 .header-type2 { width: 100%; }
@@ -223,7 +231,7 @@
 .item-type3 .item-img-wrap::before { display: block; width: 100%; padding-top: 100%; content: ''; }
 .item-type3 .item-img-wrap .img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
 .item-type3 .item-img-wrap .img img { width: 100%; height: 100%; }
-.item-type3 .item-content-wrap { display: block; padding-left: 15px; width: calc(100% - 65px); }
+.item-type3 .item-content-wrap { display: block; padding: 0 15px; width: calc(100% - 65px); }
 .item-type3 .item-content-wrap .item-name { font-size: 14px; color: #303030; margin-bottom: 5px; }
 .item-type3 .item-content-wrap .price-wrap { display: flex; gap: 4px; margin-bottom: 7px; }
 .item-type3 .item-content-wrap .price-wrap .discounted-price { color: #FF990D; font-size: 13px; font-weight: 600; }
@@ -570,7 +578,7 @@
 .saved-item-type1 { display: flex; height: 55px; align-items: center; }
 .saved-item-type1 .saved-item-name { display: flex; width: calc(100% - 145px); gap: 10px; align-items: center; }
 .saved-item-type1 .saved-item-name::before { content: ''; display: block; width: 1px; height: 10px; background-color: #e4e4e4; order: 2; }
-.saved-item-type1 .saved-item-name .option { font-size: 14px; font-weight: bold; color: #202020; order: 1; }
+.saved-item-type1 .saved-item-name .option { font-size: 14px; font-weight: bold; color: #202020; order: 1; max-width: calc(100% - 21px - 70px); }
 .saved-item-type1 .saved-item-name .price { font-size: 14px; color: #202020; order: 3; }
 .saved-item-type1 .delete-btn { font-size: 16px; color: #aeaeae; margin-left: 20px; }
 
@@ -591,6 +599,7 @@
 .price-information .label { font-size: 14px; }
 .price-information .price { font-size: 14px; font-weight: 600; color: #202020; }
 .price-information .price.minus { color: #f01c1c; }
+.price-information .price.underline { text-decoration: underline; }
 .price-information.final { margin-top: 26px; align-items: center; }
 .price-information.final .label { font-size: 16px; font-weight: bold; color: #202020; }
 .price-information.final .price { font-size: 24px; font-weight: bold; }

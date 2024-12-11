@@ -33,9 +33,12 @@ export default function Header({ subTitle }) {
                         <Link href="/" className="logo">
                             LOGO
                         </Link>
-
+                        
                         <div className="header-btn-wrap">
-                            <button className="header-btn search-btn">
+                            <div className='search-bar'>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <button className="header-btn search-open-btn">
                                 <i className="xi-search"></i>
                             </button>
                             <Link href="/cart" className="header-btn">

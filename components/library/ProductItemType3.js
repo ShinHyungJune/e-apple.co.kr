@@ -6,7 +6,7 @@ export default function ProductItemType3({product}) {
         <div className="item-type3">
             <div className="item-img-wrap">
                 <Link href={`/products/${product.id}`} className="img">
-                    <img src={product.product_images[0]?.original_url} alt={product.file_name} />
+                    <img src={product.img?.url} alt={product.name} />
                 </Link>
             </div>
             <div className="item-content-wrap">

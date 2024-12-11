@@ -42,13 +42,13 @@ const PopupReview = ({ review, setReview }) => {
 
                 <div className="popup-content-wrap pt-20">
                     {
-                        review.images.length > 0 ? (
+                        review.imgs.length > 0 ? (
                             <div className="swiper review-swiper-photo">
                                 <div className="swiper-wrapper">
-                                    {review.images.map((photoReview) => (
+                                    {review.imgs.map((photoReview) => (
                                         <div className="swiper-slide" key={photoReview.id}>
                                             <div className="review-swiper-photo-item-type1">
-                                                <img src={photoReview.original_url} alt="" />
+                                                <img src={photoReview.url} alt={photoReview.name} />
                                             </div>
                                         </div>
                                     ))}

@@ -47,10 +47,10 @@ const ProductDescription = ({ product }) => {
                         <div className="swiper mySwiper1">
                             <div className="swiper-wrapper">
                                 {
-                                    product.product_images.map((product_image) => {
+                                    product.imgs.map((product_image) => {
                                         return (
                                             <div className="swiper-slide" key={product_image.id}>
-                                                <img src={product_image.original_url} alt={product_image.file_name} />
+                                                <img src={product_image.url} alt={product_image.name} />
                                             </div>
                                         )
                                     })

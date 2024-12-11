@@ -40,7 +40,7 @@ function ContactInput({ contactValue, authCodeValue, verifyNumberState, setVerif
 
     return (
         <div>
-            <div className="flex flex-vc">
+            <div className="flex flex-vc mb-10">
                 <div className={`input-txt-box-type1 mb-10 input-box flex-1 mx560 mr8 ${verifyNumberState ? "readonly" : "" }`}>
                     <input
                         type="text"
@@ -97,7 +97,7 @@ function ContactInput({ contactValue, authCodeValue, verifyNumberState, setVerif
                     <div className="m-input-help type01">*인증이 완료되었습니다.</div>
                 :""
             }
-            <Error name={'contact'} />
+            <Error name={'phone'} />
         </div>
     );
 }

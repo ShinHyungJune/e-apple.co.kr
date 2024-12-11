@@ -171,7 +171,7 @@ const ProductReview = ({ product }) => {
                                                             {review.review}
                                                         </p>
                                                         {
-                                                            review.images.length > 0 ? (
+                                                            review.imgs.length > 0 ? (
                                                                 <div className="img-wrap">
                                                                     <ReviewPhotoItemType1 
                                                                         review={review}

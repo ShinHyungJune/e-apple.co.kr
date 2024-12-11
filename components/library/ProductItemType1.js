@@ -6,7 +6,7 @@ export default function ProductItemType1({product}) {
         <div className="item-type1">
             <div className="item-img-wrap">
                 <Link href={`/products/${product.id}`} className="img">
-                    <img src={product.product_images[0]?.original_url} alt={product.file_name} />
+                    <img src={product.img?.url} alt={product.name} />
                 </Link>
                 {product.is_new ?
                     <div className="new">

@@ -70,7 +70,7 @@ export default function page() {
                                                 <li key={event.id}>
                                                     <div className={`info-item-type1 ${isEnded ? "Ended" : ""}`}>
                                                         <Link href={`/events/${event.id}`} className="info-item-img-wrap">
-                                                            <img src="/asset/images/test-img.png" alt="" />
+                                                            <img src={event.file.url} alt={event.title} />
                                                             {isEnded && (
                                                                 <div className="Ended-box">
                                                                     <p>이벤트 종료</p>
