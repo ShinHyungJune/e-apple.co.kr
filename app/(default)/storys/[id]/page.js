@@ -13,47 +13,49 @@ import Header from "@/components/Header";
 import EditorContent from "@/components/EditorContent";
 import { StateBoards } from "@/enums/stateBoards";
 import boardsApi from "@/lib/api/boardsApi";
+import { formatDate } from "@/lib/util/formatDate";
 
+import InputFiles from "@/components/InputFiles";
 
 
 export default function page(props) {
     const router = useRouter();
     const id = props.params.id;
     
-    // // 스토리 하위 카테고리
-    // useEffect(() => {
-    //     boardsInit()
-    // }, [])
-    // function boardsInit() {
-    //     boardsApi.init(StateBoards.STORY, form, (response) => {
-    //         setInitStorys(response.data.data.category_items);
-    //     })
-    // }
+    const [board, setBoard] = useState();
 
     // // 스토리 api
-    // useEffect(() => {
-    //     boardsIndex()
-    // }, [form])
-    // function boardsIndex() {
-    //     boardsApi.index(StateBoards.STORY, form, (response) => {
-    //         setStorys(response.data);
-    //     })
-    // }
+    useEffect(() => {
+        boardsShow()
+    }, [])
+    function boardsShow() {
+        boardsApi.show(id, (response) => {
+            console.log(response.data.data);
+            setBoard(response.data.data);
+        })
+    }
 
     return (
         <>
             <Header />
 
             <div className="body main-page">
-                <section className="mb-60 mt-35">
-                    <div className="board-title-wrap px-20 mb-40">
-                        <p className="board-title mb-20">열매나무 스토리</p>
-                        <p className="board-date">23.10.10 ~ 23.10.31</p>
-                    </div>
-                    <div className="board-content-wrap">
-                        <EditorContent description={"asdasd"} />
-                    </div>
-                </section>
+                {
+                    board && (
+                        <section className="mb-60 mt-35">
+                            <div className="board-title-wrap px-20 mb-40">
+                                <p className="board-title mb-20">{board.title}</p>
+                                <p className="board-date">{formatDate(board.created_at)}</p>
+                            </div>
+                            <div className="board-content-wrap">
+                                <EditorContent description={board.content} />
+                                <div className="mt-20">
+                                    <InputFiles onlyShow={true} defaultValue={board.files}/>
+                                </div>
+                            </div>
+                        </section>
+                    )
+                }
             </div>
         </>
     );

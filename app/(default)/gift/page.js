@@ -144,7 +144,7 @@ export default function page() {
         return () => {
             if (swiper) swiper.destroy(true, true);
         };
-    }, []);
+    }, [mdGiftProducts]);
 
     return (
         <>
@@ -281,7 +281,40 @@ export default function page() {
                     <div className="swiper-type3 mb-40">
                         <div className="swiper mySwiper3">
                             <div className="swiper-wrapper">
-                                <div className="swiper-slide">
+                                {
+                                    mdGiftProducts.data.map((categorie)=>{
+                                        return(
+                                            <div className="swiper-slide" key={categorie.id}>
+                                                <ProductItemType2 categorie={categorie} />
+
+                                                <div className="item-list-type3 mt-40">
+                                                    <ul>
+                                                        {
+                                                            categorie.products.map((product)=>{
+                                                                return(
+                                                                    <li key={product.id}>
+                                                                        <ProductItemType3 product={product} />
+                                                                    </li>
+                                                                )
+                                                            })
+                                                        }
+                                                        {/* <li>
+                                                            <ProductItemType3 />
+                                                        </li>
+                                                        <li>
+                                                            <ProductItemType3 />
+                                                        </li>
+                                                        <li>
+                                                            <ProductItemType3 />
+                                                        </li> */}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
+                                
+                                {/* <div className="swiper-slide">
                                     <ProductItemType2 />
 
                                     <div className="item-list-type3 mt-40">
@@ -297,24 +330,7 @@ export default function page() {
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
-                                <div className="swiper-slide">
-                                    <ProductItemType2 />
-
-                                    <div className="item-list-type3 mt-40">
-                                        <ul>
-                                            <li>
-                                                <ProductItemType3 />
-                                            </li>
-                                            <li>
-                                                <ProductItemType3 />
-                                            </li>
-                                            <li>
-                                                <ProductItemType3 />
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

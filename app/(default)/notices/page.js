@@ -16,7 +16,7 @@ import Pagination from "@/components/Pagination";
 import { StateBoards } from "@/enums/stateBoards";
 import boardsApi from "@/lib/api/boardsApi";
 
-
+import { formatDate } from "@/lib/util/formatDate";
 
 export default function page() {
     const router = useRouter();
@@ -44,15 +44,6 @@ export default function page() {
             setNotices(response.data);
         })
     }
-
-    // 날짜 포맷팅 함수
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, "0"); // 1월은 0부터 시작하므로 +1
-        const day = String(date.getDate()).padStart(2, "0");
-        return `${year}.${month}.${day}`;
-    };
 
     return (
         <>

@@ -15,7 +15,7 @@ import NoListData from "@/components/NoListData";
 import Pagination from "@/components/Pagination";
 import { StateBoards } from "@/enums/stateBoards";
 import boardsApi from "@/lib/api/boardsApi";
-
+import { formatDate } from "@/lib/util/formatDate";
 
 
 export default function page() {
@@ -116,7 +116,7 @@ export default function page() {
                                                         </Link>
                                                         <div className="info-item-content-wrap">
                                                             <Link href={`/storys/${story.id}`} className="item-name">{story.title}</Link>
-                                                            <p className="date">{story.start_date} ~ {story.end_date}</p>
+                                                            <p className="date">{formatDate(story.created_at)}</p>
                                                         </div>
                                                     </div>
                                                 </li>
