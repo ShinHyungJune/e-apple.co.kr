@@ -1,7 +1,6 @@
 import Link from 'next/link';
 
 export default function ProductItemType2({categorie}) {
-    console.log(categorie);
     if(categorie)
     return (
         <div className="item-type2">
