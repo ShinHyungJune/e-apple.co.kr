@@ -128,12 +128,12 @@ const PopupOrder = ({ product, setIsPopupOrder, onSuccess }) => {
                                         <p className="price">{totalPrice.toLocaleString()}원</p>
                                     </div>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <div className="price-information">
                                         <p className="label">쿠폰할인</p>
                                         <p className="price minus underline">할인 쿠폰 받고 가격을 확인해보세요.</p>
                                     </div>
-                                </li>
+                                </li> */}
                             </ul>
                             <div className="price-information final">
                                 <p className="label">총 상품금액</p>

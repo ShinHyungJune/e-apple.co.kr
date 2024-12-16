@@ -56,6 +56,24 @@ img { object-fit: cover; }
     .mb { display: block; }
 }
 
+/* 크롬, 사파리, 엣지 */
+.scroll-hidden::-webkit-scrollbar {
+    display: none;
+    /* 스크롤바 숨김 */
+}
+
+/* 파이어폭스 */
+.scroll-hidden {
+    scrollbar-width: none;
+    /* 스크롤바 너비 없애기 */
+}
+
+/* IE, 구형 브라우저 */
+.scroll-hidden {
+    -ms-overflow-style: none;
+    /* 인터넷 익스플로러 대응 */
+}
+
 /* Margin classes */
 .mt-10 { margin-top: 10px; }
 .mb-10 { margin-bottom: 10px; }

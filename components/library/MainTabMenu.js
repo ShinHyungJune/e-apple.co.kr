@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function MainTabMenu({ activeTab }) {
     return (
-        <div className="main-tab-menu">
+        <div className="main-tab-menu scroll-hidden">
             <div className="tab-menu-bar">
                 <Link href="/" className={`tab-item ${activeTab === '전체' ? 'active' : ''}`}>
                     전체
