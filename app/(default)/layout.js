@@ -52,7 +52,7 @@ export default function Layout({ children }) {
             {/* 아이포트 */}
             <Script src="//cdn.iamport.kr/v1/iamport.js" />
             {/* <Header /> */}
-            <div className="body-wrap">
+            <div id="wrap">
                 {children}
                 <BottomNav/>
                 <Footer />

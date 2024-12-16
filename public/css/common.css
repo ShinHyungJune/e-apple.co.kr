@@ -99,9 +99,9 @@ img { object-fit: cover; }
 .ratio-box:before { display: block; width: 100%; padding-top: 100%; content: ''; }
 
 
-#wrap { width: 100%; margin: 0 auto; }
+#wrap { width: 100%; max-width: 475px; margin: 0 auto; }
 
-.body-wrap { width: 100%; max-width: 475px; margin: 0 auto; }
+/* .layout-wrapper { width: 100%; max-width: 475px; margin: 0 auto; } */
 
 .body { min-height: calc(100vh - 76px - 370px); position: relative; width: 100%; padding-bottom: 56px; }
 
