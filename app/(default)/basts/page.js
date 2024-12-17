@@ -20,11 +20,9 @@ export default function page() {
     const router = useRouter();
 
 
-    // 가격대별 인기 선물 form
     const [form, setForm] = useState({
         page: 1,
     });
-    // 가격대별 인기 선물 상품 리스트
     const [products, setProducts] = useState({
         data: [],
         meta: {

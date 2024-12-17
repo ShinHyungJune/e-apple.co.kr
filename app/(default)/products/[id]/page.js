@@ -36,6 +36,8 @@ export default function page(params) {
 
     const [showToast, setShowToast] = useState(false);
 
+
+
     const toggleDescription = () => {
         setIsDescriptionOpen(!isDescriptionOpen);
     };
@@ -88,10 +90,10 @@ export default function page(params) {
                                 <a href="#Information">상세정보</a>
                             </li>
                             <li>
-                                <a href="#review">후기 999+</a>
+                                <a href="#review">후기</a>
                             </li>
                             <li>
-                                <a href="#Inquiry">문의 54</a>
+                                <a href="#Inquiry">문의</a>
                             </li>
                         </ul>
                     </div>

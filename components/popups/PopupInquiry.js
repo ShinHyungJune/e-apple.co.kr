@@ -11,10 +11,6 @@ const PopupInquiry = ({ product, setProduct, onSuccess }) => {
         is_visible: "0",
     });
 
-    useEffect(() => {
-        console.log(form)
-    }, [form])
-
     const changeForm = (event) => {
         const { name, value, type, checked } = event.target;
         setForm({
@@ -32,7 +28,6 @@ const PopupInquiry = ({ product, setProduct, onSuccess }) => {
         });
     };
 
-
     return (
         <div className="popup-wrap">
             <div className="popup-wrap-bg"></div>
@@ -47,7 +42,7 @@ const PopupInquiry = ({ product, setProduct, onSuccess }) => {
                         <div className="item-type3">
                             <div className="item-img-wrap">
                                 <div className="img">
-                                    <img src="/asset/images/test-img.png" alt="" />
+                                    <img src={product.img.url} alt={product.img.name} />
                                 </div>
                             </div>
                             <div className="item-content-wrap">

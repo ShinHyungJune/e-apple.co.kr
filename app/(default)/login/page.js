@@ -27,10 +27,10 @@ export default function Page() {
                 password: password,
             },
             (response) => {
-                // dispatch(actions.setUser(response.data.data.user));
                 // dispatch(actions.setToken(response.data.data.token));
 
                 dispatch(actions.setToken(response.data.access_token));
+                dispatch(actions.setUser(response.data.user));
 
                 const redirectUrl = searchParams.get('redirect') || "/";
                 

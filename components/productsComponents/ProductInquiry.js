@@ -76,8 +76,14 @@ const ProductInquiry = ({ product }) => {
                                                 </div>
                                                 <div className="content-txt-wrap">
                                                     <div className="content-txt">
-                                                        {inquiry.title}
-                                                        {inquiry.content}
+                                                        {
+                                                            inquiry.is_visible == 1 ? 
+                                                            <p>
+                                                                {inquiry.title} <br />
+                                                                {inquiry.content}
+                                                            </p>
+                                                            :"비밀글 입니다"
+                                                        }
                                                     </div>
                                                     <div className="btn-wrap">
                                                         <button></button>

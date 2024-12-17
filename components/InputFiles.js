@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 
 const InputFiles = ({
   defaultValue = [], // 초기값
   required = true, // 필수 여부
   multiple = false, // 여러 개 파일 첨부 가능 여부
-  id = 'files', // label for와 input id에 들어갈 값
+  id = "files", // label for와 input id에 들어갈 값
   onlyShow = false, // 보여주기용 여부 (보여주기용은 삭제나 첨부를 못 하고 파일명만 나열됨)
   canRemove = true, // 삭제 가능 여부
   max = 10, // 최대 개수
@@ -78,7 +78,7 @@ const InputFiles = ({
             ref={inputRef}
             onChange={change}
             multiple={multiple}
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
           />
           <label htmlFor={id} className="m-btn">
             <i className="xi-plus" />
@@ -88,7 +88,7 @@ const InputFiles = ({
       )}
 
       {/* 파일이 없을 때 표시할 메시지 */}
-      {(defaultFiles.length === 0 && files.length === 0) && (
+      {defaultFiles.length === 0 && files.length === 0 && (
         <p className="m-noFile">파일을 첨부해주세요.</p>
       )}
 
@@ -99,7 +99,18 @@ const InputFiles = ({
             {defaultFiles.map((file, index) => (
               <div className="m-file-wrap" key={`default-${index}`}>
                 <div className="m-file">
-                  <span>{file.name}</span>
+                  {onlyShow ? (
+                    <a
+                      href={file.url || file.downloadUrl}
+                      download={file.name}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {file.name}
+                    </a>
+                  ) : (
+                    <span>{file.name}</span>
+                  )}
                   {!onlyShow && canRemove && (
                     <button
                       className="m-btn-remove"
@@ -116,7 +127,18 @@ const InputFiles = ({
             {files.map((file, index) => (
               <div className="m-file-wrap" key={`uploaded-${index}`}>
                 <div className="m-file">
-                  <span>{file.name}</span>
+                  {onlyShow ? (
+                    <a
+                      href={file.url}
+                      download={file.name}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {file.name}
+                    </a>
+                  ) : (
+                    <span>{file.name}</span>
+                  )}
                   {!onlyShow && canRemove && (
                     <button
                       className="m-btn-remove"

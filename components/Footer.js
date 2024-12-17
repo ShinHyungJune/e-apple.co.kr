@@ -18,11 +18,11 @@ const Footer = () => {
                     <Link href="/terms-of-service">이용약관</Link>
                 </div>
                 <p className="footer-information">
-                    주소: <br />
-                    대표자명: <br />
-                    사업자등록번호: <br />
-                    통신판매신고: <br />
-                    이메일:
+                    주소: 경상남도 거창군 고제면 고제로 740-8<br />
+                    대표자명: 오승철<br />
+                    사업자등록번호: 125-87-01503<br />
+                    통신판매신고: 제 2019-경남거창-00057 호<br />
+                    이메일: bezzangecp@naver.com
                 </p>
             </div>
         </div>

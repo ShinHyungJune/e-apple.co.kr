@@ -424,7 +424,7 @@
 .popup-wrap .popup-box-type1 .popup-close-btn-wrap { display: flex; width: 100%; height: 14px; justify-content: center; align-items: center; margin-bottom: 20px; }
 .popup-wrap .popup-box-type1 .popup-close-btn-wrap .popup-close-btn { width: 40px; height: 4px; border-radius: 2px; background-color: #e4e4e4; }
 .popup-wrap .popup-box-type1 .popup-title { font-weight: bold; line-height: 1.5; margin-bottom: 20px; }
-.popup-wrap .popup-box-type1 .popup-content-wrap { max-height: calc(100vh - 20px - 14px); overflow: auto; }
+.popup-wrap .popup-box-type1 .popup-content-wrap { max-height: calc(100vh - 20px - 54px); overflow: auto; }
 .popup-wrap .popup-box-type1 .popup-bt-btn-wrap { display: flex; gap: 10px; padding: 4px 0; margin-top: 20px; }
 .popup-wrap .popup-box-type1 .popup-bt-btn-wrap .popup-bt-btn { height: 48px; width: 100%; border-radius: 10px; font-size: 18px; font-weight: bold; }
 .popup-wrap .popup-box-type1 .popup-bt-btn-wrap .popup-bt-btn.org { background-color: #ff990d; color: #fff;  }

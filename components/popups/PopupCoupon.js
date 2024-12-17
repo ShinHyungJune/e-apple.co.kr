@@ -1,7 +1,68 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { actions } from "@/app/store";
 
+import couponsApi from "@/lib/api/couponsApi";
+import NoListData from "@/components/NoListData";
+import CouponItem from "@/components/library/CouponItem";
+import Pagination from "@/components/Pagination";
 
 const PopupCoupon = ({setIsPopupCoupon}) => {
+    const dispatch = useDispatch();
+    
+    const [form, setForm] = useState({
+        page: 1,
+    });
+    const [coupons, setCoupons] = useState({
+        data: [],
+        meta: {
+            current_page: 1,
+            last_page: 1,
+            total: 0,
+        },
+    });
+
+    useEffect(() => {
+        couponsIndex()
+    }, [form])
+    function couponsIndex() {
+        couponsApi.index(form, (response) => {
+            setCoupons(response.data);
+        })
+    }
+
+
+    function couponsDownload(id) {
+        return new Promise((resolve, reject) => {
+            couponsApi.download(id, {}, (response) => {
+                resolve(); // 성공 시 resolve
+            }, (error) => {
+                reject(error); // 실패 시 reject
+            });
+        });
+    }
+    
+    function couponsAllDownload() {
+        // coupons.data 배열에서 is_downloaded가 false인 쿠폰만 필터링
+        const notDownloadedCoupons = coupons.data.filter(coupon => !coupon.is_downloaded);
+        
+        // 다운로드 작업을 Promise 배열로 생성
+        const downloadPromises = notDownloadedCoupons.map(coupon => couponsDownload(coupon.id));
+        
+        // 모든 다운로드가 완료되면 실행
+        Promise.all(downloadPromises)
+            .then(() => {
+                dispatch(actions.setMessage("모든 쿠폰을 다운로드 완료했습니다"));
+                couponsIndex()
+            })
+            .catch((error) => {
+                console.error("다운로드 중 오류 발생:", error);
+                couponsIndex()
+            });
+    }
+    
+    
+
     return (
         <div className="popup-wrap">
             <div className="popup-wrap-bg" onClick={()=>{setIsPopupCoupon(false)}}></div>
@@ -16,45 +77,29 @@ const PopupCoupon = ({setIsPopupCoupon}) => {
                     </div>
 
                     <div className="coupon-list">
-                        <ul>
-                            <li>
-                                <div className="coupon-item">
-                                    <div className="coupon-item-top">
-                                        <p className="discount">12%</p>
-                                        <button className="coupon-bownload-btn">
-                                            <i className="xi-download"></i>
-                                        </button>
-                                    </div>
-                                    <div className="coupon-item-bt">
-                                        <p className="coupon-item-name">[이달의 과일] 12% 쿠폰</p>
-                                        <div className="coupon-item-maximum-period">
-                                            <p className="maximum">최대 10,000원 할인</p>
-                                            <p className="period">1일 4시간 2분 남음</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="coupon-item">
-                                    <div className="coupon-item-top">
-                                        <p className="discount">12%</p>
-                                        <p className="complete-txt">
-                                            다운완료 <i className="xi-check"></i>
-                                        </p>
-                                    </div>
-                                    <div className="coupon-item-bt">
-                                        <p className="coupon-item-name">[이달의 과일] 12% 쿠폰</p>
-                                        <div className="coupon-item-maximum-period">
-                                            <p className="maximum">최대 10,000원 할인</p>
-                                            <p className="period">1일 4시간 2분 남음</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+                        {
+                            coupons.data.length > 0 ? (
+                                <ul>
+                                    {
+                                        coupons.data.map((coupon)=>{
+                                            return(
+                                                <li key={coupon.id}>
+                                                    <CouponItem coupon={coupon} onSuccess={()=>{couponsIndex()}}/>
+                                                </li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                            ) : (<NoListData message={"쿠폰이 없습니다."}/>)
+                        }
                     </div>
+                    <Pagination
+                        form={form}
+                        setForm={setForm}
+                        meta={coupons.meta}
+                    />
                     <div className="popup-bt-btn-wrap">
-                        <button className="popup-bt-btn org">전체 다운로드</button>
+                        <button className="popup-bt-btn org" onClick={()=>{couponsAllDownload()}}>전체 다운로드</button>
                     </div>
                 </div>
             </div>
