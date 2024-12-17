@@ -1,62 +1,90 @@
 import React, { useState, useEffect, useMemo } from "react";
-
+import cartsApi from "@/lib/api/cartsApi";
 
 const PopupOrder = ({ product, setIsPopupOrder, onSuccess }) => {
 
     const [selectedOptions, setSelectedOptions] = useState([]); // 선택된 옵션 저장
     const [selectedValue, setSelectedValue] = useState(""); // 셀렉트박스의 현재 값 관리
 
+    const [form, setForm] = useState({
+        product_id: product.id,
+        product_options: selectedOptions,
+    });
+
+    useEffect(() => {
+        setForm((prevForm) => ({
+            ...prevForm,
+            product_options: selectedOptions,
+        }));
+    }, [selectedOptions, selectedValue]);
+
     const handleOptionChange = (event) => {
         const value = parseInt(event.target.value, 10);
         const selectedOption = product.options.find((option) => option.id === value);
-    
+
         if (!selectedOption) return;
-    
+
         // 중복 체크
         const isAlreadySelected = selectedOptions.some(
-            (option) => option.id === selectedOption.id
+            (option) => option.product_option_id === selectedOption.id
         );
-    
+
         if (isAlreadySelected) {
             alert("이미 선택된 옵션입니다."); // 중복 시 알림
         } else {
-            // count 키를 추가한 새로운 객체 생성
-            const optionWithCount = { ...selectedOption, count: 1 };
-    
-            setSelectedOptions((prevOptions) => [...prevOptions, optionWithCount]); // 새 옵션 추가
+            // product_option_id와 quantity를 추가한 새로운 객체 생성
+            const optionWithQuantity = {
+                product_option_id: selectedOption.id, // 기존 id를 product_option_id로 변경
+                name: selectedOption.name,
+                price: selectedOption.price,
+                quantity: 1,
+            };
+
+            setSelectedOptions((prevOptions) => [...prevOptions, optionWithQuantity]); // 새 옵션 추가
         }
-    
+
         // 선택 완료 후 셀렉트박스 초기화
         setSelectedValue("");
     };
-    const handleQuantityChange = (id, type) => {
+    const handleQuantityChange = (product_option_id, type) => {
         setSelectedOptions((prevOptions) =>
             prevOptions.map((option) =>
-                option.id === id
+                option.product_option_id === product_option_id
                     ? {
-                          ...option,
-                          count: type === "increment" ? option.count + 1 : Math.max(1, option.count - 1),
-                      }
+                        ...option,
+                        quantity: type === "increment" ? option.quantity + 1 : Math.max(1, option.quantity - 1),
+                    }
                     : option
             )
         );
     };
-    const handleDeleteOption = (id) => {
+
+    const handleDeleteOption = (product_option_id) => {
         setSelectedOptions((prevOptions) =>
-            prevOptions.filter((option) => option.id !== id)
+            prevOptions.filter((option) => option.product_option_id !== product_option_id)
         );
     };
+
 
     // 쿠폰사용전 상품들 총 가격
     const totalPrice = useMemo(() => {
         return selectedOptions.reduce(
             (acc, option) =>
-                acc + (product.price + option.price) * option.count,
+                acc + (product.price + option.price) * option.quantity,
             0
         );
     }, [selectedOptions, product.price]);
-    
-    console.log(totalPrice);
+
+
+    console.log(product.options);
+
+    function cartStore() {
+        cartsApi.store(form, (response) => {
+            setIsPopupOrder(false)
+            onSuccess()
+        });
+    }
+
 
     return (
         <>
@@ -93,24 +121,26 @@ const PopupOrder = ({ product, setIsPopupOrder, onSuccess }) => {
                         <div className="saved-items-list-type1">
                             <ul>
                                 {selectedOptions.map((option) => (
-                                    <li key={option.id}>
+                                    <li key={option.product_option_id}>
                                         <div className="saved-item-type1">
                                             <div className="saved-item-name">
                                                 <p className="option">{option.name}</p>
-                                                <p className="price">{((product.price + option.price) * option.count).toLocaleString()}원</p>
+                                                <p className="price">
+                                                    {((product.price + option.price) * option.quantity).toLocaleString()}원
+                                                </p>
                                             </div>
                                             <div className="quantity-selector">
-                                                <button onClick={() => handleQuantityChange(option.id, "decrement")}>
+                                                <button onClick={() => handleQuantityChange(option.product_option_id, "decrement")}>
                                                     <i className="xi-minus"></i>
                                                 </button>
-                                                <input type="number" value={option.count} readOnly />
-                                                <button onClick={() => handleQuantityChange(option.id, "increment")}>
+                                                <input type="number" value={option.quantity} readOnly />
+                                                <button onClick={() => handleQuantityChange(option.product_option_id, "increment")}>
                                                     <i className="xi-plus"></i>
                                                 </button>
                                             </div>
                                             <button
                                                 className="delete-btn"
-                                                onClick={() => handleDeleteOption(option.id)}
+                                                onClick={() => handleDeleteOption(option.product_option_id)}
                                             >
                                                 <i className="xi-close"></i>
                                             </button>
@@ -142,9 +172,8 @@ const PopupOrder = ({ product, setIsPopupOrder, onSuccess }) => {
                         </div>
 
                         <div className="popup-bt-btn-wrap">
-                            <button className="popup-bt-btn wht" onClick={()=>{
-                                setIsPopupOrder(false)
-                                onSuccess()
+                            <button className="popup-bt-btn wht" onClick={() => {
+                                cartStore()
                             }}>장바구니</button>
                             <button className="popup-bt-btn org">바로구매</button>
                         </div>

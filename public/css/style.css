@@ -638,7 +638,7 @@
 .cart-item-type1 .cart-item-price { text-align: right; margin-top: 15px; font-size: 14px; font-weight: 600; color: #373948; }
 
 /* 장바구니 상품 구매 버튼 */
-.buy-cart-items-btn-wrap { display: flex; position: fixed; bottom: 0; left: calc(100vw / 2); transform: translateX(-50%); width: 100%; max-width: 475px; height: 80px; z-index: 99; background-color: #ff990d; padding: 0 30px; align-items: center; justify-content: space-between; }
+.buy-cart-items-btn-wrap { display: flex; position: fixed; bottom: 56px; left: calc(100vw / 2); transform: translateX(-50%); width: 100%; max-width: 475px; height: 80px; z-index: 99; background-color: #ff990d; padding: 0 30px; align-items: center; justify-content: space-between; }
 .buy-cart-items-btn-wrap > * { font-size: 20px; font-weight: bold; color: #fff; }
 
 /* ToastAlert */
@@ -807,6 +807,8 @@
 .address-item-type1 .address-name-wrap { display: flex; justify-content: space-between; margin-bottom: 10px; }
 .address-item-type1 .address-name-wrap .address-name { display: flex; gap: 10px; font-size: 15px; font-weight: bold; color: #222; }
 .address-item-type1 .address-name-wrap .address-name .default { padding: 0 10px; height: 20px; border-radius: 2px; background-color: #ffeed9; font-size: 12px; font-weight: 500; color: #ff990d; display: flex; align-items: center; }
+.address-item-type1 .address-name-wrap .btn-wrap { display: flex; gap: 4px; min-width: fit-content; padding-left: 4px; }
+
 .address-item-type1 .address-wrap { margin-bottom: 10px; }
 .address-item-type1 .address-wrap .address { opacity: 0.5; font-size: 14px; font-weight: 500; color: #222222; }
 .address-item-type1 .user-name-num-wrap { display: flex; gap: 21px; }

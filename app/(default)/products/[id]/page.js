@@ -75,6 +75,12 @@ export default function page(params) {
         return () => window.removeEventListener("scroll", handleScroll); // cleanup
     }, []);
 
+
+
+    
+
+
+
     if (product)
         return (
             <>
@@ -123,7 +129,7 @@ export default function page(params) {
                         <ToastAlert
                             message="장바구니 담기 완료"
                             navigateText="장바구니로 이동" // 문구 동적으로 설정
-                            onNavigate={()=>{router.push("/")}} // 버튼 클릭 시 호출
+                            onNavigate={()=>{router.push("/mypage/carts")}} // 버튼 클릭 시 호출
                             duration={3000}
                             onClose={() => setShowToast(false)} // 알림 닫힌 후 상태 초기화
                         />

@@ -41,7 +41,7 @@ export default function Header({ subTitle }) {
                             <button className="header-btn search-open-btn">
                                 <i className="xi-search"></i>
                             </button>
-                            <Link href="/cart" className="header-btn">
+                            <Link href="/mypage/carts" className="header-btn">
                                 <i className="xi-cart-o"></i>
                             </Link>
                         </div>
