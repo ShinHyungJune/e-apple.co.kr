@@ -54,13 +54,13 @@ export default function page() {
                             <p className="mypage-menu-title">나의 쇼핑 정보</p>
                             <ul>
                                 <li>
-                                    <a href="/deliveryTracking.html">주문/배송 조회</a>
+                                    <Link href="/deliveryTracking.html">주문/배송 조회</Link>
                                 </li>
                                 <li>
-                                    <a href="/deliveryTracking.html">취소/교환/반품 조회</a>
+                                    <Link href="/deliveryTracking.html">취소/교환/반품 조회</Link>
                                 </li>
                                 <li>
-                                    <a href="/reviewSubmit.html">상품 리뷰</a>
+                                    <Link href="/reviewSubmit.html">상품 리뷰</Link>
                                 </li>
                             </ul>
                         </div>
@@ -68,13 +68,13 @@ export default function page() {
                             <p className="mypage-menu-title">고객센터</p>
                             <ul>
                                 <li>
-                                    <a href="/productInquiry.html">상품 문의</a>
+                                    <Link href="/productInquiry.html">상품 문의</Link>
                                 </li>
                                 <li>
-                                    <a href="/inquiryPage.html">1:1 문의</a>
+                                    <Link href="/inquiryPage.html">1:1 문의</Link>
                                 </li>
                                 <li>
-                                    <a href="/faq.html">고객센터</a>
+                                    <Link href="/faq.html">고객센터</Link>
                                 </li>
                             </ul>
                         </div>
@@ -82,19 +82,19 @@ export default function page() {
                             <p className="mypage-menu-title">계정정보</p>
                             <ul>
                                 <li>
-                                    <a href="/editMemberInfo.html">회원정보 수정</a>
+                                    <Link href="/editMemberInfo.html">회원정보 수정</Link>
                                 </li>
                                 <li>
-                                    <a href="/membershipLevel.html">회원등급</a>
+                                    <Link href="/membershipLevel.html">회원등급</Link>
                                 </li>
                                 <li>
-                                    <a href="/availableCoupons.html">사용가능 쿠폰</a>
+                                    <Link href="/mypage/coupons">사용가능 쿠폰</Link>
                                 </li>
                                 <li>
-                                    <a href="/rewardPoints.html">적립금</a>
+                                    <Link href="/mypage/points">적립금</Link>
                                 </li>
                                 <li>
-                                    <a href="/mypage/deliveryAddresses">배송지 관리</a>
+                                    <Link href="/mypage/deliveryAddresses">배송지 관리</Link>
                                 </li>
                             </ul>
                         </div>
@@ -102,16 +102,16 @@ export default function page() {
                             <p className="mypage-menu-title">열매나무</p>
                             <ul>
                                 <li>
-                                    <a href="">브랜드 소개</a>
+                                    <Link href="">브랜드 소개</Link>
                                 </li>
                                 <li>
-                                    <a href="">배송 및 이용 안내</a>
+                                    <Link href="">배송 및 이용 안내</Link>
                                 </li>
                                 <li>
-                                    <a href="">개인정보처리방침</a>
+                                    <Link href="">개인정보처리방침</Link>
                                 </li>
                                 <li>
-                                    <a href="">이용약관</a>
+                                    <Link href="">이용약관</Link>
                                 </li>
                             </ul>
                         </div>

@@ -32,14 +32,14 @@ const CouponItem = ({ coupon, onSuccess }) => {
                         }
                     </p>
                     {
-                        coupon.is_downloaded ?
-                        <p className="complete-txt">
-                            다운완료 <i className="xi-check"></i>
-                        </p>
-                        :
+                        coupon.is_downloaded == false ?
                         <button className="coupon-bownload-btn" onClick={() => { couponsDownload(coupon.id) }}>
                             <i className="xi-download"></i>
                         </button>
+                        :
+                        <p className="complete-txt">
+                            다운완료 <i className="xi-check"></i>
+                        </p>
                     }
                 </div>
                 <div className="coupon-item-bt">
@@ -49,9 +49,10 @@ const CouponItem = ({ coupon, onSuccess }) => {
                     <div className="coupon-item-maximum-period">
                         <p className="maximum">
                             {
-                                coupon.type == "amount" ?
-                                    "최대 10,000원 할인"
-                                    : ""
+                                coupon.type == "rate" ?
+                                    <>최대 {coupon.usage_limit_amount.toLocaleString()}원 할인</>
+                                    :
+                                    <>최소 결제 {coupon.minimum_purchase_amount.toLocaleString()}원</>
                             }
                         </p>
                         <p className="period">{coupon.human_issued_until} 남음</p>

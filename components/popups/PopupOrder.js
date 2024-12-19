@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import cartsApi from "@/lib/api/cartsApi";
 
-const PopupOrder = ({ product, setIsPopupOrder, onSuccess }) => {
+const PopupOrder = ({ product, setIsPopupOrder, onlyCart = false, onSuccess }) => {
 
     const [selectedOptions, setSelectedOptions] = useState([]); // 선택된 옵션 저장
     const [selectedValue, setSelectedValue] = useState(""); // 셀렉트박스의 현재 값 관리
@@ -76,7 +76,7 @@ const PopupOrder = ({ product, setIsPopupOrder, onSuccess }) => {
     }, [selectedOptions, product.price]);
 
 
-    console.log(product.options);
+    // console.log(product.options);
 
     function cartStore() {
         cartsApi.store(form, (response) => {
@@ -175,7 +175,7 @@ const PopupOrder = ({ product, setIsPopupOrder, onSuccess }) => {
                             <button className="popup-bt-btn wht" onClick={() => {
                                 cartStore()
                             }}>장바구니</button>
-                            <button className="popup-bt-btn org">바로구매</button>
+                            {!onlyCart && <button className="popup-bt-btn org">바로구매</button>}
                         </div>
                     </div>
                 </div>

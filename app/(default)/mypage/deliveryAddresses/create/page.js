@@ -30,6 +30,7 @@ export default function page() {
     }, []);
 
     const [form, setForm] = useState({
+        recipient_name: "",
         name: "",
         phone: "",
         postal_code: "",
@@ -85,14 +86,35 @@ export default function page() {
             <div className="body">
                 {/* 새 배송지 등록 버튼 */}
                 <div className="btn-wrap-fixed">
-                    <button className="btn org" onClick={()=>{store()}}>새 배송지 등록</button>
+                    <button className="btn org" onClick={()=>{store()}}>
+                        {
+                            id ?
+                            "배송지 수정"
+                            :"새 배송지 등록"
+                        }
+                    </button>
                 </div>
 
                 <section>
                     <div className="input-list-type2 pt-20 pb-20 px-20">
+                      
+
                         {/* 배송지 제목 */}
                         <div className="input-list-title-wrap">
                             <p className="input-list-title">배송지</p>
+                        </div>
+                        {/* 수취인 이름 */}
+                        <div>
+                            <div className="input-txt-box-type1">
+                                <input
+                                    type="text"
+                                    name="recipient_name"
+                                    value={form.recipient_name || ""}
+                                    onChange={changeForm}
+                                    placeholder="수취인 이름을 입력해주세요."
+                                />
+                            </div>
+                            <Error name={'recipient_name'} />
                         </div>
 
                         {/* 배송지명 입력 */}

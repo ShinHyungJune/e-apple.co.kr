@@ -66,7 +66,7 @@ const ProductInquiry = ({ product }) => {
                                                 style={{ cursor: inquiry.is_answered ? "pointer" : "default" }} // 답변 미완료 시 클릭 불가 표시
                                             >
                                                 <div className="date-btn-wrap">
-                                                    <p className="date-txt">{inquiry.answered_at}</p>
+                                                    <p className="date-txt">{inquiry.created_at}</p>
                                                     <p
                                                         className={`state-txt ${inquiry.is_answered ? "active" : null
                                                             }`}

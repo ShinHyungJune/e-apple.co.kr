@@ -40,10 +40,14 @@ export default function page() {
 
 
     const destroy = (id) => {
-        deliveryAddressesApi.destroy(id, {}, (response) => {
-            console.log(response)
-        });
-    }
+        const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
+        if (confirmDelete) {
+            deliveryAddressesApi.destroy(id, {}, (response) => {
+                deliveryAddressesIndex()
+                alert("삭제되었습니다.");
+            });
+        }
+    };
 
 
     return (
@@ -85,7 +89,7 @@ export default function page() {
                                                             </p>
                                                         </div>
                                                         <div className="user-name-num-wrap">
-                                                            {/* <p className="user-name">{deliveryAddresse.}</p> */}
+                                                            <p className="user-name">{deliveryAddresse.recipient_name}</p>
                                                             <p className="user-num">{deliveryAddresse.phone}</p>
                                                         </div>
                                                     </div>
