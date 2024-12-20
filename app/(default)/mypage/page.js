@@ -54,7 +54,7 @@ export default function page() {
                             <p className="mypage-menu-title">나의 쇼핑 정보</p>
                             <ul>
                                 <li>
-                                    <Link href="/deliveryTracking.html">주문/배송 조회</Link>
+                                    <Link href="/mypage/orders">주문/배송 조회</Link>
                                 </li>
                                 <li>
                                     <Link href="/deliveryTracking.html">취소/교환/반품 조회</Link>
@@ -74,7 +74,7 @@ export default function page() {
                                     <Link href="/mypage/inquiry/">1:1 문의</Link>
                                 </li>
                                 <li>
-                                    <Link href="/faq.html">고객센터</Link>
+                                    <Link href="/faqs">고객센터</Link>
                                 </li>
                             </ul>
                         </div>
