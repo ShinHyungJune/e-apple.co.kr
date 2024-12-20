@@ -1,6 +1,6 @@
 "use client";
-import {useEffect, useState} from "react";
-import {useRouter, useSearchParams} from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import Pagination from "@/components/Pagination";
@@ -22,7 +22,7 @@ export default function Page() {
     const [item, setItem] = useState(null);
 
     const [form, setForm] = useState({
-        files:[],
+        files: [],
         files_remove_ids: [],
 
         text: "",
@@ -33,14 +33,14 @@ export default function Page() {
     });
 
     useEffect(() => {
-        if(id)
+        if (id)
             getItem();
     }, []);
 
-    function getItem(){
+    function getItem() {
         examplesApi.show(id, (response) => {
             setItem(response.data.data);
-            
+
             setForm({
                 ...form,
                 ...response.data.data,
@@ -48,15 +48,15 @@ export default function Page() {
         })
     }
 
-    function onChange(event){
+    function onChange(event) {
         setForm({
             ...form,
-            [event.target.name] : event.target.value
+            [event.target.name]: event.target.value
         });
     }
 
-    function store(){
-        if(id)
+    function store() {
+        if (id)
             return examplesApi.update(id, form, () => {
                 router.back();
             });
@@ -153,9 +153,9 @@ export default function Page() {
                     <div className="m-input-body">
                         <InputImages
                             multiple={false}
-                            defaultValue={item && item.img ? [item.img] : [] }
-                            onChange={(data) => {setForm({ ...form, files: data })}}
-                            onRemove={(data) => {setForm({...form, files_remove_ids: data})}}
+                            defaultValue={item && item.img ? [item.img] : []}
+                            onChange={(data) => { setForm({ ...form, files: data }) }}
+                            onRemove={(data) => { setForm({ ...form, files_remove_ids: data }) }}
                         />
 
                         <Error name={'files'} />
@@ -168,17 +168,17 @@ export default function Page() {
                     </div>
                     <div className="m-input-body">
                         <InputObjects form={form} setForm={setForm} name={'objects'}
-                                      attributes={[
-                                          {
-                                              name: 'title',
-                                              label: '옵션명'
-                                          },
-                                          {
-                                              name: 'price',
-                                              label: '옵션가격',
-                                              type: 'number',
-                                          }
-                                      ]}
+                            attributes={[
+                                {
+                                    name: 'title',
+                                    label: '옵션명'
+                                },
+                                {
+                                    name: 'price',
+                                    label: '옵션가격',
+                                    type: 'number',
+                                }
+                            ]}
                         />
 
                         <Error name={'objects'} />

@@ -13,13 +13,15 @@ import NoListData from "@/components/NoListData";
 import couponsApi from "@/lib/api/couponsApi";
 
 import CouponItem from "@/components/library/CouponItem";
-
+import Pagination from "@/components/Pagination";
 
 export default function page() {
     const router = useRouter();
 
 
-    const [form, setForm] = useState({});
+    const [form, setForm] = useState({
+        take: "4",
+    });
     const [userCoupons, setUserCoupons] = useState({
         data: [],
         meta: {
@@ -29,15 +31,34 @@ export default function page() {
         },
     });
 
+    const [coupons, setCoupons] = useState({
+        data: [],
+        meta: {
+            current_page: 1,
+            last_page: 1,
+            total: 0,
+        },
+    });
+    
+
     useEffect(() => {
         IndexUserCoupons()
+        IndexCoupons()
     }, [form])
     function IndexUserCoupons() {
-        couponsApi.indexUserCoupons(form, (response) => {
+        couponsApi.indexUserCoupons({}, (response) => {
             setUserCoupons(response.data);
+        })
+    }
+
+    function IndexCoupons() {
+        couponsApi.index(form, (response) => {
+            setCoupons(response.data);
             console.log(response.data);
         })
     }
+
+
 
 
 
@@ -48,46 +69,30 @@ export default function page() {
             <div className="body">
                 <section className="mb-30 pt-30">
                     <div className="coupon-list px-20">
-                        <p className="coupon-list-title">newbie 등급 쿠폰</p>
-                        <ul>
-                            <li>
-                                <div className="coupon-item">
-                                    <div className="coupon-item-top">
-                                        <p className="discount">12%</p>
-                                        <button className="coupon-bownload-btn">
-                                            <i className="xi-download"></i>
-                                        </button>
-                                    </div>
-                                    <div className="coupon-item-bt">
-                                        <p className="coupon-item-name">[이달의 과일] 12% 쿠폰</p>
-                                        <div className="coupon-item-maximum-period">
-                                            <p className="maximum">최대 10,000원 할인</p>
-                                            <p className="period">1일 4시간 2분 남음</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="coupon-item">
-                                    <div className="coupon-item-top">
-                                        <p className="discount">12%</p>
-                                        <p className="complete-txt">
-                                            다운완료 <i className="xi-check"></i>
-                                        </p>
-                                    </div>
-                                    <div className="coupon-item-bt">
-                                        <p className="coupon-item-name">[이달의 과일] 12% 쿠폰</p>
-                                        <div className="coupon-item-maximum-period">
-                                            <p className="maximum">최대 10,000원 할인</p>
-                                            <p className="period">1일 4시간 2분 남음</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+                        <p className="coupon-list-title">다운로드 가능 쿠폰 목록</p>
+                        {
+                            coupons.data.length > 0 ? (
+                                <ul>
+                                    {
+                                        coupons.data.map((coupon)=>{
+                                            return(
+                                                <li key={coupon.id}>
+                                                    <CouponItem coupon={coupon} onSuccess={()=>{couponsIndex()}}/>
+                                                </li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                            ) : (<NoListData message={"쿠폰이 없습니다."}/>)
+                        }
                     </div>
+                    <Pagination
+                        form={form}
+                        setForm={setForm}
+                        meta={coupons.meta}
+                    />
                 </section>
-                <section className="mb-30">
+                <section className="mb-30 mt-80">
                     <div className="coupon-list px-20">
                         <p className="coupon-list-title">사용 가능 쿠폰</p>
                         {

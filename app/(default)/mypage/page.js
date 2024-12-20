@@ -71,7 +71,7 @@ export default function page() {
                                     <Link href="/productInquiry.html">상품 문의</Link>
                                 </li>
                                 <li>
-                                    <Link href="/inquiryPage.html">1:1 문의</Link>
+                                    <Link href="/mypage/inquiry/">1:1 문의</Link>
                                 </li>
                                 <li>
                                     <Link href="/faq.html">고객센터</Link>

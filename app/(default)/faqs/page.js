@@ -27,6 +27,7 @@ export default function page() {
 
     const [form, setForm] = useState({
         page: 1,
+        category_id: "",
     });
 
     const [faqs, setFaqs] = useState({
@@ -48,6 +49,7 @@ export default function page() {
         })
     }
 
+    console.log(initFaqs);
 
     useEffect(() => {
         boardsIndex()
@@ -87,11 +89,31 @@ export default function page() {
                 <section className="mb-60">
                     <div className="tab-menu-type3 mb-10 mt-10">
                         <div className="tab-menu-bar">
-                            <button className="tab-item active">전체</button>
-                            <button className="tab-item">주문결제</button>
-                            <button className="tab-item">배송</button>
-                            <button className="tab-item">상품</button>
-                            <button className="tab-item">취소/교환/환불</button>
+                            <button 
+                                className={"tab-item" + (form.category_id == "" ? " active" : "")}
+                                onClick={() =>
+                                    setForm((prevForm) => ({
+                                        ...prevForm,
+                                        category_id: "",
+                                    }))
+                                }
+                            >전체</button>
+                            {
+                                initFaqs.map((initFaq)=>{
+                                    return(
+                                        <button 
+                                            key={initFaq.value} 
+                                            className={"tab-item " + (form.category_id == initFaq.value ? " active" : "")}
+                                            onClick={() =>
+                                                setForm((prevForm) => ({
+                                                    ...prevForm,
+                                                    category_id: initFaq.value,
+                                                }))
+                                            }
+                                        >{initFaq.text}</button>
+                                    )
+                                })
+                            }
                         </div>
                     </div>
                     <div className="qna-list-type1">
@@ -140,7 +162,7 @@ export default function page() {
                                     }
                                 </ul>
                             ) : (
-                                <NoListData message="공지사항이 없습니다." />
+                                <NoListData message="FAQ가 없습니다." />
                             )
                         }
                     </div>

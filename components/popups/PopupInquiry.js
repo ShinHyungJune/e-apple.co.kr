@@ -8,14 +8,14 @@ const PopupInquiry = ({ product, setProduct, onSuccess }) => {
         product_id: product.id,
         title: "",
         content: "",
-        is_visible: "0",
+        is_visible: "1",
     });
 
     const changeForm = (event) => {
         const { name, value, type, checked } = event.target;
         setForm({
             ...form,
-            [name]: type === "checkbox" ? (checked ? "1" : "0") : value, // 체크박스는 "0" 또는 "1"
+            [name]: type === "checkbox" ? (checked ? "0" : "1") : value, // 체크박스는 "0" 또는 "1"
         });
     };
 
@@ -91,12 +91,12 @@ const PopupInquiry = ({ product, setProduct, onSuccess }) => {
                         </div>
                         <div>
                             <div className="checkbox-list-type1">
-                                <div className="checkbox-type1">
+                            <div className="checkbox-type1">
                                     <input
                                         type="checkbox"
                                         name="is_visible"
                                         id="checkbox-01"
-                                        checked={form.is_visible === "1"}
+                                        checked={form.is_visible === "0"} // "0"이 체크된 상태
                                         onChange={changeForm}
                                     />
                                     <label htmlFor="checkbox-01">비밀글</label>
