@@ -41,8 +41,6 @@ export default function Page() {
             }
         );
     }
-    const token = useSelector(state => state.app.token);
-
 
     return (
         <>

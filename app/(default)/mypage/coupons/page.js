@@ -54,7 +54,6 @@ export default function page() {
     function IndexCoupons() {
         couponsApi.index(form, (response) => {
             setCoupons(response.data);
-            console.log(response.data);
         })
     }
 
@@ -77,7 +76,7 @@ export default function page() {
                                         coupons.data.map((coupon)=>{
                                             return(
                                                 <li key={coupon.id}>
-                                                    <CouponItem coupon={coupon} onSuccess={()=>{couponsIndex()}}/>
+                                                    <CouponItem coupon={coupon} onSuccess={()=>{IndexUserCoupons(); IndexCoupons();}}/>
                                                 </li>
                                             )
                                         })
@@ -102,7 +101,7 @@ export default function page() {
                                         userCoupons.data.map((coupon)=>{
                                             return(
                                                 <li key={coupon.id}>
-                                                    <CouponItem coupon={coupon} onSuccess={()=>{couponsIndex()}}/>
+                                                    <CouponItem coupon={coupon} onSuccess={()=>{IndexUserCoupons(); IndexCoupons();}}/>
                                                 </li>
                                             )
                                         })

@@ -19,7 +19,7 @@ export default function page() {
 
     const [form, setForm] = useState({
         page: 1,
-        category_id: "",
+        is_answered: null,
     });
     const [inquirys, setInquirys] = useState({
         data: [],
@@ -62,9 +62,24 @@ export default function page() {
                 <section className="mb-60">
                     <div className="tab-menu-type3 mb-20 mt-10">
                         <div className="tab-menu-bar">
-                            <button className="tab-item active">전체</button>
-                            <button className="tab-item">답변완료</button>
-                            <button className="tab-item">답변대기</button>
+                            <button
+                                className={`tab-item ${form.is_answered === null ? 'active' : ''}`}
+                                onClick={() => setForm((prevForm) => ({ ...prevForm, is_answered: null }))}
+                            >
+                                전체
+                            </button>
+                            <button
+                                className={`tab-item ${form.is_answered === 1 ? 'active' : ''}`}
+                                onClick={() => setForm((prevForm) => ({ ...prevForm, is_answered: 1 }))}
+                            >
+                                답변완료
+                            </button>
+                            <button
+                                className={`tab-item ${form.is_answered === 0 ? 'active' : ''}`}
+                                onClick={() => setForm((prevForm) => ({ ...prevForm, is_answered: 0 }))}
+                            >
+                                답변대기
+                            </button>
                         </div>
                     </div>
                     <div className="section-title-wrap-type3">
@@ -93,7 +108,7 @@ export default function page() {
                                                             }} // 클릭 시 열고 닫기 (답변 있을 때만)
                                                         >
                                                             <div className="date-btn-wrap">
-                                                                <p className="date-txt">2024.00.00</p>
+                                                                <p className="date-txt">{inquiry.created_at}</p>
                                                                 {inquiry.is_answer ? (
                                                                     <p className="state-txt active">답변완료</p>
                                                                 ) : (
@@ -101,7 +116,7 @@ export default function page() {
                                                                 )}
                                                             </div>
                                                             <div className="category-wrap">
-                                                                <p className="category-txt">교환문의</p>
+                                                                <p className="category-txt">{inquiry.type}</p>
                                                             </div>
                                                             <div className="content-txt-wrap">
                                                                 <div className="content-txt">{inquiry.content}</div>

@@ -3,9 +3,6 @@ import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Error from "@/components/Error";
-
-// import Swiper from "swiper";  // Swiper 기본 가져오기
-
 // 리덕스
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "@/app/store";
@@ -23,7 +20,7 @@ export default function page() {
     const router = useRouter();
 
     const [form, setForm] = useState({
-        purchase_related_inquiry: "",
+        type: "",
         content: "",
         images: [],
     });
@@ -79,9 +76,9 @@ export default function page() {
                                         <input
                                             type="radio"
                                             id={item}
-                                            name="purchase_related_inquiry"
+                                            name="type"
                                             value={item}
-                                            checked={form.purchase_related_inquiry === item}
+                                            checked={form.type === item}
                                             onChange={changeForm}
                                         />
                                         <label htmlFor={item}>{item}</label>
@@ -96,9 +93,9 @@ export default function page() {
                                         <input
                                             type="radio"
                                             id={item}
-                                            name="purchase_related_inquiry"
+                                            name="type"
                                             value={item}
-                                            checked={form.purchase_related_inquiry === item}
+                                            checked={form.type === item}
                                             onChange={changeForm}
                                         />
                                         <label htmlFor={item}>{item}</label>

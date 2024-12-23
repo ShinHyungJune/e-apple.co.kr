@@ -15,6 +15,16 @@ import productsApi from "@/lib/api/productsApi";
 export default function page() {
     const router = useRouter();
 
+    // 유저 정보 관리
+    const user = useSelector(state => state.app.user);
+    const [isClient, setIsClient] = useState(false);
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    console.log(user)
+
+    if (isClient)
     return (
         <>
             <Header />
@@ -23,27 +33,28 @@ export default function page() {
                     {/* 상단 사용자 정보 */}
                     <div className="mypage-top-box">
                         <div className="user-name-wrap">
-                            <p className="user-name">user name</p>
+                            <p className="user-name">{user.nickname}</p>
                         </div>
                         <div className="user-rank-wrap">
                             <div className="user-rank">
                                 <div className="img-wrap">
                                     <img src="/asset/images/test-img.png" alt="" />
+                                    <i className="xi-user-o"></i>
                                 </div>
                                 <div className="txt-wrap">
                                     <p className="label">회원등급</p>
-                                    <p className="user-rank">FAMILY</p>
+                                    <p className="user-rank">{user.level}</p>
                                 </div>
                             </div>
                         </div>
                         <div className="coupon-points-wrap">
                             <div className="coupon-wrap">
                                 <p className="label">사용 가능 쿠폰</p>
-                                <p className="amount">24</p>
+                                <p className="amount">{user.available_coupons_count}</p>
                             </div>
                             <div className="points-wrap">
                                 <p className="label">적립금</p>
-                                <p className="amount">29,080</p>
+                                <p className="amount">{user.points.toLocaleString()}</p>
                             </div>
                         </div>
                     </div>
@@ -60,7 +71,7 @@ export default function page() {
                                     <Link href="/deliveryTracking.html">취소/교환/반품 조회</Link>
                                 </li>
                                 <li>
-                                    <Link href="/reviewSubmit.html">상품 리뷰</Link>
+                                    <Link href="/mypage/review/available">상품 리뷰</Link>
                                 </li>
                             </ul>
                         </div>

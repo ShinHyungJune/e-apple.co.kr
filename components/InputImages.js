@@ -57,6 +57,7 @@ const InputImages = ({
             readers[index].onload = (readerEvent) => {
                 images[index].onload = () => {
                     const result = resizeImage(image);
+                    console.log(result);
 
                     // 여러개 첨부 허용한게 아니라면 파일 첨부할 때마다 기존 목록 초기화
                     if(!multiple)

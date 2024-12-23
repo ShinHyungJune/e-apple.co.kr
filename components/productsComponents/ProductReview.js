@@ -6,13 +6,14 @@ import ReviewPhotoItemType1 from "@/components/library/ReviewPhotoItemType1";
 import StarScore from "../library/StarScore";
 import NoListData from "../NoListData";
 import PopupReview from "../popups/PopupReview";
+import PopupPhotoReviews from "../popups/PopupPhotoReviews";
 
 const ProductReview = ({ product }) => {
     const [isFirstRender, setIsFirstRender] = useState(true);
     const [form, setForm] = useState({
         page: 1,
         type: "",
-        take:"4",
+        take: "4",
     });
 
     const [reviews, setReviews] = useState({
@@ -28,6 +29,7 @@ const ProductReview = ({ product }) => {
     const [photoReviewsForm, setPhotoReviewsForm] = useState({
         page: 1,
         type: "photo",
+        take: "8",
     });
 
     const [photoReviews, setPhotoReviews] = useState({
@@ -93,11 +95,14 @@ const ProductReview = ({ product }) => {
         return () => {
             if (swiper) swiper.destroy(true, true);
         };
-    }, [reviews]);
+    }, [photoReviews]);
 
 
     // 리뷰팝업
     const [targetReview, setTargetReview] = useState(null);
+    // 포토리뷰 팝업
+    const [isPopupPhotoReviews, setIsPopupPhotoReviews] = useState()
+
 
     return (
         <>
@@ -117,7 +122,16 @@ const ProductReview = ({ product }) => {
                                         <div className="swiper-slide" key={index}>
                                             <ReviewPhotoItemType1
                                                 review={photoReview}
-                                                onClick={() => setTargetReview(photoReview)} // 클릭 시 실행
+                                                onClick={
+                                                    photoReviews.meta.total > 8 && index === photoReviews.data.length - 1
+                                                        ? () => setIsPopupPhotoReviews(product.id)// 마지막 아이템 클릭 시 콘솔 출력
+                                                        : () => setTargetReview(photoReview) // 다른 아이템은 기존 동작 유지
+                                                }
+                                                viewMoreBtn={
+                                                    photoReviews.meta.total > 8 && index === photoReviews.data.length - 1
+                                                        ? true
+                                                        : false
+                                                }
                                             />
                                         </div>
                                     ))}
@@ -173,9 +187,9 @@ const ProductReview = ({ product }) => {
                                                         {
                                                             review.imgs.length > 0 ? (
                                                                 <div className="img-wrap">
-                                                                    <ReviewPhotoItemType1 
+                                                                    <ReviewPhotoItemType1
                                                                         review={review}
-                                                                        onClick={() => setTargetReview(review)} 
+                                                                        onClick={() => setTargetReview(review)}
                                                                     />
                                                                 </div>
                                                             ) : null
@@ -199,9 +213,8 @@ const ProductReview = ({ product }) => {
                     meta={reviews.meta}
                 />
             </section>
-            {
-                targetReview ? <PopupReview review={targetReview} setReview={setTargetReview} /> : null
-            }
+            {targetReview && <PopupReview review={targetReview} setReview={setTargetReview} />}
+            {isPopupPhotoReviews && <PopupPhotoReviews productId={isPopupPhotoReviews} setProductId={setIsPopupPhotoReviews} />}
 
         </>
 

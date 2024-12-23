@@ -326,9 +326,10 @@
 .review-photo-list-type1 > ul > li { width: calc((100% - 10px) / 3); }
 .review-photo-list-type1 .mySwiper2 { overflow: hidden; }
 
-.review-photo-item-type1 { display: block; cursor: pointer; }
+.review-photo-item-type1 { display: block; cursor: pointer; position: relative; }
 .review-photo-item-type1 .img-wrap { display: block; background-color: #f7f7f7; }
 .review-photo-item-type1 .img-wrap > img { width: 100%; height: 100%; position: absolute; left: 0; top: 0;  }
+.review-photo-item-type1 .viewMoreBtn { position: absolute; left: 0; top: 0; background-color: #fff; z-index: 1; display: flex; width: 100%; height: 100%; background-color: #00000080; justify-content: center; align-items: center; color: #fff; }
 
 
 .review-swiper-photo-item-type1 { display: flex; width: 100%; }
@@ -683,8 +684,10 @@
 
  .user-rank-wrap { display: flex; padding-bottom: 15px; border-bottom: 2px solid #2020201A; }
  .user-rank-wrap .user-rank { display: flex; align-items: center; }
- .user-rank-wrap .user-rank .img-wrap { width: 40px; height: 40px; overflow: hidden; border-radius: 100%; }
- .user-rank-wrap .user-rank .img-wrap img { width: 100%; height: 100%; }
+ .user-rank-wrap .user-rank .img-wrap { width: 40px; height: 40px; overflow: hidden; border-radius: 100%; background-color: #202020; display: flex; justify-content: center; align-items: center; }
+ .user-rank-wrap .user-rank .img-wrap img { width: 100%; height: 100%; display: none; }
+ .user-rank-wrap .user-rank .img-wrap i { color: #fff; font-size: 32px; }
+
  .user-rank-wrap .user-rank .txt-wrap { padding-left: 15px; }
  .user-rank-wrap .user-rank .txt-wrap .label { font-size: 12px; font-weight: 500; color: #303030; margin-bottom: 5px; }
  .user-rank-wrap .user-rank .txt-wrap .user-rank { font-size: 15px; font-weight: bold; color: #303030; font-weight: bold; }

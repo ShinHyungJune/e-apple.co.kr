@@ -74,8 +74,6 @@ export default function page() {
     };
 
 
-    console.log(carts.data);
-
     // 총 상품 금액, 총 할인 금액, 총 배송비, 최종 금액 계산
     const { totalOriginalPrice, totalDiscountPrice, totalDeliveryFee, finalPrice } = useMemo(() => {
         let totalOriginalPrice = 0; // 총 상품 금액 (original_price 기준)

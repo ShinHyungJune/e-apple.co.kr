@@ -31,7 +31,8 @@ export default function CartItemType1({ cart, onSuccess, isSelected, onSelect })
 
     // 옵션삭제
     const DestroyProductOption = (cart_product_option_id) => {
-        if (cart.cart_product_options > 1) {
+        console.log(cart.cart_product_options);
+        if (cart.cart_product_options.length > 1) {
             cartProductOptionsApi.destroy(cart.id, cart_product_option_id, {}, (response) => {
                 alert("삭제되었습니다.");
                 onSuccess()
@@ -44,12 +45,13 @@ export default function CartItemType1({ cart, onSuccess, isSelected, onSelect })
     // 옵션 갯수 상승
     const update = (cart_product_option_id, quantity) => {
         cartProductOptionsApi.update(cart.id, cart_product_option_id, {
-            quantity: quantity
+            quantity: quantity // 숫자를 문자열로 변환
         }, (response) => {
             console.log(response);
-            onSuccess()
+            onSuccess();
         });
-    }
+    };
+    
 
 
 

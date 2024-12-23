@@ -19,7 +19,9 @@ export default function page() {
     const router = useRouter();
 
 
-    const [form, setForm] = useState({});
+    const [form, setForm] = useState({
+        type: ""
+    });
     const [points, setPoints] = useState({
         data: [],
         meta: {
@@ -39,77 +41,75 @@ export default function page() {
         })
     }
 
+    // 유저 정보 관리
+    const user = useSelector(state => state.app.user);
+    const [isClient, setIsClient] = useState(false);
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
+    if (isClient)
+        return (
+            <>
+                <Header subTitle={'적립금'} />
 
-    return (
-        <>
-            <Header subTitle={'적립금'} />
-
-            <div className="body">
-                <section>
-                    <div className="mileageBalance-wrap px-20">
-                        <p className="mileageBalance-label">보유 마일리지</p>
-                        <div className="mileageBalance-point">
-                            <p>44,840 P</p><i className="xi-info"></i>
+                <div className="body">
+                    <section>
+                        <div className="mileageBalance-wrap px-20">
+                            <p className="mileageBalance-label">보유 마일리지</p>
+                            <div className="mileageBalance-point">
+                                <p>{(user.points || 0).toLocaleString()} P</p><i className="xi-info"></i>
+                            </div>
                         </div>
-                    </div>
-                    <div className="totalEarnablePoints-wrap type2 px-20">
-                        <p className="label">적립 가능한 적립금 합계</p>
-                        <p className="totalEarnablePoints">30,000P</p>
-                    </div>
-                </section>
-                <section>
-                    <div className="tab-menu-type3 mb-10 mt-10">
-                        <div className="tab-menu-bar">
-                            <button className="tab-item active">전체</button>
-                            <button className="tab-item">적립</button>
-                            <button className="tab-item">사용</button>
-                            <button className="tab-item">소멸</button>
+                        <div className="totalEarnablePoints-wrap type2 px-20">
+                            <p className="label">적립 가능한 적립금 합계</p>
+                            <p className="totalEarnablePoints">{user.available_deposit_point}p</p>
                         </div>
-                    </div>
-                    <div className="rewardPoints-list-type1 px-20">
-                        <ul>
-                            {
-                                points.data.map((point)=>{
-                                    return(
-                                        <li key={point.id}>
-                                            <PointsItemType1 point={point}/>
-                                        </li>
-                                    )
-                                })
-                            }
-                            <li>
-                                <div className="rewardPoints-item-type1">
-                                    <p className="date mb-10">2024.00.00</p>
-                                    <div className="rewardPoints-item-content-wrap">
-                                        <div className="rewardPoints-item-title-wrap">
-                                            <p className="title">주문사용</p>
-                                            <p className="num">Order20240000-000000</p>
-                                        </div>
-                                        <p className="points minus">-1,000P</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="rewardPoints-item-type1">
-                                    <p className="date mb-10">2024.00.00</p>
-                                    <div className="rewardPoints-item-content-wrap mb-10">
-                                        <div className="rewardPoints-item-title-wrap">
-                                            <p className="title">주문사용</p>
-                                            <p className="num">Order20240000-000000</p>
-                                        </div>
-                                        <p className="points">+1,000P</p>
-                                    </div>
-                                    <div className="rewardPointInfo-wrap">
-                                        <p className="usageType">리뷰적립</p>
-                                        <p className="expirationDate">2029.00.00 소멸예정</p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-            </div>
-        </>
-    );
+                    </section>
+                    <section>
+                        <div className="tab-menu-type3 mb-10 mt-10">
+                            <div className="tab-menu-bar">
+                                <button
+                                    className={`tab-item ${form.type === "" ? "active" : ""}`}
+                                    onClick={() => setForm({ type: "" })}
+                                >
+                                    전체
+                                </button>
+                                <button
+                                    className={`tab-item ${form.type === "deposit" ? "active" : ""}`}
+                                    onClick={() => setForm({ type: "deposit" })}
+                                >
+                                    적립
+                                </button>
+                                <button
+                                    className={`tab-item ${form.type === "withdrawal" ? "active" : ""}`}
+                                    onClick={() => setForm({ type: "withdrawal" })}
+                                >
+                                    사용
+                                </button>
+                                <button
+                                    className={`tab-item ${form.type === "expiration" ? "active" : ""}`}
+                                    onClick={() => setForm({ type: "expiration" })}
+                                >
+                                    소멸
+                                </button>
+                            </div>
+                        </div>
+                        <div className="rewardPoints-list-type1 px-20">
+                            <ul>
+                                {
+                                    points.data.map((point) => {
+                                        return (
+                                            <li key={point.id}>
+                                                <PointsItemType1 point={point} />
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+            </>
+        );
 }
