@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Error from "@/components/Error";
 
@@ -19,6 +19,8 @@ import ContactInput from "@/components/ContactInput"
 export default function page() {
     const dispatch = useDispatch();
     const router = useRouter();
+    const searchParams = useSearchParams();
+
 
     // 번호인증 확인
     const [verifyNumberState, setVerifyNumberState] = useState(false);
@@ -34,8 +36,24 @@ export default function page() {
         agreeAll: false,
         agreeTerms: false,
         agreePrivacy: false,
+        agreePayment: false,
         agree_promotion_sms: false
     });
+
+    useEffect(() => {
+        if(searchParams.get('socialUser')) {
+            const socialUser = JSON.parse(searchParams.get('socialUser'));
+
+            setForm({
+                ...form,
+                contact: socialUser.contact,
+                name: socialUser.name,
+                email: socialUser.email,
+                social_id: socialUser.id,
+                social_platform: socialUser.platform,
+            });
+        }
+    }, []);
 
     useEffect(()=>{
         console.log(form)
@@ -55,7 +73,7 @@ export default function page() {
     const store = () => {
         
         // 필수 약관 동의가 false일 때
-        if (!form.agreeTerms || !form.agreePrivacy) {
+        if (!form.agreeTerms || !form.agreePrivacy || !form.agreePayment) {
             dispatch(actions.setMessage("필수 약관에 동의해 주세요."));
             return; // 전송 중단
         }
@@ -74,8 +92,6 @@ export default function page() {
 
         // API 요청
         usersApi.store(formDataToSend, (response) => {
-            dispatch(actions.setUser(response.data.data.user));
-            dispatch(actions.setToken(response.data.data.token));
             router.push("/users/create/success");
         });
     };
@@ -151,14 +167,6 @@ export default function page() {
                                 onChange={changeForm}
                             />
                         </div>
-                        {/* <div>
-                            <div className="input-txt-box-type1">
-                                <input type="number" placeholder="연락처를 입력하세요(“-“ 제외)" />
-                            </div>
-                        </div>
-                        <div>
-                            <button className="btn org disabled">연락처 인증</button>
-                        </div> */}
                     </div>
                     <div className="input-list-type2 mt-20 mb-20 px-20">
                         <div className="input-list-title-wrap">
@@ -219,6 +227,7 @@ export default function page() {
                                             ...form,
                                             agreeTerms: checked,
                                             agreePrivacy: checked,
+                                            agreePayment: checked,
                                             // agree_promotion_sms: checked,
                                         });
                                     }}
@@ -249,7 +258,20 @@ export default function page() {
                                         checked={form.agreePrivacy}
                                         onChange={(e) => setForm({ ...form, agreePrivacy: e.target.checked })}
                                     />
-                                    <label htmlFor="agreePrivacy">[필수] 서비스 이용 약관 동의</label>
+                                    <label htmlFor="agreePrivacy">[필수] 개인정보 제 3자 제공 동의</label>
+                                </div>
+                                <a href="">상세보기</a>
+                            </li>
+                            <li>
+                                <div className="checkbox-type1">
+                                    <input
+                                        type="checkbox"
+                                        name="agreePayment"
+                                        id="agreePayment"
+                                        checked={form.agreePayment}
+                                        onChange={(e) => setForm({ ...form, agreePayment: e.target.checked })}
+                                    />
+                                    <label htmlFor="agreePayment">[필수] 전자결제대행 이용 동의</label>
                                 </div>
                                 <a href="">상세보기</a>
                             </li>
@@ -262,7 +284,7 @@ export default function page() {
                                         checked={form.agree_promotion_sms}
                                         onChange={(e) => setForm({ ...form, agree_promotion_sms: e.target.checked })}
                                     />
-                                    <label htmlFor="agree_promotion_sms">[선택] 마케팅 정보 수신 동의</label>
+                                    <label htmlFor="agree_promotion_sms">[선택] 광고성 정보 수신 동의</label>
                                 </div>
                                 <a href="">상세보기</a>
                             </li>

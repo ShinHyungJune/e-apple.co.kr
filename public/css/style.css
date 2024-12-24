@@ -6,7 +6,7 @@
 .btn-wrap-type1 { display: flex; gap: 10px; padding: 0 20px; }
 
 /* 페이지 화면 하단 고정 버튼 틀 */
-.btn-wrap-fixed { position: absolute; left: 0; bottom: 0; width: 100%; height: 56px; display: flex; align-items: center; padding: 0 20px; gap: 10px; background-color: #fff; }
+.btn-wrap-fixed { position: absolute; left: 0; bottom: 56px; width: 100%; height: 56px; display: flex; align-items: center; padding: 0 20px; gap: 10px; background-color: #fff; }
 
 
 
@@ -68,13 +68,16 @@
 .header-type1 .header-box .header-btn-wrap .header-btn.search-open-btn i { color: #FF990D; }
 .header-type1 .header-box .back-btn-wrap { display: flex; }
 .header-type1 .header-box .back-btn-wrap button i { font-size: 24px; color: #202020; }
-
 .header-type1 .header-box .header-subTitle-wrap { position: absolute; left: 50%; transform: translateX(-50%); }
 .header-type1 .header-box .header-subTitle-wrap .header-subTitle { font-size: 17px; font-weight: 500; }
-
 .header-type1 .header-box .search-bar { border-bottom: 1px solid #FF990D; display: flex; }
 
-
+/* 해드 검색 */
+.search-box-type1 { width: 100%; display: block; }
+.search-box-type1 .search-input-wrap { display: flex; border-bottom: 2px solid #FF990D; padding-bottom: 3px; }
+.search-box-type1 .search-input-wrap input { width: calc(100% - 40px); padding: 0 12px; font-size: 15px; }
+.search-box-type1 .search-input-wrap button { width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; }
+.search-box-type1 .search-input-wrap button i { font-size: 24px; color: #FF990D; }
 
 
 
@@ -92,6 +95,10 @@
 .header-type2 .header-box .header-btn-wrap { display: flex; gap: 16px; }
 .header-type2 .header-box .header-btn-wrap .header-btn { font-size: 24px; }
 .header-type2 .header-box .header-btn-wrap .header-btn.search-btn i { color: #FF990D; }
+
+
+
+
 
 
 /* 푸터 */
@@ -185,6 +192,9 @@
 .timer-type1 .separator { font-size: 24px; font-weight: bold; color: #333; }
 
 
+/* 상품 리스트 상단 제목 */
+.filter-wrap-type1 { display: flex; justify-content: space-between; }
+.filter-wrap-type1 .total-count { font-size: 14px; }
 
 
 /* 아이템 리스트 타입1 */
@@ -418,10 +428,15 @@
 
 
 /* 팝업 */
-.popup-wrap { position: fixed; left: calc(100vw / 2); top: 0; width: 100%; transform: translateX(-50%); max-width: 475px; height: 100%; background-color: #00000080; z-index: 999; display: flex; align-items: flex-end; display: flex; }
+.popup-wrap { position: fixed; left: calc(100vw / 2); top: 0; width: 100%; transform: translateX(-50%); max-width: 476px; height: 100%; background-color: #00000080; z-index: 999; display: flex; align-items: flex-end; display: flex; }
+.popup-wrap.add-bottomNav { height: calc(100% - 56px); }
+
+
 .popup-wrap.active { display: flex; }
+
 .popup-wrap .popup-wrap-bg { position: absolute; left: 0; bottom: 0; width: 100%; height: 100%; z-index: -1; }
 .popup-wrap .popup-box-type1 { width: 100%; height: auto; max-height: calc(100vh - 20px); background-color: #fcfcfc; padding: 0 20px 10px; }
+.popup-wrap .popup-box-type1.no-x-padding { padding: 0 0 10px; }
 .popup-wrap .popup-box-type1 .popup-close-btn-wrap { display: flex; width: 100%; height: 14px; justify-content: center; align-items: center; margin-bottom: 20px; }
 .popup-wrap .popup-box-type1 .popup-close-btn-wrap .popup-close-btn { width: 40px; height: 4px; border-radius: 2px; background-color: #e4e4e4; }
 .popup-wrap .popup-box-type1 .popup-title { font-weight: bold; line-height: 1.5; margin-bottom: 20px; }
@@ -834,6 +849,17 @@
 /* 비회원 주문하기/비회원 주문조회 */
 .guestOrderOptions { display: flex; justify-content: space-around; }
 .guestOrderOptions > a { font-size: 14px; font-weight: 300; color: #949599; }
+
+
+/* 카테고리 리스트 */
+.category-list-type1 { width: 100%; display: flex; flex-direction: column; }
+.category-list-type1 .category-main { display: block; }
+.category-list-type1 .category-main:first-child .category-main-btn { border-top: 1px solid #eee; }
+.category-list-type1 .category-main .category-main-btn { display: flex; border-bottom: 1px solid #eee; }
+.category-list-type1 .category-main .category-main-btn button { font-size: 18px; height: 48px; display: flex; width: 100%; align-items: center; justify-content: space-between; padding: 0 20px; }
+.category-list-type1 .category-main .category-sub { background-color: #F5F6F7; padding: 8px 20px; }
+.category-list-type1 .category-main .category-sub > li { height: 38px; display: flex; align-items: center; cursor: pointer; }
+
 
 
 

@@ -117,7 +117,7 @@ img { object-fit: cover; }
 .ratio-box:before { display: block; width: 100%; padding-top: 100%; content: ''; }
 
 
-#wrap { width: 100%; max-width: 475px; margin: 0 auto; }
+#wrap { width: 100%; max-width: 475px; margin: 0 auto; box-shadow: rgb(0 0 0 / 16%) 0px 0px 8px; }
 
 /* .layout-wrapper { width: 100%; max-width: 475px; margin: 0 auto; } */
 

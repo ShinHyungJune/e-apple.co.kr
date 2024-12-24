@@ -43,7 +43,7 @@ const ProductInquiry = ({ product }) => {
             <section id="Inquiry" className="pt-30 mb-40">
                 <div className="section-title-wrap-type3 mb-20">
                     <p className="section-title">상품 Q&A</p>
-                    <button onClick={()=>{setTargetProduct(product)}} className="link-txt">
+                    <button onClick={() => { setTargetProduct(product) }} className="link-txt">
                         Q&A쓰기
                     </button>
                 </div>
@@ -77,12 +77,12 @@ const ProductInquiry = ({ product }) => {
                                                 <div className="content-txt-wrap">
                                                     <div className="content-txt">
                                                         {
-                                                            inquiry.is_visible == 1 ? 
-                                                            <p>
-                                                                {inquiry.title} <br />
-                                                                {inquiry.content}
-                                                            </p>
-                                                            :"비밀글 입니다"
+                                                            inquiry.is_visible == 1 ?
+                                                                <p>
+                                                                    {inquiry.title} <br />
+                                                                    {inquiry.content}
+                                                                </p>
+                                                                : "비밀글 입니다"
                                                         }
                                                     </div>
                                                     <div className="btn-wrap">
@@ -90,7 +90,7 @@ const ProductInquiry = ({ product }) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            {inquiry.is_answered && openInquiryId === inquiry.id && ( // 답변 완료 상태에서만 표시
+                                            {inquiry.is_answered && openInquiryId === inquiry.id && inquiry.is_visible !== 0 && (
                                                 <div className="qna-item-bt">
                                                     <div className="category-wrap">
                                                         <p className="category">답변</p>
@@ -104,9 +104,9 @@ const ProductInquiry = ({ product }) => {
                                     </li>
                                 ))}
                             </ul>
-                        ) : (<NoListData/>)
+                        ) : (<NoListData />)
                     }
-                   
+
                 </div>
                 <Pagination
                     form={form}
@@ -115,7 +115,7 @@ const ProductInquiry = ({ product }) => {
                 />
             </section>
             {
-                targetProduct ? <PopupInquiry  product={targetProduct} setProduct={setTargetProduct} onSuccess={()=>{productsInquiryIndex()}} /> : null
+                targetProduct ? <PopupInquiry product={targetProduct} setProduct={setTargetProduct} onSuccess={() => { productsInquiryIndex() }} /> : null
             }
         </>
 

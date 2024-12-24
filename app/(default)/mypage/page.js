@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Error from "@/components/Error";
-
+import {actions} from "@/app/store";
 // 리덕스
 import { useDispatch, useSelector } from "react-redux";
 
@@ -14,6 +14,7 @@ import productsApi from "@/lib/api/productsApi";
 
 export default function page() {
     const router = useRouter();
+    const dispatch = useDispatch();
 
     // 유저 정보 관리
     const user = useSelector(state => state.app.user);
@@ -22,18 +23,24 @@ export default function page() {
         setIsClient(true);
     }, []);
 
-    console.log(user)
+
+    // 로그아웃
+    function logout() {
+        dispatch(actions.logout());
+        router.push('/login');
+    }
+
 
     if (isClient)
     return (
         <>
             <Header />
             <div className="body">
-                <section className="mypage-section">
+                <section className="mypage-section pt-20">
                     {/* 상단 사용자 정보 */}
                     <div className="mypage-top-box">
                         <div className="user-name-wrap">
-                            <p className="user-name">{user.nickname}</p>
+                            <p className="user-name">{user?.nickname}</p>
                         </div>
                         <div className="user-rank-wrap">
                             <div className="user-rank">
@@ -43,18 +50,18 @@ export default function page() {
                                 </div>
                                 <div className="txt-wrap">
                                     <p className="label">회원등급</p>
-                                    <p className="user-rank">{user.level}</p>
+                                    <p className="user-rank">{user?.level}</p>
                                 </div>
                             </div>
                         </div>
                         <div className="coupon-points-wrap">
                             <div className="coupon-wrap">
                                 <p className="label">사용 가능 쿠폰</p>
-                                <p className="amount">{user.available_coupons_count}</p>
+                                <p className="amount">{user?.available_coupons_count}</p>
                             </div>
                             <div className="points-wrap">
                                 <p className="label">적립금</p>
-                                <p className="amount">{user.points.toLocaleString()}</p>
+                                <p className="amount">{user?.points?.toLocaleString() || "0"}</p>
                             </div>
                         </div>
                     </div>
@@ -93,7 +100,7 @@ export default function page() {
                             <p className="mypage-menu-title">계정정보</p>
                             <ul>
                                 <li>
-                                    <Link href="/editMemberInfo.html">회원정보 수정</Link>
+                                    <Link href="/mypage/users">회원정보 수정</Link>
                                 </li>
                                 <li>
                                     <Link href="/membershipLevel.html">회원등급</Link>
@@ -130,7 +137,7 @@ export default function page() {
 
                     {/* 로그아웃 버튼 */}
                     <div className="underline-btn-wrap mb-60">
-                        <button className="underline-btn">로그아웃</button>
+                        <button onClick={()=>{logout()}} className="underline-btn">로그아웃</button>
                     </div>
                 </section>
             </div>

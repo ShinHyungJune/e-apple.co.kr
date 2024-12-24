@@ -76,14 +76,14 @@ const PopupOrder = ({ product, setIsPopupOrder, onlyCart = false, onSuccess }) =
     }, [selectedOptions, product.price]);
 
 
-    // console.log(product.options);
-
     function cartStore() {
         cartsApi.store(form, (response) => {
             setIsPopupOrder(false)
             onSuccess()
         });
     }
+
+
 
 
     return (

@@ -20,7 +20,7 @@ export default function PointsItemType1({point}) {
                 
             </div>
             <div className="rewardPointInfo-wrap">
-                <p className="usageType">리뷰적립</p>
+                {/* <p className="usageType">리뷰적립</p> */}
                 <p className="expirationDate">{point.expiration_date} 소멸예정</p>
             </div>
         </div>

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
+
+import PopupList from "@/components/popups/PopupList";
 
 const BottomNav = () => {
 
@@ -16,44 +18,50 @@ const BottomNav = () => {
         setIsLoggedIn(!!token);
     }, [token]);
 
+    const [isPopupList, setIsPopupList] = useState(false)
+
     return (
-        <div className="bottomNav-type1">
-            <ul>
-                <li>
-                    <a href="/" className="bottomNav-button">
-                        <img src="/images/bottomNav-home.png" alt="홈" />
-                    </a>
-                </li>
-                <li>
-                    <a href="" className="bottomNav-button">
-                        <img src="/images/bottomNav-list.png" alt="목록" />
-                    </a>
-                </li>
-                <li>
-                    <a href="/basts" className="bottomNav-button">
-                        <img src="/images/bottomNav-best.png" alt="베스트" />
-                    </a>
-                </li>
-                <li>
-                    <a href="/events" className="bottomNav-button">
-                        <img src="/images/bottomNav-event.png" alt="이벤트" />
-                    </a>
-                </li>
-                {isLoggedIn ? (
+        <>
+            <div className="bottomNav-type1">
+                <ul>
                     <li>
-                        <a href="/mypage" className="bottomNav-button">
-                            <img src="/images/bottomNav-my.png" alt="마이페이지" />
+                        <a href="/" className="bottomNav-button">
+                            <img src="/images/bottomNav-home.png" alt="홈" />
                         </a>
                     </li>
-                ) : (
                     <li>
-                        <a href="/login" className="bottomNav-button">
-                            <img src="/images/bottomNav-my.png" alt="로그인" />
+                        <button onClick={()=>{setIsPopupList(true)}} className="bottomNav-button">
+                            <img src="/images/bottomNav-list.png" alt="목록" />
+                        </button>
+                    </li>
+                    <li>
+                        <a href="/basts" className="bottomNav-button">
+                            <img src="/images/bottomNav-best.png" alt="베스트" />
                         </a>
                     </li>
-                )}
-            </ul>
-        </div>
+                    <li>
+                        <a href="/events" className="bottomNav-button">
+                            <img src="/images/bottomNav-event.png" alt="이벤트" />
+                        </a>
+                    </li>
+                    {isLoggedIn ? (
+                        <li>
+                            <a href="/mypage" className="bottomNav-button">
+                                <img src="/images/bottomNav-my.png" alt="마이페이지" />
+                            </a>
+                        </li>
+                    ) : (
+                        <li>
+                            <a href="/login" className="bottomNav-button">
+                                <img src="/images/bottomNav-my.png" alt="로그인" />
+                            </a>
+                        </li>
+                    )}
+                </ul>
+            </div>
+            {isPopupList &&  <PopupList isPopup={isPopupList} setIsPopup={setIsPopupList}/>}
+           
+        </>
     );
 };
 

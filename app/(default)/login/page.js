@@ -16,13 +16,20 @@ export default function Page() {
     const [ids, setIds] = useState("");
     const [password, setPassword] = useState("");
     const searchParams = useSearchParams();
+    const [token, setToken] = useState(searchParams.get('token'));
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if(token)
+            login();
+    }, []);
 
     function login(e) {
         e.preventDefault();
         usersApi.login(
             {
+                token: token,
                 email: ids,
                 password: password,
             },
@@ -89,21 +96,21 @@ export default function Page() {
                         <button className="btn blk" onClick={login}>로그인하기</button>
                     </div>
                     <div className="findAccountOptions px-20 mb-40">
-                        <a href="" className="findId">아이디 찾기</a>
-                        <a href="" className="findPassword">비밀번호 찾기</a>
+                        <Link href="/users/findId" className="findId">아이디 찾기</Link>
+                        <Link href="/users/findPassword" className="findPassword">비밀번호 찾기</Link>
                     </div>
                     <div className="input-list-type2 px-20">
                         <div>
-                            <button className="btn ylw">
+                            <a href={`${process.env.NEXT_PUBLIC_API_URL}/openLoginPop/kakaoCustom`} className="btn ylw">
                                 <img src="/images/sns-login-kakao.png" alt="" />
                                 카카오 로그인
-                            </button>
+                            </a>
                         </div>
                         <div>
-                            <button className="btn grn">
+                            <a href={`${process.env.NEXT_PUBLIC_API_URL}/openLoginPop/naverCustom`} className="btn grn">
                                 <img src="/images/sns-login-naver.png" alt="" />
                                 네이버 로그인
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </section>
