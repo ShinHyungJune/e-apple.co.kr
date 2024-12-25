@@ -14,21 +14,30 @@ export default function page() {
     const searchParams = useSearchParams();
     const id = searchParams.get('id');
 
-    console.log(id);
-
-    useEffect(() => {
-        if (id) {
-            show();
-        }
-    }, []);
-
     const [item, setItem] = useState(null);
     const [form, setForm] = useState({
-        files: [],
+        images: [],
         files_remove_ids: [],
         rating: "5",
         review: "",
     });
+
+    useEffect(() => {
+        if (id) {
+            show();
+        } else {
+            const params = Object.fromEntries(searchParams.entries()); // 모든 쿼리 파라미터를 객체로 변환
+            setForm((prevForm) => ({
+                ...prevForm,
+                ...params, // 기존 폼에 쿼리 파라미터 추가
+            }));
+        }
+    }, [searchParams]);
+
+    console.log(form);
+    
+
+
 
 
     const changeForm = (event) => {
@@ -62,7 +71,7 @@ export default function page() {
         if (id) {
             product_reviewApi.update(id, form, (response) => {
                 console.log(response);
-                router.back();
+                // router.back();
             });
         } else {
             product_reviewApi.store(form, (response) => {
@@ -77,6 +86,15 @@ export default function page() {
         <>
             <Header subTitle={'리뷰작성'} />
             <div className="body">
+                <div className="btn-wrap-fixed">
+                    <button className="btn org" onClick={()=>{store()}}>
+                        {
+                            id ?
+                            "배송지 수정"
+                            :"리뷰 등록"
+                        }
+                    </button>
+                </div>
                 <section>
                     <div className="order-product-type1 px-20 pb-20 bd-bt-sm">
                         <div className="item-img-wrap ratio-box">
@@ -134,8 +152,8 @@ export default function page() {
                         <div>
                             <InputImages
                                 multiple={true}
-                                defaultValue={item && item.img ? item.img : []}
-                                onChange={(data) => { setForm({ ...form, files: data }) }}
+                                defaultValue={item && item.imgs ? item.imgs : []}
+                                onChange={(data) => { setForm({ ...form, images: data }) }}
                                 onRemove={(data) => { setForm({ ...form, files_remove_ids: data }) }}
                             />
                         </div>

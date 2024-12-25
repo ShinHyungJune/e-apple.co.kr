@@ -72,13 +72,13 @@ export default function page() {
 
                         <div className="order-product-list-type1">
                             {
-                                reviews.data.length == 0 ? (
+                                reviews.data.length > 0 ? (
                                     <ul>
                                         {
                                             reviews.data.map((review) => {
                                                 return (
                                                     <li key={review.id}>
-                                                        <ReviewAvailable/>
+                                                        <ReviewAvailable review={review} onSuccess={()=>{index()}}/>
                                                     </li>
                                                 )
                                             })

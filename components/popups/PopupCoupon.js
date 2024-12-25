@@ -60,8 +60,8 @@ const PopupCoupon = ({setIsPopupCoupon}) => {
                 couponsIndex()
             });
     }
-    
-    
+
+
 
     return (
         <div className="popup-wrap">
