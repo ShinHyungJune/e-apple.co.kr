@@ -9,7 +9,11 @@ export default function PointsItemType1({point}) {
             <div className="rewardPoints-item-content-wrap mb-10">
                 <div className="rewardPoints-item-title-wrap">
                     <p className="title">{point.description}</p>
-                    <p className="num">Order20240000-000000</p>
+                    {
+                        point.order_id 
+                        && 
+                        <p className="num">{point.order_id}</p>
+                    }
                 </div>
                 {
                     point.deposit > 0 ?

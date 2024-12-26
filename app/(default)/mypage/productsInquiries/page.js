@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "@/components/Header";
 import NoListData from "@/components/NoListData";
 
-import inquirysApi from "@/lib/api/inquirysApi";
+import inquiriesApi from "@/lib/api/inquiriesApi";
 
 export default function page() {
     const router = useRouter();
@@ -34,7 +34,7 @@ export default function page() {
         index()
     }, [form])
     function index() {
-        inquirysApi.index(form, (response) => {
+        inquiriesApi.indexProductsInquiries(form, (response) => {
             setInquirys(response.data);
             console.log(response.data);
         })
@@ -44,7 +44,7 @@ export default function page() {
     const destroy = (id) => {
         const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
         if (confirmDelete) {
-            inquirysApi.destroy(id, {}, (response) => {
+            inquiriesApi.destroy(id, {}, (response) => {
                 index()
                 alert("삭제되었습니다.");
             });
@@ -56,7 +56,7 @@ export default function page() {
 
     return (
         <>
-            <Header subTitle={'1:1 문의'} />
+            <Header subTitle={'상품문의'} />
 
             <div className="body">
                 <section className="mb-60">
@@ -83,10 +83,7 @@ export default function page() {
                         </div>
                     </div>
                     <div className="section-title-wrap-type3">
-                        <p className="section-title">1:1 문의내역</p>
-                        <Link href="/mypage/inquiry/create" className="link-txt">
-                            1:1 문의 쓰기
-                        </Link>
+                        <p className="section-title">상품 Q&A</p>
                     </div>
                     <div className="qna-list-type1">
                         {
@@ -116,7 +113,7 @@ export default function page() {
                                                                 )}
                                                             </div>
                                                             <div className="category-wrap">
-                                                                <p className="category-txt">{inquiry.type}</p>
+                                                                <p className="category-txt">{inquiry.product.name}</p>
                                                             </div>
                                                             <div className="content-txt-wrap">
                                                                 <div className="content-txt">{inquiry.content}</div>

@@ -42,16 +42,16 @@ export default function page() {
     
 
     useEffect(() => {
-        IndexUserCoupons()
-        IndexCoupons()
+        indexUserCoupons()
+        indexCoupons()
     }, [form])
-    function IndexUserCoupons() {
+    function indexUserCoupons() {
         couponsApi.indexUserCoupons({}, (response) => {
             setUserCoupons(response.data);
         })
     }
 
-    function IndexCoupons() {
+    function indexCoupons() {
         couponsApi.index(form, (response) => {
             setCoupons(response.data);
         })
@@ -76,7 +76,7 @@ export default function page() {
                                         coupons.data.map((coupon)=>{
                                             return(
                                                 <li key={coupon.id}>
-                                                    <CouponItem coupon={coupon} onSuccess={()=>{IndexUserCoupons(); IndexCoupons();}}/>
+                                                    <CouponItem coupon={coupon} onSuccess={()=>{indexUserCoupons(); indexCoupons();}}/>
                                                 </li>
                                             )
                                         })
@@ -101,7 +101,7 @@ export default function page() {
                                         userCoupons.data.map((coupon)=>{
                                             return(
                                                 <li key={coupon.id}>
-                                                    <CouponItem coupon={coupon} onSuccess={()=>{IndexUserCoupons(); IndexCoupons();}}/>
+                                                    <CouponItem coupon={coupon} onSuccess={()=>{indexUserCoupons(); indexCoupons();}}/>
                                                 </li>
                                             )
                                         })

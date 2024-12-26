@@ -34,7 +34,6 @@ export default function Page() {
     const initialForm = {
         page: 1,
         word: '',
-
         ids: [],
     };
 

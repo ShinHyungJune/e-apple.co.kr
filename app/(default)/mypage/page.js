@@ -45,7 +45,7 @@ export default function page() {
                         <div className="user-rank-wrap">
                             <div className="user-rank">
                                 <div className="img-wrap">
-                                    <img src="/asset/images/test-img.png" alt="" />
+                                    {/* <img src="/asset/images/test-img.png" alt="" /> */}
                                     <i className="xi-user-o"></i>
                                 </div>
                                 <div className="txt-wrap">
@@ -86,10 +86,10 @@ export default function page() {
                             <p className="mypage-menu-title">고객센터</p>
                             <ul>
                                 <li>
-                                    <Link href="/productInquiry.html">상품 문의</Link>
+                                    <Link href="/mypage/productsInquiries">상품 문의</Link>
                                 </li>
                                 <li>
-                                    <Link href="/mypage/inquiry/">1:1 문의</Link>
+                                    <Link href="/mypage/inquiries">1:1 문의</Link>
                                 </li>
                                 <li>
                                     <Link href="/faqs">고객센터</Link>
@@ -103,7 +103,7 @@ export default function page() {
                                     <Link href="/mypage/users">회원정보 수정</Link>
                                 </li>
                                 <li>
-                                    <Link href="/membershipLevel.html">회원등급</Link>
+                                    <Link href="/mypage/membershipLevel">회원등급</Link>
                                 </li>
                                 <li>
                                     <Link href="/mypage/coupons">사용가능 쿠폰</Link>

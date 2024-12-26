@@ -59,8 +59,7 @@ const BottomNav = () => {
                     )}
                 </ul>
             </div>
-            {isPopupList &&  <PopupList isPopup={isPopupList} setIsPopup={setIsPopupList}/>}
-           
+            <PopupList isPopup={isPopupList} setIsPopup={setIsPopupList}/>
         </>
     );
 };

@@ -8,12 +8,15 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "@/components/Header";
 import product_reviewApi from "@/lib/api/product_reviewApi";
 import InputImages from "@/components/InputImages";
+import ordersApi from "@/lib/api/ordersApi";
 
 export default function page() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const id = searchParams.get('id');
+    const order_product_id = searchParams.get('order_product_id');
 
+    const [orderProduct, setOrderProduct] = useState(null);
     const [item, setItem] = useState(null);
     const [form, setForm] = useState({
         images: [],
@@ -34,11 +37,16 @@ export default function page() {
         }
     }, [searchParams]);
 
-    console.log(form);
+    useEffect(()=>{
+        console.log(order_product_id)
+        if (order_product_id) {
+            ordersApi.show_order_products(order_product_id, (response) => {
+                setOrderProduct(response.data.data);
+                console.log(response.data.data);
+            });
+        }
+    },[searchParams])
     
-
-
-
 
     const changeForm = (event) => {
         const { name, value, type, checked } = event.target;
@@ -67,11 +75,13 @@ export default function page() {
     };
 
 
+
+
     const store = () => {
         if (id) {
             product_reviewApi.update(id, form, (response) => {
                 console.log(response);
-                // router.back();
+                router.back();
             });
         } else {
             product_reviewApi.store(form, (response) => {
@@ -81,7 +91,7 @@ export default function page() {
         }
     };
 
-
+    if (orderProduct)
     return (
         <>
             <Header subTitle={'리뷰작성'} />
@@ -98,14 +108,14 @@ export default function page() {
                 <section>
                     <div className="order-product-type1 px-20 pb-20 bd-bt-sm">
                         <div className="item-img-wrap ratio-box">
-                            <img src="/asset/images/test-img.png" alt="" />
+                            <img src={orderProduct.product.img.url} alt={orderProduct.product.name} />
                         </div>
                         <div className="item-content-wrap">
-                            <p className="item-title">돌 스위티오 바나나, 1kg 내외, 1개</p>
-                            <p className="item-option">4kg(14-16 중대과)</p>
+                            <p className="item-title">{orderProduct.product.name}</p>
+                            <p className="item-option">{orderProduct.productOption.name}</p>
                             <div className="item-count-amount-wrap">
-                                <p className="item-count">수량 1개</p>
-                                <p className="item-amount">84,800원</p>
+                                <p className="item-count">수량 {orderProduct.quantity}개</p>
+                                <p className="item-amount">{orderProduct.price.toLocaleString()}원</p>
                             </div>
                         </div>
                     </div>

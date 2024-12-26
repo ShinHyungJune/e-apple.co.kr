@@ -56,7 +56,7 @@ export default function ReviewMine({review, onSuccess}) {
             </div>
 
             <div className="order-product-btn-wrap">
-                <Link href={`/mypage/review/create/?id=${review.id}`} className="order-product-btn">
+                <Link href={`/mypage/review/create/?id=${review.id}&order_product_id=${review.orderProduct.id}`} className="order-product-btn">
                     수정
                 </Link>
                 <button onClick={()=>{destroy()}} className="order-product-btn">

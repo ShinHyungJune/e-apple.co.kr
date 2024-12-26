@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { useRouter } from "next/navigation";
 import Link from 'next/link';
-import PopupSearch from './popups/PopupSearch';
 
 export default function Header({ subTitle }) {
+    const router = useRouter();
     const [showTopBanner, setShowTopBanner] = useState(true); // topBanner의 가시성 관리
 
-    const [isPopupSearch, setIsPopupSearch] = useState(false);
+
 
     return (
         <>
@@ -33,7 +34,7 @@ export default function Header({ subTitle }) {
                             </div>
 
                             <div className="header-btn-wrap">
-                                <button onClick={()=>{setIsPopupSearch(true)}} className="header-btn search-open-btn">
+                                <button onClick={()=>{router.push("/products/search")}} className="header-btn search-open-btn">
                                     <i className="xi-search"></i>
                                 </button>
                                 <Link href="/mypage/carts" className="header-btn">
@@ -44,11 +45,11 @@ export default function Header({ subTitle }) {
                         :
                         <div className="header-box">
                             <Link href="/" className="logo">
-                                LOGO
+                                <img src="/images/logo.png" alt="" />
                             </Link>
 
                             <div className="header-btn-wrap">
-                                <button onClick={()=>{setIsPopupSearch(true)}} className="header-btn search-open-btn">
+                                <button onClick={()=>{router.push("/products/search")}} className="header-btn search-open-btn">
                                     <i className="xi-search"></i>
                                 </button>
                                 <Link href="/mypage/carts" className="header-btn">
@@ -58,7 +59,6 @@ export default function Header({ subTitle }) {
                         </div>
                 }
             </div>
-            {isPopupSearch && <PopupSearch isPopup={isPopupSearch} setIsPopup={setIsPopupSearch}/>}
         </>
     );
 }

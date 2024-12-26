@@ -73,8 +73,8 @@ export default function Page() {
                                     }}
                                 />
                             </div>
+                            <Error name={'email'} />
                         </div>
-                        <Error name={'ids'} />
                         <div>
                             <div className="input-txt-box-type1">
                                 <input

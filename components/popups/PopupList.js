@@ -1,66 +1,69 @@
 import React, { useState, useEffect } from "react";
-import productsApi from "@/lib/api/productsApi";
-import NoListData from "../NoListData";
-import ProductItemType1 from "../library/ProductItemType1";
-import Pagination from "../Pagination";
+import { useRouter, useSearchParams } from "next/navigation";
+import categoriesApi from "@/lib/api/categoriesApi";
 
 const PopupList = ({ isPopup, setIsPopup }) => {
+    const router = useRouter();
+    const [categories, setCategories] = useState([]);
+    const searchParams = useSearchParams();
+
+    useEffect(() => {
+        indexCategories()
+    }, [])
+
+    function indexCategories() {
+        categoriesApi.indexCategories({}, (response) => {
+            setCategories(response.data.data);
+        })
+    }
 
 
-    // useEffect(() => {
-    //     ProductsIndex()
-    // }, [form])
+    const handleCategoryClick = (categorieId, subCategorieId) => {
+        router.push(`/products?category_id=${categorieId}&subcategory_id=${subCategorieId}` );
+        setIsPopup(false);
+    };
 
-    // function ProductsIndex() {
-    //     productsApi.index("best", form, (response) => {
-    //         setProducts(response.data);
-    //     })
-    // }
-    
-
+    if(isPopup)
     return (
         <>
             <div className="popup-wrap add-bottomNav">
-                <div className="popup-wrap-bg" onClick={()=>{setIsPopup(false)}}></div>
+                <div className="popup-wrap-bg" onClick={() => { setIsPopup(false) }}></div>
                 <div className="popup-box-type1 no-x-padding">
                     <div className="popup-close-btn-wrap">
-                        <button className="popup-close-btn" onClick={()=>{setIsPopup(false)}}></button>
+                        <button className="popup-close-btn" onClick={() => { setIsPopup(false) }}></button>
                     </div>
                     <div className="popup-content-wrap">
                         <div className="category-list-type1 pb-20">
-
-                            <div className="category-main">
-                                <div className="category-main-btn">
-                                    <button>국산 과일 
-                                        {/* <i className="xi-angle-down-min"></i> */}
-                                    </button>
-                                </div>
-                                <ul className="category-sub">
-                                    <li>전체보기</li>
-                                    <li>딸기</li>
-                                    <li>사과</li>
-                                </ul>
-                            </div>
-
-                            <div className="category-main">
-                                <div className="category-main-btn">
-                                    <button>수입 과일  
-                                        {/* <i className="xi-angle-down-min"></i> */}
-                                    </button>
-                                </div>
-                                <ul className="category-sub">
-                                    <li>전체보기</li>
-                                    <li>망고/열대과일</li>
-                                    <li>블루베리</li>
-                                </ul>
-                            </div>
-
+                            {
+                                categories.map((category) => (
+                                    <div className="category-main" key={category.value}>
+                                        <div className="category-main-btn">
+                                            <button onClick={() => handleCategoryClick(category.value, "")}>
+                                                {category.text}
+                                            </button>
+                                        </div>
+                                        {category.items && (
+                                            <ul className="category-sub">
+                                                <li onClick={() => handleCategoryClick(category.value, "")}>전체보기</li>
+                                                {category.items.map((subCategory) => (
+                                                    <li
+                                                        key={subCategory.value}
+                                                        onClick={() => handleCategoryClick(category.value, subCategory.value)}
+                                                    >
+                                                        {subCategory.text}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                    </div>
+                                ))
+                            }
                         </div>
                     </div>
                 </div>
             </div>
         </>
-       
+
     );
 };
 

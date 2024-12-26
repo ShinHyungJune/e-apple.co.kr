@@ -11,7 +11,7 @@ import Header from "@/components/Header";
 import NoListData from "@/components/NoListData";
 import AddressInput from "@/components/AddressInput";
 
-import inquirysApi from "@/lib/api/inquirysApi";
+import inquiriesApi from "@/lib/api/inquiriesApi";
 
 import InputImages from "@/components/InputImages";
 
@@ -25,8 +25,6 @@ export default function page() {
         images: [],
     });
 
-    console.log(form);
-
     const changeForm = (event) => {
         const { name, value, type, checked } = event.target;
         setForm({
@@ -37,7 +35,7 @@ export default function page() {
 
 
     const store = () => {
-        inquirysApi.store(form, (response) => {
+        inquiriesApi.store(form, (response) => {
             let message = response.data.message
             dispatch(actions.setMessage(message));
             router.back();
