@@ -27,7 +27,6 @@ export default function page() {
         order_direction: searchParams.get("order_direction") || "desc",
         category_id: searchParams.get("category_id") || "",
         subcategory_id: searchParams.get("subcategory_id") || "",
-        take: 2,
     });
 
     // 상품 리스트
@@ -44,17 +43,10 @@ export default function page() {
 
     // 페이지 초기화: page 외 값이 변경될 때만 실행
     useEffect(() => {
-        if (isFirstRender) {
-            setIsFirstRender(false);
-            return;
-        }
-
-        // 이전 상태와 비교하여 변경이 있을 때만 page를 1로 설정
-        setForm((prevForm) => ({
-            ...prevForm,
-            page: 1,
-        }));
-    }, [JSON.stringify({ ...form, page: undefined, })]);
+        if (isFirstRender) return setIsFirstRender(false);
+    
+        setForm({ ...form, page: "1" });
+    }, [JSON.stringify({ ...form, page: undefined })]);
 
     // URL 동기화 및 상품 데이터 가져오기
     useEffect(() => {
@@ -72,13 +64,12 @@ export default function page() {
 
     // URL 변경 시 form 상태 동기화
     useEffect(() => {
-        setForm((prevForm) => ({
-            ...prevForm,
-            category_id: searchParams.get("category_id") || "",
-            subcategory_id: searchParams.get("subcategory_id") || "",
-            order_column: searchParams.get("order_column") || "created_at",
-            order_direction: searchParams.get("order_direction") || "desc",
-        }));
+        setForm({
+            ...form,
+            category_id: searchParams.get('category_id') || "",
+            subcategory_id: searchParams.get('subcategory_id') || "",
+        });
+    
         indexCategories()
     }, [searchParams]);
 
@@ -136,7 +127,7 @@ export default function page() {
                     </>
 
                     <div className="filter-wrap-type1 px-20 mt-20">
-                        <p className="total-count">총 63개</p>
+                        <p className="total-count">총 {products.meta.total}개</p>
                         <select
                             name="order"
                             id="order"
