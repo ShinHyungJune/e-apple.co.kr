@@ -41,7 +41,7 @@ export default function page() {
         })
     }
 
-
+    
 
     return (
         <>
@@ -59,9 +59,13 @@ export default function page() {
                                                 <li key={order.id}>
                                                     <div className="order-item-type1">
                                                         <div className="order-num">
-                                                            <Link href="/deliveryTrackingDetail.html">
-                                                                {order.merchant_uid} <i className="xi-angle-right"></i>
-                                                            </Link>
+                                                            {
+                                                                order.merchant_uid ?
+                                                                <Link href="/deliveryTrackingDetail.html">
+                                                                    {order.merchant_uid} <i className="xi-angle-right"></i>
+                                                                </Link>
+                                                                : <div></div>
+                                                            }
                                                             {['주문접수', '주문완료', '결제대기중', '결제완료', '배송준비중'].includes(order.status) && (
                                                                 <button className="order-product-btn">주문취소</button>
                                                             )}
@@ -74,7 +78,10 @@ export default function page() {
                                                                         {
                                                                             return (
                                                                                 <li key={orderProduct.id}>
-                                                                                    <OrderProductType1 orderProduct={orderProduct}/>
+                                                                                    <OrderProductType1 
+                                                                                        order={order}
+                                                                                        orderProduct={orderProduct}
+                                                                                    />
                                                                                 </li>
                                                                             )
                                                                         }

@@ -10,12 +10,14 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "@/components/Header";
 import NoListData from "@/components/NoListData";
 import cartsApi from "@/lib/api/cartsApi";
+import ordersApi from "@/lib/api/ordersApi";
 import CartItemType1 from "@/components/library/CartItemType1";
 
 export default function page() {
     const router = useRouter();
+    const user = useSelector(state => state.app.user);
 
-    const[selectedIds, setSelectedIds] = useState([]);
+    const [selectedIds, setSelectedIds] = useState([]);
 
     const [form, setForm] = useState({
         page: 1,
@@ -35,6 +37,8 @@ export default function page() {
     function cartsIndex() {
         cartsApi.index(form, (response) => {
             setCarts(response.data);
+            const ids = response.data.data.map(cart => cart.id);
+            setSelectedIds(ids);
         })
     }
 
@@ -64,7 +68,7 @@ export default function page() {
             setSelectedIds([]);
         }
     };
-    
+
     const handleItemSelect = (id, isChecked) => {
         if (isChecked) {
             setSelectedIds(prev => [...prev, id]);
@@ -74,30 +78,53 @@ export default function page() {
     };
 
 
-    // 총 상품 금액, 총 할인 금액, 총 배송비, 최종 금액 계산
-    const { totalOriginalPrice, totalDiscountPrice, totalDeliveryFee, finalPrice } = useMemo(() => {
+    // 총 상품 금액, 총 할인 금액, 최종 금액 계산
+    const { totalOriginalPrice, totalDiscountPrice, finalPrice } = useMemo(() => {
         let totalOriginalPrice = 0; // 총 상품 금액 (original_price 기준)
         let totalDiscountPrice = 0; // 총 할인된 금액
-        let totalDeliveryFee = carts.data.length * 3000; // 배송비 (장바구니당 3000원)
         let finalPrice = 0; // 최종 금액
-
-        carts.data.forEach(cart => {
+    
+        // 선택된 상품만 필터링
+        const selectedCarts = carts.data.filter(cart => selectedIds.includes(cart.id));
+    
+        selectedCarts.forEach(cart => {
             cart.cart_product_options.forEach(option => {
-                // 상품 금액 계산 (original_price 기준)
-                totalOriginalPrice += (cart.product.original_price + option.price) * option.quantity;
-
-                // 할인된 금액 계산 (original_price - price)
-                const discountedAmount = (cart.product.original_price - cart.product.price) * option.quantity;
+                // 상품 금액 계산 (original_price 기준, 없으면 0으로 처리)
+                const originalPrice = option.original_price || 0;
+                totalOriginalPrice += originalPrice * option.quantity;
+    
+                // 할인된 금액 계산 (original_price - price) * quantity, 없으면 0으로 처리
+                const discountedAmount = (originalPrice - option.price) * option.quantity;
                 totalDiscountPrice += discountedAmount;
             });
         });
-
-        // 최종 금액 = 상품 금액 - 할인된 금액 + 배송비
-        finalPrice = totalOriginalPrice - totalDiscountPrice + totalDeliveryFee;
-
-        return { totalOriginalPrice, totalDiscountPrice, totalDeliveryFee, finalPrice };
-    }, [carts]);
     
+        // 최종 금액 = 상품 금액 - 할인된 금액
+        finalPrice = totalOriginalPrice - totalDiscountPrice;
+    
+        return { totalOriginalPrice, totalDiscountPrice, finalPrice };
+    }, [carts, selectedIds]);
+
+
+    // 구매하기
+    function store() {
+        ordersApi.store_carts({
+            cart_ids: selectedIds
+        }, (response) => {
+            if (user) {
+                router.push(`/orders?order_id=${response.data.data.id}`);
+            } else {
+                const isConfirmed = window.confirm("로그인 하시겠습니까?");
+                if (isConfirmed) {
+                    router.push(`/login?redirect=/orders?order_id=${response.data.data.id}`)
+                } else {
+                    router.push(`/orders?order_id=${response.data.data.id}`);
+                }
+            }
+        });
+    }
+
+
     return (
         <>
             <Header />
@@ -106,9 +133,9 @@ export default function page() {
                 {/* 총 구매 버튼 */}
                 <div className="buy-cart-items-btn-wrap">
                     <p className="price">{finalPrice.toLocaleString()}원</p>
-                    <a href="order.html" className="buy-cart-items-btn">
-                        총 2개 구매하기
-                    </a>
+                    <button onClick={() => { store() }} className="buy-cart-items-btn">
+                        총 {selectedIds.length}개 구매하기
+                    </button>
                 </div>
 
                 <section>
@@ -124,8 +151,8 @@ export default function page() {
                                 />
                                 <label htmlFor="checkbox-01">전체선택</label>
                             </div>
-                            <button className="cart-top-btn" onClick={()=>{destroy()}}>선택삭제</button>
-                            <button className="cart-top-btn" onClick={()=>{soldOutDestroy()}}>품절삭제</button>
+                            <button className="cart-top-btn" onClick={() => { destroy() }}>선택삭제</button>
+                            <button className="cart-top-btn" onClick={() => { soldOutDestroy() }}>품절삭제</button>
                         </div>
                     </div>
 
@@ -170,12 +197,12 @@ export default function page() {
                                     <p className="price minus">-6,500원</p>
                                 </div>
                             </li> */}
-                            <li>
+                            {/* <li>
                                 <div className="price-information">
                                     <p className="label">배송비</p>
                                     <p className="price">{totalDeliveryFee.toLocaleString()}원</p>
                                 </div>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </section>

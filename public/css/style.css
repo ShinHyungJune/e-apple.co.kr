@@ -729,7 +729,7 @@
 
 /* 주문조회 아이템 */
 .order-item-type1 { display: block; }
-.order-item-type1 .order-num { display: flex; height: 45px; background-color: #f7f7f7; padding: 0 20px; align-items: center; gap: 20px; }
+.order-item-type1 .order-num { display: flex; justify-content: space-between; height: 45px; background-color: #f7f7f7; padding: 0 20px; align-items: center; gap: 20px; }
 
 .order-item-type1 .order-num > a { display: flex; width: 100%; height: 100%; align-items: center; justify-content: space-between; font-size: 15px; font-weight: bold; color: #303030; }
 
@@ -822,6 +822,7 @@
 
 .address-item-type1 { display: block; padding: 20px; border-radius: 10px; border: solid 1px #e4e4e4; background-color: #fff; }
 .address-item-type1.active { border: solid 1px #ff990d; }
+.address-item-type1.hover { cursor: pointer; }
 
 .address-item-type1 .address-name-wrap { display: flex; justify-content: space-between; margin-bottom: 10px; }
 .address-item-type1 .address-name-wrap .address-name { display: flex; gap: 10px; font-size: 15px; font-weight: bold; color: #222; }

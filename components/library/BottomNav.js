@@ -30,7 +30,7 @@ const BottomNav = () => {
                         </a>
                     </li>
                     <li>
-                        <button onClick={()=>{setIsPopupList(true)}} className="bottomNav-button">
+                        <button onClick={()=>{setIsPopupList(!isPopupList)}} className="bottomNav-button">
                             <img src="/images/bottomNav-list.png" alt="목록" />
                         </button>
                     </li>

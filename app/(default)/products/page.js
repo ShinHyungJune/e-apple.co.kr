@@ -23,7 +23,7 @@ export default function page() {
 
     const [form, setForm] = useState({
         page: searchParams.get('page') || 1,
-        order_column: searchParams.get("order_column") || "created_at", // 수정: `order_direction`이 중복되었음
+        order_column: searchParams.get("order_column") || "created_at",
         order_direction: searchParams.get("order_direction") || "desc",
         category_id: searchParams.get("category_id") || "",
         subcategory_id: searchParams.get("subcategory_id") || "",
@@ -52,11 +52,11 @@ export default function page() {
     useEffect(() => {
         const queryString = new URLSearchParams(form).toString();
         window.history.replaceState(null, '', `?${queryString}`);
-        getProducts();
+        indexProducts();
     }, [JSON.stringify({ ...form, })]);
 
     // 상품 목록 API 호출
-    function getProducts() {
+    function indexProducts() {
         productsApi.index("", form, (response) => {
             setProducts(response.data);
         });

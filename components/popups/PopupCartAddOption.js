@@ -3,8 +3,6 @@ import cartsApi from "@/lib/api/cartsApi";
 
 const PopupCartAddOption = ({ cart, setCart, onSuccess }) => {
 
-    console.log(cart);
-
     const [selectedOptions, setSelectedOptions] = useState([]); // 선택된 옵션 저장
     const [selectedValue, setSelectedValue] = useState(""); // 셀렉트박스의 현재 값 관리
 

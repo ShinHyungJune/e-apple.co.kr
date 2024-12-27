@@ -13,9 +13,9 @@ export default function MainTabMenu({ activeTab }) {
                 <Link href="/basts" className={`tab-item ${activeTab === '베스트' ? 'active' : ''}`}>
                     베스트
                 </Link>
-                <Link href="/gift" className={`tab-item ${activeTab === '선물' ? 'active' : ''}`}>
+                {/* <Link href="/gift" className={`tab-item ${activeTab === '선물' ? 'active' : ''}`}>
                     선물
-                </Link>
+                </Link> */}
                 <Link href="/storys" className={`tab-item ${activeTab === '스토리' ? 'active' : ''}`}>
                     스토리
                 </Link>

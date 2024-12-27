@@ -55,7 +55,12 @@ const CouponItem = ({ coupon, onSuccess }) => {
                                     <>최소 결제 {coupon.minimum_purchase_amount.toLocaleString()}원</>
                             }
                         </p>
-                        <p className="period">{coupon.human_issued_until} 남음</p>
+                        {
+                            coupon.human_issued_until ? 
+                            <p className="period">{coupon.human_issued_until} 남음</p>
+                            :
+                            <p className="period">{coupon.expiration_left_days}일 남음</p>
+                        }
                     </div>
                 </div>
             </div>

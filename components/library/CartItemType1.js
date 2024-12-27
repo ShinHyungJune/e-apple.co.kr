@@ -9,12 +9,11 @@ export default function CartItemType1({ cart, onSuccess, isSelected, onSelect })
     // 옵션 추가 팝업 열고닫기
     const [isPopupCartAddOption, setIsPopupCartAddOption] = useState(null);
 
-    // 쿠폰사용전 상품들 총 가격
     const totalPrice = useMemo(() => {
         if (!cart || !cart.cart_product_options) return 0;
 
         return cart.cart_product_options.reduce((total, option) => {
-            return total + ((cart.product.price + option.price) * option.quantity);
+            return total + (option.price * option.quantity);
         }, 0);
     }, [cart]);
 
@@ -104,7 +103,7 @@ export default function CartItemType1({ cart, onSuccess, isSelected, onSelect })
                                             <div className="saved-item-type1">
                                                 <div className="saved-item-name">
                                                     <p className="option">{cart_product_option.name}</p>
-                                                    <p className="price">{((cart.product.price + cart_product_option.price) * cart_product_option.quantity).toLocaleString()}원</p>
+                                                    <p className="price">{((cart_product_option.price) * cart_product_option.quantity).toLocaleString()}원</p>
                                                 </div>
                                                 <div className="quantity-selector">
                                                     <button onClick={() => { update(cart_product_option.id, cart_product_option.quantity - 1) }}>
@@ -125,7 +124,7 @@ export default function CartItemType1({ cart, onSuccess, isSelected, onSelect })
                             }
                         </ul>
                     </div>
-                    <p className="cart-item-price">상품가격 {totalPrice.toLocaleString()} + 배송비 3,000 = {(totalPrice + 3000).toLocaleString()}</p>
+                    <p className="cart-item-price">상품가격: {totalPrice.toLocaleString()}원</p>
                 </div>
             </>
         );

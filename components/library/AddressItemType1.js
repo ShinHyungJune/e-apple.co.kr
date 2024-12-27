@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import deliveryAddressesApi from "@/lib/api/deliveryAddressesApi";
 
-export default function AddressItemType1({ deliveryAddresse, onSuccess }) {
+export default function AddressItemType1({ deliveryAddresse, onSuccess, selectedDeliveryAddress, setSelectedDeliveryAddress, noEdit=false }) {
 
 
     const destroy = (id) => {
@@ -17,7 +17,10 @@ export default function AddressItemType1({ deliveryAddresse, onSuccess }) {
 
     if (deliveryAddresse)
         return (
-            <div className={`address-item-type1 ${deliveryAddresse.is_default == 1 ? "active" : ""}`}>
+            <div 
+                className={`address-item-type1 hover ${selectedDeliveryAddress?.id == deliveryAddresse.id ? "active" : null}`}
+                onClick={()=>{setSelectedDeliveryAddress(deliveryAddresse)}}
+            >
                 <div className="address-name-wrap">
                     <p className="address-name">
                         {deliveryAddresse.name}
@@ -27,14 +30,20 @@ export default function AddressItemType1({ deliveryAddresse, onSuccess }) {
                                 : null
                         }
                     </p>
-                    <div className="btn-wrap">
-                        {
-                            deliveryAddresse.is_default != 1 ?
-                                <button className="add-option-btn" onClick={() => { destroy(deliveryAddresse.id) }}>삭제</button>
-                                : null
-                        }
-                        <Link href={`/mypage/deliveryAddresses/create?id=${deliveryAddresse.id}`} className="add-option-btn">수정하기</Link>
-                    </div>
+                    {
+                        noEdit ?
+                        null
+                        :
+                        <div className="btn-wrap">
+                            {
+                                deliveryAddresse.is_default != 1 ?
+                                    <button className="add-option-btn" onClick={() => { destroy(deliveryAddresse.id) }}>삭제</button>
+                                    : null
+                            }
+                            <Link href={`/mypage/deliveryAddresses/create?id=${deliveryAddresse.id}`} className="add-option-btn">수정하기</Link>
+                        </div>
+                    }
+                   
                 </div>
                 <div className="address-wrap">
                     <p className="address">

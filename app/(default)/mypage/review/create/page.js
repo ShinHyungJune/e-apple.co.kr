@@ -38,7 +38,6 @@ export default function page() {
     }, [searchParams]);
 
     useEffect(()=>{
-        console.log(order_product_id)
         if (order_product_id) {
             ordersApi.show_order_products(order_product_id, (response) => {
                 setOrderProduct(response.data.data);

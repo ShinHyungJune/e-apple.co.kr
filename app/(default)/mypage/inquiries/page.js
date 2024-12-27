@@ -84,7 +84,7 @@ export default function page() {
                     </div>
                     <div className="section-title-wrap-type3">
                         <p className="section-title">1:1 문의내역</p>
-                        <Link href="/mypage/inquiry/create" className="link-txt">
+                        <Link href="/mypage/inquiries/create" className="link-txt">
                             1:1 문의 쓰기
                         </Link>
                     </div>
