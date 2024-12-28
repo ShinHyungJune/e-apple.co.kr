@@ -32,7 +32,7 @@ export default function page() {
 
     const [userCoupons, setUserCoupons] = useState([]);
 
- 
+
 
     const [form, setForm] = useState({
         buyer_name: user?.name || "", // 주문자 이름
@@ -50,6 +50,8 @@ export default function page() {
 
         use_points: 0, // 적립금
         common_entrance_method: "", // 공동현관 출입방법
+
+        payment_method: "card",
 
         agreeAll: false,
         agreeTerms: false,
@@ -87,7 +89,7 @@ export default function page() {
         });
     }
 
-    
+
     const {
         totalOriginalPrice,    // 총 상품 금액: original_price * quantity의 합
         totalDiscountPrice,    // 총 상품 자체 할인 금액: (original_price - price) * quantity의 합
@@ -107,17 +109,17 @@ export default function page() {
                 totalDiscountAmount: 0,
             };
         }
-    
+
         let totalOriginalPrice = 0; // 총 상품 금액
         let totalDiscountPrice = 0; // 총 상품 자체 할인 금액
-    
+
         // 상품금액과 가격인하/할인 계산
         order.orderProducts.forEach((product) => {
             const { quantity, productOption } = product;
             totalOriginalPrice += productOption.original_price * quantity;
             totalDiscountPrice += (productOption.original_price - productOption.price) * quantity;
         });
-    
+
         // 쿠폰 할인 금액 계산
         let totalCouponDiscount = 0;
         if (form.user_coupon_discount_amount) {
@@ -125,16 +127,16 @@ export default function page() {
         } else if (form.user_coupon_discount_rate) {
             totalCouponDiscount = Math.floor(totalOriginalPrice * (form.user_coupon_discount_rate / 100)); // 할인율 적용
         }
-    
+
         // 적립금 사용 금액 처리 (숫자 변환)
         const totalPointsUsed = parseInt(form.use_points, 10) || 0;
-    
+
         // 총 할인 금액 = 총 상품 자체 할인 금액 + 쿠폰 할인 금액
         const totalDiscountAmount = totalDiscountPrice + totalCouponDiscount;
-    
+
         // 최종 상품 금액 = 상품금액 - 총 할인 금액 - 적립금 사용
         const totalFinalPrice = totalOriginalPrice - totalDiscountAmount - totalPointsUsed;
-    
+
         return {
             totalOriginalPrice,
             totalDiscountPrice,
@@ -144,7 +146,7 @@ export default function page() {
             totalDiscountAmount,
         };
     }, [order, form]); // form도 의존성에 추가
-    
+
 
     // 결제시도
     function update() {
@@ -152,7 +154,7 @@ export default function page() {
             dispatch(actions.setMessage("필수 약관에 동의해 주세요."));
             return; // 전송 중단
         }
-        
+
         ordersApi.update(order_id, form, (response) => {
             setOrder(response.data.data);
         });
@@ -174,7 +176,7 @@ export default function page() {
                 <div className="body">
                     <div className="buy-cart-items-btn-wrap">
                         <p className="price">{totalFinalPrice.toLocaleString()}원</p>
-                        <button onClick={()=>{update()}} className="buy-cart-items-btn">
+                        <button onClick={() => { update() }} className="buy-cart-items-btn">
                             결제하기
                         </button>
                     </div>
@@ -193,7 +195,7 @@ export default function page() {
                                         placeholder="주문자명을 입력해주세요."
                                     />
                                 </div>
-                                <Error name={'phone'} />
+                                <Error name={'buyer_name'} />
                             </div>
                             <div>
                                 <div className="input-txt-box-type1">
@@ -205,6 +207,7 @@ export default function page() {
                                         placeholder="휴대폰번호를 입력해주세요. (“-“제외)"
                                     />
                                 </div>
+                                <Error name={'buyer_phone'} />
                             </div>
                         </div>
 
@@ -225,6 +228,7 @@ export default function page() {
                                         placeholder="배송지명을 입력해주세요."
                                     />
                                 </div>
+                                <Error name={'delivery_name'} />
                             </div>
                             <div>
                                 <div className="input-txt-box-type1">
@@ -236,6 +240,7 @@ export default function page() {
                                         placeholder="휴대폰번호를 입력해주세요. (“-“제외)"
                                     />
                                 </div>
+                                <Error name={'delivery_phone'} />
                             </div>
                             <div className="address-input-wrap-type1">
                                 <AddressInput form={form} setForm={setForm} addressType={"delivery"} />
@@ -253,6 +258,7 @@ export default function page() {
                                     </select>
                                     <i className="xi-angle-down"></i>
                                 </div>
+                                <Error name={'delivery_request'} />
                             </div>
                         </div>
 
@@ -286,6 +292,7 @@ export default function page() {
                                     </select>
                                     <i className="xi-angle-down"></i>
                                 </div>
+                                <Error name={'user_coupon_id'} />
                             </div>
                         </div>
 
@@ -301,14 +308,19 @@ export default function page() {
                                             name="use_points"
                                             value={form.use_points}
                                             onChange={(e) => {
-                                                const value = parseInt(e.target.value, 10) || 0;
+                                                let value = e.target.value.replace(/^0+/, ''); // 앞의 0 제거
+                                                value = parseInt(value, 10) || 0; // 숫자로 변환, NaN 방지
                                                 if (value <= user.points) {
-                                                    changeForm(e);
+                                                    setForm({
+                                                        ...form,
+                                                        use_points: value, // 변경된 값을 직접 설정
+                                                    });
                                                 }
                                             }}
                                             placeholder="적립금"
                                         />
                                     </div>
+                                    <Error name={'use_points'} />
                                 </div>
                                 <div className="input-list-sub-title-wrap mt-10">
                                     <p className="input-list-sub-title">
@@ -336,6 +348,7 @@ export default function page() {
                                     </select>
                                     <i className="xi-angle-down"></i>
                                 </div>
+                                <Error name={'common_entrance_method'} />
                             </div>
                         </div>
 
@@ -440,7 +453,7 @@ export default function page() {
                                             form.agreeTerms
                                             &&
                                             form.agreePrivacy
-                                            && 
+                                            &&
                                             form.agreePayment
                                         }
                                         onChange={(e) => {
@@ -500,6 +513,42 @@ export default function page() {
                             </ul>
                         </div>
                     </section>
+
+                    <section className="bd-bt">
+                        <div className="input-list-type2 pt-20 pb-20 px-20">
+                            <div className="input-list-title-wrap">
+                                <p className="input-list-title">결제수단</p>
+                            </div>
+                            <div>
+                                <div className="radiobox-list-type2 mb-20">
+                                    <div className="radiobox">
+                                        <input
+                                            type="radio"
+                                            id="card"
+                                            name="payment_method"
+                                            value="card"
+                                            checked={form.payment_method === "card"}
+                                            onChange={changeForm}
+                                        />
+                                        <label htmlFor="card">카드결제</label>
+                                    </div>
+                                    <div className="radiobox">
+                                        <input
+                                            type="radio"
+                                            id="vbank"
+                                            name="payment_method"
+                                            value="vbank"
+                                            checked={form.payment_method === "vbank"}
+                                            onChange={changeForm}
+                                        />
+                                        <label htmlFor="vbank">계좌이체</label>
+                                    </div>
+                                </div>
+                                <Error name={'payment_method'} />
+                            </div>
+                        </div>
+                    </section>
+
 
                     <section className="bd-bt pt-20 pb-20">
                         <div className="price-information-list mb-20 px-20">
