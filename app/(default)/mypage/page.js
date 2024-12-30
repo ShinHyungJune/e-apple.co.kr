@@ -74,9 +74,9 @@ export default function page() {
                                 <li>
                                     <Link href="/mypage/orders">주문/배송 조회</Link>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <Link href="/deliveryTracking.html">취소/교환/반품 조회</Link>
-                                </li>
+                                </li> */}
                                 <li>
                                     <Link href="/mypage/review/available">상품 리뷰</Link>
                                 </li>

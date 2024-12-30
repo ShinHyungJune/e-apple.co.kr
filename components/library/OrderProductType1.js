@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import Link from 'next/link';
 import { formatDate } from "@/lib/util/formatDate";
 
-export default function OrderProductType1({ order,orderProduct }) {
+export default function OrderProductType1({ order, orderProduct, onSuccess }) {
     const router = useRouter();
 
     // 리뷰 쓸때 사용
@@ -16,12 +16,13 @@ export default function OrderProductType1({ order,orderProduct }) {
     const queryString = new URLSearchParams(queryParams).toString();
 
 
+    // 주문확정 버튼
     function confirm() {
-        ordersApi.confirm(id, {}, (response) => {
+        ordersApi.confirm(orderProduct.id, {}, (response) => {
             console.log(response)
+            onSuccess();
         })
     }
-
 
     if (orderProduct)
         return (
@@ -35,8 +36,8 @@ export default function OrderProductType1({ order,orderProduct }) {
                         </div>
                         {
                             order.delivery_fee ?
-                            <p className="shipping-fee">배송비 {order.delivery_fee.toLocaleString()}원</p>
-                            :null
+                                <p className="shipping-fee">배송비 {order.delivery_fee.toLocaleString()}원</p>
+                                : null
                         }
                     </div>
 
@@ -53,18 +54,18 @@ export default function OrderProductType1({ order,orderProduct }) {
                             </div>
                         </div>
                     </div>
-                    
+
                     {
                         order.delivery_tracking_number ?
-                        <div className="order-tracking mb-20">
-                            <p className="order-tracking-labal">주문배송조회</p>
-                            <Link href="">
-                                <span className="tracking-number">{order.delivery_tracking_number}</span>
-                            </Link>
-                        </div>
-                        : null
+                            <div className="order-tracking mb-20">
+                                <p className="order-tracking-labal">주문배송조회</p>
+                                <Link href="">
+                                    <span className="tracking-number">{order.delivery_tracking_number}</span>
+                                </Link>
+                            </div>
+                            : null
                     }
-                    
+
                     <div className="order-product-btn-wrap">
                         {/* 1:1 문의 버튼은 항상 표시 */}
                         <Link href="/mypage/inquiries/create" className="order-product-btn">
@@ -80,14 +81,14 @@ export default function OrderProductType1({ order,orderProduct }) {
 
                         {/* 교환접수 버튼: 배송중일 때 */}
                         {['배송중'].includes(orderProduct.status) && (
-                            <Link href="" className="order-product-btn">
+                            <Link href={`/mypage/orders/exchangeReturns?order_id=${order.id}&order_product_id=${orderProduct.id}&merchant_uid=${order.merchant_uid}&buyer_name=${order.buyer_name}`} className="order-product-btn">
                                 교환접수
                             </Link>
                         )}
 
                         {/* 반품접수 버튼: 배송중일 때 */}
                         {['배송중'].includes(orderProduct.status) && (
-                            <Link href="" className="order-product-btn">
+                            <Link href={`/mypage/orders/exchangeReturns?order_id=${order.id}&order_product_id=${orderProduct.id}&merchant_uid=${order.merchant_uid}&buyer_name=${order.buyer_name}`} className="order-product-btn">
                                 반품접수
                             </Link>
                         )}
@@ -107,7 +108,7 @@ export default function OrderProductType1({ order,orderProduct }) {
                         )}
 
                         {['배송중'].includes(orderProduct.status) && (
-                            <button onClick={()=>{}} className="order-product-btn big blk">
+                            <button onClick={() => { confirm() }} className="order-product-btn big blk">
                                 구매확정
                             </button>
                         )}

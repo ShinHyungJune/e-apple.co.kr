@@ -21,7 +21,6 @@ export default function page() {
         setIsClient(true);
     }, []);
 
-    console.log(user)
 
     function destroy() {
         const isConfirmed = window.confirm("정말로 탈퇴하시겠습니까?");
@@ -34,7 +33,20 @@ export default function page() {
             alert("탈퇴가 취소되었습니다.");
         }
     }
-    
+
+    function update(e) {
+        const isChecked = e.target.checked; // true: 체크, false: 체크 해제
+        usersApi.update(
+            { is_agree_promotion: isChecked }, // true 또는 false로 전송
+            (response) => {
+                usersApi.show();
+            }
+        );
+    }
+
+
+
+    console.log(user);
 
     if (isClient)
         return (
@@ -92,7 +104,12 @@ export default function page() {
                             <ul>
                                 <li>
                                     <div className="checkbox-type1">
-                                        <input type="checkbox" id="checkbox-02" />
+                                        <input
+                                            type="checkbox"
+                                            checked={user.is_agree_promotion} // true이면 체크, false이면 체크 해제
+                                            id="checkbox-02"
+                                            onChange={update} // update 함수 연결
+                                        />
                                         <label htmlFor="checkbox-02">광고성 정보 수신 동의</label>
                                     </div>
                                     <a href="#">상세보기</a>
@@ -102,7 +119,7 @@ export default function page() {
 
                         {/* 영수증 보기 버튼 */}
                         <div className="underline-btn-wrap mb-60">
-                            <button onClick={()=>{destroy()}} className="underline-btn">회원탈퇴</button>
+                            <button onClick={() => { destroy() }} className="underline-btn">회원탈퇴</button>
                         </div>
                     </section>
                 </div>

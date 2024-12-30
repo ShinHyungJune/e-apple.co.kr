@@ -17,7 +17,7 @@ export default function page() {
     const order_product_id = searchParams.get('order_product_id');
 
     const [orderProduct, setOrderProduct] = useState(null);
-    const [item, setItem] = useState(null);
+    const [reviewItem, setReviewItem] = useState(null);
     const [form, setForm] = useState({
         images: [],
         files_remove_ids: [],
@@ -65,7 +65,7 @@ export default function page() {
     const show = () => {
         // API 요청
         product_reviewApi.show(id, (response) => {
-            setItem(response.data.data);
+            setReviewItem(response.data.data);
             setForm({
                 ...form,
                 ...response.data.data,
@@ -161,7 +161,7 @@ export default function page() {
                         <div>
                             <InputImages
                                 multiple={true}
-                                defaultValue={item && item.imgs ? item.imgs : []}
+                                defaultValue={reviewItem && reviewItem.imgs ? reviewItem.imgs : []}
                                 onChange={(data) => { setForm({ ...form, images: data }) }}
                                 onRemove={(data) => { setForm({ ...form, files_remove_ids: data }) }}
                             />

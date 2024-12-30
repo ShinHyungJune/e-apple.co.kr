@@ -39,7 +39,7 @@ const PopupOrdersDeliveryAddresses = ({ setForm, isPopup, setIsPopup }) => {
         if (selectedDeliveryAddress) {
             setForm((prevForm) => ({
                 ...prevForm,
-                delivery_name: selectedDeliveryAddress.name, // 배송지명
+                delivery_name: selectedDeliveryAddress.recipient_name, // 배송지명
                 delivery_phone: selectedDeliveryAddress.phone, // 배송지 연락처
                 delivery_postal_code: selectedDeliveryAddress.postal_code, // 배송지 우편번호
                 delivery_address: selectedDeliveryAddress.address, // 배송지 주소

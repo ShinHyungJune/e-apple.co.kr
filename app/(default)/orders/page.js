@@ -287,7 +287,7 @@ export default function page() {
                                         name="delivery_name"
                                         value={form.delivery_name}
                                         onChange={changeForm}
-                                        placeholder="배송지명을 입력해주세요."
+                                        placeholder="수령인 이름을 입력해주세요."
                                     />
                                 </div>
                                 <Error name={'delivery_name'} />

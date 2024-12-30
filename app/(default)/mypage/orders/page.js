@@ -21,6 +21,7 @@ export default function page() {
 
     const [form, setForm] = useState({
         page: 1,
+        take:100,
     });
     const [orders, setOrders] = useState({
         data: [],
@@ -37,10 +38,17 @@ export default function page() {
     function index() {
         ordersApi.index(form, (response) => {
             setOrders(response.data);
-            // console.log(response.data);
         })
     }
 
+
+    // 주문취소 버튼
+    function cancel(id) {
+        ordersApi.cancel(id, {}, (response) => {
+            dispatch(actions.setMessage("주문취소가 완료되었습니다."));
+            index()
+        })
+    }
     
 
     return (
@@ -61,13 +69,13 @@ export default function page() {
                                                         <div className="order-num">
                                                             {
                                                                 order.merchant_uid ?
-                                                                <Link href="/deliveryTrackingDetail.html">
+                                                                <Link href={`/mypage/orders/${order.id}`}>
                                                                     {order.merchant_uid} <i className="xi-angle-right"></i>
                                                                 </Link>
                                                                 : <div></div>
                                                             }
                                                             {['주문접수', '주문완료', '결제대기중', '결제완료', '배송준비중'].includes(order.status) && (
-                                                                <button className="order-product-btn">주문취소</button>
+                                                                <button onClick={()=>{cancel(order.id)}} className="order-product-btn">주문취소</button>
                                                             )}
                                                         </div>
 
@@ -81,6 +89,7 @@ export default function page() {
                                                                                     <OrderProductType1 
                                                                                         order={order}
                                                                                         orderProduct={orderProduct}
+                                                                                        onSuccess={()=>{index()}}
                                                                                     />
                                                                                 </li>
                                                                             )
