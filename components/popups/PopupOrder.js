@@ -1,20 +1,34 @@
 import React, { useState, useEffect, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import cartsApi from "@/lib/api/cartsApi";
+import ordersApi from "@/lib/api/ordersApi";
+// 리덕스
+import { useDispatch, useSelector } from "react-redux";
 
 const PopupOrder = ({ product, setIsPopupOrder, onlyCart = false, onSuccess }) => {
-
+    const router = useRouter();
+    const user = useSelector(state => state.app.user);
     const [selectedOptions, setSelectedOptions] = useState([]); // 선택된 옵션 저장
     const [selectedValue, setSelectedValue] = useState(""); // 셀렉트박스의 현재 값 관리
-
-    const [form, setForm] = useState({
+    const [cartForm, setCartForm] = useState({
         product_id: product.id,
         product_options: selectedOptions,
     });
 
+    const [orderFrom, setOrderFrom] = useState({
+        total_amount: "",
+        delivery_fee: product.delivery_fee,
+        order_products: selectedOptions,
+    })
+
     useEffect(() => {
-        setForm((prevForm) => ({
+        setCartForm((prevForm) => ({
             ...prevForm,
             product_options: selectedOptions,
+        }));
+        setOrderFrom((prevForm) => ({
+            ...prevForm,
+            order_products: selectedOptions,
         }));
     }, [selectedOptions, selectedValue]);
 
@@ -66,24 +80,56 @@ const PopupOrder = ({ product, setIsPopupOrder, onlyCart = false, onSuccess }) =
     };
 
 
-    // 쿠폰사용전 상품들 총 가격
+    // 상품들 총 가격
     const totalPrice = useMemo(() => {
         return selectedOptions.reduce(
             (acc, option) =>
-                acc + (product.price + option.price) * option.quantity,
+                acc + (option.price) * option.quantity,
             0
         );
-    }, [selectedOptions, product.price]);
+    }, [selectedOptions, product.options]);
+
+    useEffect(() => {
+        setOrderFrom((prev) => ({
+            ...prev,
+            total_amount: totalPrice, // totalPrice를 total_amount에 설정
+        }));
+    }, [totalPrice]);
 
 
+    // 장바구니 담기
     function cartStore() {
-        cartsApi.store(form, (response) => {
+        cartsApi.store(cartForm, (response) => {
             setIsPopupOrder(false)
             onSuccess()
         });
     }
 
-
+    // 바로구매
+    function store() {
+        // order_products 배열에 product_id 추가
+        const updatedOrderProducts = orderFrom.order_products.map((item) => ({
+            ...item,
+            product_id: product.id,
+        }));
+    
+        const requestData = {
+            ...orderFrom,
+            order_products: updatedOrderProducts,
+        };
+    
+        const handleResponse = (response) => {
+            router.push(`/orders?order_id=${response.data.data.id}`);
+        };
+    
+        if (user) {
+            ordersApi.store(requestData, handleResponse);
+        } else if (window.confirm("로그인 하시겠습니까?")) {
+            router.push(`/login?redirect=/products/${product.id}`);
+        } else {
+            ordersApi.store(requestData, handleResponse);
+        }
+    }
 
 
     return (
@@ -126,7 +172,7 @@ const PopupOrder = ({ product, setIsPopupOrder, onlyCart = false, onSuccess }) =
                                             <div className="saved-item-name">
                                                 <p className="option">{option.name}</p>
                                                 <p className="price">
-                                                    {((product.price + option.price) * option.quantity).toLocaleString()}원
+                                                    {(option.price * option.quantity).toLocaleString()}원
                                                 </p>
                                             </div>
                                             <div className="quantity-selector">
@@ -175,7 +221,15 @@ const PopupOrder = ({ product, setIsPopupOrder, onlyCart = false, onSuccess }) =
                             <button className="popup-bt-btn wht" onClick={() => {
                                 cartStore()
                             }}>장바구니</button>
-                            {!onlyCart && <button className="popup-bt-btn org">바로구매</button>}
+                            {
+                                !onlyCart
+                                &&
+                                <button
+                                    onClick={()=>{store()}}
+                                    className="popup-bt-btn org"
+                                >바로구매
+                                </button>
+                            }
                         </div>
                     </div>
                 </div>

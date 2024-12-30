@@ -3,16 +3,23 @@ import { useRouter, useSearchParams } from "next/navigation";
 import NoListData from "../NoListData";
 import deliveryAddressesApi from "@/lib/api/deliveryAddressesApi";
 import AddressItemType1 from "../library/AddressItemType1";
+// 리덕스
+import { useDispatch, useSelector } from "react-redux";
+import { actions } from "@/app/store";
 
 const PopupOrdersDeliveryAddresses = ({ setForm, isPopup, setIsPopup }) => {
     const router = useRouter();
+    const user = useSelector(state => state.app.user);
 
     const [selectedDeliveryAddress, setSelectedDeliveryAddress] = useState();
 
     const [deliveryAddresses, setDeliveryAddresses] = useState([]);
 
     useEffect(() => {
-        index()
+        if (user) {
+            index()
+        }
+        
     }, [])
     function index() {
         deliveryAddressesApi.index({}, (response) => {

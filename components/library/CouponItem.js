@@ -18,7 +18,6 @@ const CouponItem = ({ coupon, onSuccess }) => {
             onSuccess()
         });
     }
-    console.log(coupon);
 
     if (coupon)
         return (

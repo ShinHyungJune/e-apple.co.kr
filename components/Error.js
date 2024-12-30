@@ -5,6 +5,7 @@ import {actions} from "@/app/store";
 export default function Error({name}) {
     const dispatch = useDispatch();
     const errors = useSelector(state => state.app.errors);
+    console.log(errors);
 
     useEffect(() => {
         dispatch(actions.setErrors({}));
@@ -14,7 +15,7 @@ export default function Error({name}) {
         <>
             {
                 errors[name]
-                    ? <div className="m-input-error type01">{errors[name][0]}</div>
+                    ? <div className="m-input-error type01">{errors[name]}</div>
                     : null
             }
         </>

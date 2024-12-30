@@ -108,21 +108,22 @@ export default function page() {
 
     // 구매하기
     function store() {
-        ordersApi.store_carts({
-            cart_ids: selectedIds
-        }, (response) => {
-            if (user) {
-                router.push(`/orders?order_id=${response.data.data.id}`);
-            } else {
-                const isConfirmed = window.confirm("로그인 하시겠습니까?");
-                if (isConfirmed) {
-                    router.push(`/login?redirect=/orders?order_id=${response.data.data.id}`)
-                } else {
-                    router.push(`/orders?order_id=${response.data.data.id}`);
-                }
-            }
-        });
+        const handleStoreCarts = () => {
+            ordersApi.store_carts(
+                { cart_ids: selectedIds },
+                (response) => router.push(`/orders?order_id=${response.data.data.id}`)
+            );
+        };
+    
+        if (user) {
+            handleStoreCarts();
+        } else if (window.confirm("로그인 하시겠습니까?")) {
+            router.push(`/login?redirect=/mypage/carts`);
+        } else {
+            handleStoreCarts();
+        }
     }
+    
 
 
     return (

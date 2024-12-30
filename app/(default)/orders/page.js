@@ -34,7 +34,7 @@ export default function page() {
 
     const [form, setForm] = useState({
         buyer_name: user?.name || "", // 주문자 이름
-        buyer_phone: user?.phone || "", // 주문자 연락처
+        buyer_contact: user?.phone || "", // 주문자 연락처
         delivery_name: "", // 배송지명
         delivery_phone: "", // 배송지 연락처
         delivery_postal_code: "", // 배송지 우편번호
@@ -50,9 +50,9 @@ export default function page() {
         use_points: 0, // 적립금
         common_entrance_method: "", // 공동현관 출입방법
 
-        payment_method: "card", // 결제방법
+        pay_method_method: "card", // 결제방법
 
-        total_amount:  0,
+        total_amount: 0,
         price: 0,
 
         agreeAll: false,
@@ -70,7 +70,9 @@ export default function page() {
 
     useEffect(() => {
         show()
-        indexUserCoupons()
+        if (user) {
+            indexUserCoupons()
+        }
     }, [searchParams])
 
     function show() {
@@ -107,17 +109,17 @@ export default function page() {
                 totalDiscountAmount: 0,
             };
         }
-    
+
         let totalOriginalPrice = 0; // 총 상품 금액
         let totalDiscountPrice = 0; // 총 상품 자체 할인 금액
-    
+
         // 상품금액과 가격인하/할인 계산
         order.orderProducts.forEach((product) => {
             const { quantity, productOption } = product;
             totalOriginalPrice += productOption.original_price * quantity;
             totalDiscountPrice += (productOption.original_price - productOption.price) * quantity;
         });
-    
+
         // 쿠폰 할인 금액 계산
         let totalCouponDiscount = 0;
         const discountedPrice = totalOriginalPrice - totalDiscountPrice; // 실제 할인된 가격 계산
@@ -126,16 +128,16 @@ export default function page() {
         } else if (form.user_coupon_discount_rate) {
             totalCouponDiscount = Math.floor(discountedPrice * (form.user_coupon_discount_rate / 100)); // 할인율 적용
         }
-    
+
         // 적립금 사용 금액 처리 (숫자 변환)
         const totalPointsUsed = parseInt(form.use_points, 10) || 0;
-    
+
         // 총 할인 금액 = 총 상품 자체 할인 금액 + 쿠폰 할인 금액 + 적립금
         const totalDiscountAmount = totalDiscountPrice + totalCouponDiscount + totalPointsUsed;
-    
+
         // 최종 상품 금액 = 상품금액 - 총 할인 금액 + 배송비 
         const totalFinalPrice = totalOriginalPrice - totalDiscountAmount + order.delivery_fee;
-    
+
         return {
             totalOriginalPrice,
             totalDiscountPrice,
@@ -156,8 +158,8 @@ export default function page() {
                 coupon_discount_amount: totalCouponDiscount,
             }));
         }
-    }, [order, totalFinalPrice,totalCouponDiscount]);
-    
+    }, [order, totalFinalPrice, totalCouponDiscount]);
+
 
 
     // 결제시도
@@ -180,32 +182,32 @@ export default function page() {
         IMP.init(impCode); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 
         IMP.request_pay({
-            pg : order.pay_method_pg,
-            pay_method : order.pay_method_method,
-            merchant_uid : order.merchant_uid,
+            pg: order.pay_method_pg,
+            pay_method: order.pay_method_method,
+            merchant_uid: order.merchant_uid,
             customer_id: order.merchant_uid,
-            name : order.buyer_name,
+            name: order.buyer_name,
             escrow: order.pay_method_method === 'card' ? false : true,
             goods_name: order.format_preset_products,
-            amount : order.price,
-            buyer_name : order.buyer_name,
-            buyer_tel : order.buyer_contact,
-            buyer_email : user ? user.email : '',
-            buyer_addr : order.buyer_address,
-            buyer_postcode : form.buyer_address_zipcode,
+            amount: order.price,
+            buyer_name: order.buyer_name,
+            buyer_tel: order.buyer_contact,
+            buyer_email: user ? user.email : '',
+            buyer_addr: order.buyer_address,
+            buyer_postcode: form.buyer_address_zipcode,
             m_redirect_url: redirectUrl,
             display: { card_quota: [0, 6] },
-        }, function(response) {
-            if ( !response.error_msg  ) {
+        }, function (response) {
+            if (!response.error_msg) {
                 form.imp_uid = response.imp_uid;
                 form.merchant_uid = response.merchant_uid;
 
-                setForm({...form});
+                setForm({ ...form });
 
                 ordersApi.complete(form, (response) => {
                     const order = response.data.data;
 
-                    // router.push(`/orders/result?merchant_uid=${order.merchant_uid}&buyer_contact=${order.buyer_contact}&buyer_name=${order.buyer_name}`);
+                    router.push(`/orders/result?updated_at=${order.updated_at}&merchant_uid=${order.merchant_uid}`);
                     console.log(order);
                 })
             } else {
@@ -256,22 +258,27 @@ export default function page() {
                                 <div className="input-txt-box-type1">
                                     <input
                                         type="text"
-                                        name="buyer_phone"
-                                        value={form.buyer_phone}
+                                        name="buyer_contact"
+                                        value={form.buyer_contact}
                                         onChange={changeForm}
                                         placeholder="휴대폰번호를 입력해주세요. (“-“제외)"
                                     />
                                 </div>
-                                <Error name={'buyer_phone'} />
+                                <Error name={'buyer_contact'} />
                             </div>
                         </div>
 
                         <div className="input-list-type2 pt-20 pb-20 px-20">
                             <div className="input-list-title-wrap">
                                 <p className="input-list-title">배송지</p>
-                                <button className="change-address-btn" onClick={() => { setIsPopupOrdersDeliveryAddresses(true) }}>
-                                    배송지 변경 <i className="xi-angle-right-min"></i>
-                                </button>
+                                {
+                                    user
+                                    &&
+                                    <button className="change-address-btn" onClick={() => { setIsPopupOrdersDeliveryAddresses(true) }}>
+                                        배송지 변경 <i className="xi-angle-right-min"></i>
+                                    </button>
+                                }
+
                             </div>
                             <div>
                                 <div className="input-txt-box-type1">
@@ -317,39 +324,42 @@ export default function page() {
                             </div>
                         </div>
 
-                        <div className="input-list-type2 pt-20 px-20">
-                            <div className="input-list-title-wrap">
-                                <p className="input-list-title">쿠폰사용</p>
-                            </div>
-                            <div>
-                                <div className="select-box-type1">
-                                    <select
-                                        name="user_coupon_id"
-                                        value={form.user_coupon_id}
-                                        onChange={(e) => {
-                                            const selectedCouponId = e.target.value;
-                                            const selectedCoupon = userCoupons.find(userCoupon => userCoupon.user_coupon_id == selectedCouponId);
-
-                                            setForm((prevForm) => ({
-                                                ...prevForm,
-                                                user_coupon_id: selectedCouponId,
-                                                user_coupon_discount_amount: selectedCoupon?.type == "amount" ? selectedCoupon.discount_amount : "",
-                                                user_coupon_discount_rate: selectedCoupon?.type == "rate" ? selectedCoupon.discount_rate : "",
-                                            }));
-                                        }}
-                                    >
-                                        <option value="">쿠폰을 선택해 주세요.</option>
-                                        {userCoupons.map((userCoupon) => (
-                                            <option key={userCoupon.user_coupon_id} value={userCoupon.user_coupon_id}>
-                                                {userCoupon.name}
-                                            </option>
-                                        ))}
-                                    </select>
-                                    <i className="xi-angle-down"></i>
+                        {user ? (
+                            <div className="input-list-type2 pt-20 px-20">
+                                <div className="input-list-title-wrap">
+                                    <p className="input-list-title">쿠폰사용</p>
                                 </div>
-                                <Error name={'user_coupon_id'} />
+                                <div>
+                                    <div className="select-box-type1">
+                                        <select
+                                            name="user_coupon_id"
+                                            value={form.user_coupon_id}
+                                            onChange={(e) => {
+                                                const selectedCouponId = e.target.value;
+                                                const selectedCoupon = userCoupons.find(userCoupon => userCoupon.user_coupon_id == selectedCouponId);
+
+                                                setForm((prevForm) => ({
+                                                    ...prevForm,
+                                                    user_coupon_id: selectedCouponId,
+                                                    user_coupon_discount_amount: selectedCoupon?.type == "amount" ? selectedCoupon.discount_amount : "",
+                                                    user_coupon_discount_rate: selectedCoupon?.type == "rate" ? selectedCoupon.discount_rate : "",
+                                                }));
+                                            }}
+                                        >
+                                            <option value="">쿠폰을 선택해 주세요.</option>
+                                            {userCoupons.map((userCoupon) => (
+                                                <option key={userCoupon.user_coupon_id} value={userCoupon.user_coupon_id}>
+                                                    {userCoupon.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        <i className="xi-angle-down"></i>
+                                    </div>
+                                    <Error name={'user_coupon_id'} />
+                                </div>
                             </div>
-                        </div>
+                        ) : null}
+
 
                         {user ? (
                             <div className="input-list-type2 pt-20 pb-20 px-20">
@@ -397,9 +407,9 @@ export default function page() {
                                         onChange={changeForm}
                                     >
                                         <option value="">출입방법을 선택해 주세요.</option>
-                                        <option value="password">공동현관 비밀번호 입력</option>
-                                        <option value="intercom">인터폰 호출</option>
-                                        <option value="manual">수동 출입</option>
+                                        <option value="공동현관 비밀번호 입력">공동현관 비밀번호 입력</option>
+                                        <option value="인터폰 호출">인터폰 호출</option>
+                                        <option value="수동 출입">수동 출입</option>
                                     </select>
                                     <i className="xi-angle-down"></i>
                                 </div>
@@ -580,9 +590,9 @@ export default function page() {
                                         <input
                                             type="radio"
                                             id="card"
-                                            name="payment_method"
+                                            name="pay_method_method"
                                             value="card"
-                                            checked={form.payment_method == "card"}
+                                            checked={form.pay_method_method == "card"}
                                             onChange={changeForm}
                                         />
                                         <label htmlFor="card">카드결제</label>
@@ -591,15 +601,15 @@ export default function page() {
                                         <input
                                             type="radio"
                                             id="vbank"
-                                            name="payment_method"
+                                            name="pay_method_method"
                                             value="vbank"
-                                            checked={form.payment_method == "vbank"}
+                                            checked={form.pay_method_method == "vbank"}
                                             onChange={changeForm}
                                         />
                                         <label htmlFor="vbank">계좌이체</label>
                                     </div>
                                 </div>
-                                <Error name={'payment_method'} />
+                                <Error name={'pay_method_method'} />
                             </div>
                         </div>
                     </section>

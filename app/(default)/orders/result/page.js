@@ -9,12 +9,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { actions } from "@/app/store";
 
 import Header from "@/components/Header";
+import { formatDate } from "@/lib/util/formatDate";
 
 export default function page() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const dispatch = useDispatch();
-    const order_id = searchParams.get('order_id');
+    const updated_at = searchParams.get('updated_at');
+    const merchant_uid = searchParams.get('merchant_uid');
 
     return (
         <>
@@ -40,8 +42,8 @@ export default function page() {
                         </div>
 
                         <div className="order-number-wrap mt-30">
-                            <p className="date">주문일 2023-12-12</p>
-                            <p className="order-number">주문번호 A123456789</p>
+                            <p className="date">주문일 {formatDate(updated_at)}</p>
+                            <p className="order-number">주문번호 {merchant_uid}</p>
                         </div>
                     </div>
                 </section>
