@@ -18,6 +18,7 @@ const CouponItem = ({ coupon, onSuccess }) => {
             onSuccess()
         });
     }
+    console.log(coupon);
 
     if (coupon)
         return (
@@ -26,9 +27,10 @@ const CouponItem = ({ coupon, onSuccess }) => {
                     <p className="discount">
                         {
                             coupon.type == "amount" ?
-                                coupon.discount_rate + "%"
-                                :
                                 coupon.discount_amount.toLocaleString() + "원"
+                                :
+                                coupon.discount_rate + "%"
+                                
                         }
                     </p>
                     {

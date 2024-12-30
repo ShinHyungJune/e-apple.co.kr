@@ -32,8 +32,6 @@ export default function page() {
 
     const [userCoupons, setUserCoupons] = useState([]);
 
-
-
     const [form, setForm] = useState({
         buyer_name: user?.name || "", // 주문자 이름
         buyer_phone: user?.phone || "", // 주문자 연락처
@@ -45,13 +43,17 @@ export default function page() {
         delivery_request: "", // 배송 요청 사항
 
         user_coupon_id: "", // 쿠폰
+        coupon_discount_amount: 0, // 쿠폰으로 할인된금액
         user_coupon_discount_amount: "",
         user_coupon_discount_rate: "",
 
         use_points: 0, // 적립금
         common_entrance_method: "", // 공동현관 출입방법
 
-        payment_method: "card",
+        payment_method: "card", // 결제방법
+
+        total_amount:  0,
+        price: 0,
 
         agreeAll: false,
         agreeTerms: false,
@@ -62,13 +64,9 @@ export default function page() {
         const { name, value, type, checked } = event.target;
         setForm({
             ...form,
-            [name]: type === 'checkbox' ? checked : value
+            [name]: type == 'checkbox' ? checked : value
         });
     };
-
-    useEffect(() => {
-        console.log(form);
-    }, [form])
 
     useEffect(() => {
         show()
@@ -96,7 +94,7 @@ export default function page() {
         totalCouponDiscount,   // 상품 쿠폰 할인 금액
         totalPointsUsed,       // 적립금 사용 금액
         totalFinalPrice,       // 최종 상품 금액: 총 상품 금액 - 총 할인 금액 - 쿠폰 할인 금액 - 적립금 사용
-        totalDiscountAmount    // 총 할인 금액: 상품 자체 할인 금액 + 쿠폰 할인 금액
+        totalDiscountAmount    // 총 할인 금액: 상품 자체 할인 금액 + 쿠폰 할인 금액 + 적립금
     } = useMemo(() => {
         if (!order) {
             // order가 없으면 기본값 반환
@@ -109,34 +107,35 @@ export default function page() {
                 totalDiscountAmount: 0,
             };
         }
-
+    
         let totalOriginalPrice = 0; // 총 상품 금액
         let totalDiscountPrice = 0; // 총 상품 자체 할인 금액
-
+    
         // 상품금액과 가격인하/할인 계산
         order.orderProducts.forEach((product) => {
             const { quantity, productOption } = product;
             totalOriginalPrice += productOption.original_price * quantity;
             totalDiscountPrice += (productOption.original_price - productOption.price) * quantity;
         });
-
+    
         // 쿠폰 할인 금액 계산
         let totalCouponDiscount = 0;
+        const discountedPrice = totalOriginalPrice - totalDiscountPrice; // 실제 할인된 가격 계산
         if (form.user_coupon_discount_amount) {
             totalCouponDiscount = form.user_coupon_discount_amount; // 고정 금액 쿠폰
         } else if (form.user_coupon_discount_rate) {
-            totalCouponDiscount = Math.floor(totalOriginalPrice * (form.user_coupon_discount_rate / 100)); // 할인율 적용
+            totalCouponDiscount = Math.floor(discountedPrice * (form.user_coupon_discount_rate / 100)); // 할인율 적용
         }
-
+    
         // 적립금 사용 금액 처리 (숫자 변환)
         const totalPointsUsed = parseInt(form.use_points, 10) || 0;
-
-        // 총 할인 금액 = 총 상품 자체 할인 금액 + 쿠폰 할인 금액
-        const totalDiscountAmount = totalDiscountPrice + totalCouponDiscount;
-
-        // 최종 상품 금액 = 상품금액 - 총 할인 금액 - 적립금 사용
-        const totalFinalPrice = totalOriginalPrice - totalDiscountAmount - totalPointsUsed;
-
+    
+        // 총 할인 금액 = 총 상품 자체 할인 금액 + 쿠폰 할인 금액 + 적립금
+        const totalDiscountAmount = totalDiscountPrice + totalCouponDiscount + totalPointsUsed;
+    
+        // 최종 상품 금액 = 상품금액 - 총 할인 금액 + 배송비 
+        const totalFinalPrice = totalOriginalPrice - totalDiscountAmount + order.delivery_fee;
+    
         return {
             totalOriginalPrice,
             totalDiscountPrice,
@@ -148,6 +147,19 @@ export default function page() {
     }, [order, form]); // form도 의존성에 추가
 
 
+    useEffect(() => {
+        if (order) {
+            setForm((prevForm) => ({
+                ...prevForm,
+                price: totalFinalPrice,
+                total_amount: order.total_amount,
+                coupon_discount_amount: totalCouponDiscount,
+            }));
+        }
+    }, [order, totalFinalPrice,totalCouponDiscount]);
+    
+
+
     // 결제시도
     function update() {
         if (!form.agreeTerms || !form.agreePrivacy || !form.agreePayment) {
@@ -156,10 +168,53 @@ export default function page() {
         }
 
         ordersApi.update(order_id, form, (response) => {
-            setOrder(response.data.data);
+            const data = response.data.data;
+            console.log(data);
+            pay(data.imp_code, data.m_redirect_url, data.order);
         });
     }
 
+    const pay = (impCode, redirectUrl, order) => {
+        let IMP = window.IMP; // 생략가능
+
+        IMP.init(impCode); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+
+        IMP.request_pay({
+            pg : order.pay_method_pg,
+            pay_method : order.pay_method_method,
+            merchant_uid : order.merchant_uid,
+            customer_id: order.merchant_uid,
+            name : order.buyer_name,
+            escrow: order.pay_method_method === 'card' ? false : true,
+            goods_name: order.format_preset_products,
+            amount : order.price,
+            buyer_name : order.buyer_name,
+            buyer_tel : order.buyer_contact,
+            buyer_email : user ? user.email : '',
+            buyer_addr : order.buyer_address,
+            buyer_postcode : form.buyer_address_zipcode,
+            m_redirect_url: redirectUrl,
+            display: { card_quota: [0, 6] },
+        }, function(response) {
+            if ( !response.error_msg  ) {
+                form.imp_uid = response.imp_uid;
+                form.merchant_uid = response.merchant_uid;
+
+                setForm({...form});
+
+                ordersApi.complete(form, (response) => {
+                    const order = response.data.data;
+
+                    // router.push(`/orders/result?merchant_uid=${order.merchant_uid}&buyer_contact=${order.buyer_contact}&buyer_name=${order.buyer_name}`);
+                    console.log(order);
+                })
+            } else {
+                let msg = response.error_msg;
+
+                alert(msg);
+            }
+        });
+    }
 
     if (order && isClient)
         return (
@@ -273,7 +328,7 @@ export default function page() {
                                         value={form.user_coupon_id}
                                         onChange={(e) => {
                                             const selectedCouponId = e.target.value;
-                                            const selectedCoupon = userCoupons.find(userCoupon => userCoupon.id == selectedCouponId);
+                                            const selectedCoupon = userCoupons.find(userCoupon => userCoupon.user_coupon_id == selectedCouponId);
 
                                             setForm((prevForm) => ({
                                                 ...prevForm,
@@ -285,7 +340,7 @@ export default function page() {
                                     >
                                         <option value="">쿠폰을 선택해 주세요.</option>
                                         {userCoupons.map((userCoupon) => (
-                                            <option key={userCoupon.id} value={userCoupon.id}>
+                                            <option key={userCoupon.user_coupon_id} value={userCoupon.user_coupon_id}>
                                                 {userCoupon.name}
                                             </option>
                                         ))}
@@ -527,7 +582,7 @@ export default function page() {
                                             id="card"
                                             name="payment_method"
                                             value="card"
-                                            checked={form.payment_method === "card"}
+                                            checked={form.payment_method == "card"}
                                             onChange={changeForm}
                                         />
                                         <label htmlFor="card">카드결제</label>
@@ -538,7 +593,7 @@ export default function page() {
                                             id="vbank"
                                             name="payment_method"
                                             value="vbank"
-                                            checked={form.payment_method === "vbank"}
+                                            checked={form.payment_method == "vbank"}
                                             onChange={changeForm}
                                         />
                                         <label htmlFor="vbank">계좌이체</label>
