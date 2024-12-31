@@ -143,6 +143,7 @@ export default function page() {
                                         </div>
                                     ))}
                                 </div>
+                                <Error name={'problem'} />
                             </div>
                         </div>
 
@@ -161,6 +162,7 @@ export default function page() {
                                         onChange={changeForm} // 입력 값 업데이트
                                     ></textarea>
                                 </div>
+                                <Error name={'description'} />
                             </div>
                         </div>
                     </section>

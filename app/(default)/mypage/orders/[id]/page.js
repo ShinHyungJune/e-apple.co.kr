@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState, useMemo } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Error from "@/components/Error";
 
@@ -15,7 +15,11 @@ import OrderProductType1 from "@/components/library/OrderProductType1";
 
 export default function page(props) {
     const router = useRouter();
-    const orderId = props.params.id
+    const searchParams = useSearchParams();
+    const orderId = props.params.id;
+    const buyer_name = searchParams.get('buyer_name');
+    const merchant_uid = searchParams.get('merchant_uid');
+    
 
     const [order, setOrder] = useState();
 
@@ -23,12 +27,23 @@ export default function page(props) {
         show()
     }, [orderId])
     function show() {
-        ordersApi.show(orderId, (response) => {
-            setOrder(response.data.data);
-            console.log(response.data.data);
-        })
+        if (orderId == "guest") {
+            ordersApi.show(orderId, {
+                buyer_name: buyer_name,
+                merchant_uid: merchant_uid
+            }, (response) => {
+                setOrder(response.data.data);
+                console.log(response.data.data);
+            })
+        }else{
+            ordersApi.show(orderId, {}, (response) => {
+                setOrder(response.data.data);
+                console.log(response.data.data);
+            })
+        }
     }
 
+    
 
     const {
         totalOriginalPrice,    // 총 상품 금액: original_price * quantity의 합
@@ -64,7 +79,7 @@ export default function page(props) {
         };
     }, [order]); // form도 의존성에 추가
 
-    console.log(totalOriginalPrice);
+
 
 
     if (order)
@@ -185,14 +200,14 @@ export default function page(props) {
                                 <li>
                                     <div className="price-information">
                                         <p className="label">카드결제</p>
-                                        <p className="price">{order.price.toLocaleString()} (현대카드)</p>
+                                        <p className="price">{order.price.toLocaleString()} 원</p>
                                     </div>
                                 </li>
                             </ul>
                         </div>
 
                         {/* 취소/환불 정보 */}
-                        <div className="price-information-list mb-20 pb-20 px-20 bd-bt">
+                        {/* <div className="price-information-list mb-20 pb-20 px-20 bd-bt">
                             <p className="price-information-title">취소/환불 정보</p>
                             <ul>
                                 <li>
@@ -220,9 +235,8 @@ export default function page(props) {
                                     </div>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
 
-                        {/* 추가 정보 */}
                         <div className="price-information-list mb-20 pb-20 px-20 bd-bt">
                             <ul>
                                 <li>
@@ -237,32 +251,37 @@ export default function page(props) {
                                         <p className="price">0원</p>
                                     </div>
                                 </li>
-                                <li>
-                                    <div className="price-information">
-                                        <p className="label">반품배송비</p>
-                                        <p className="price">0원</p>
-                                    </div>
-                                </li>
+                                {order.refund_delivery_fee ?
+                                    <li>
+                                        <div className="price-information">
+                                            <p className="label">반품배송비</p>
+                                            <p className="price">{order.refund_delivery_fee.toLocaleString()}원</p>
+                                        </div>
+                                    </li>
+                                : null}
                             </ul>
                         </div>
 
-                        {/* 환불 정보 */}
-                        <div className="price-information-list mb-20 pb-20 px-20 bd-bt">
-                            <ul>
-                                <li>
-                                    <div className="price-information big">
-                                        <p className="label">환불금액</p>
-                                        <p className="price">48,587원</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className="price-information">
-                                        <p className="label">카드환불</p>
-                                        <p className="price">48,587 (현대카드)</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                        {order.refund_amount ?
+                            <div className="price-information-list mb-20 pb-20 px-20 bd-bt">
+                                <ul>
+                                    <li>
+                                        <div className="price-information big">
+                                            <p className="label">환불금액</p>
+                                            <p className="price">{order.refund_amount.toLocaleString()}원</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div className="price-information">
+                                            <p className="label">카드환불</p>
+                                            <p className="price">{order.refund_amount.toLocaleString()}</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        : null}
+
+                        
 
                         {/* 배송지 정보 */}
                         <div className="price-information-list mb-20 pb-20 px-20 bd-bt">
@@ -285,9 +304,7 @@ export default function page(props) {
                                         <p className="label">주소</p>
                                         <p className="price"> 
                                             {order.delivery_postal_code}
-                                            <br />
                                             {order.delivery_address}
-                                            <br />
                                             {order.delivery_address_detail}
                                         </p>
                                     </div>

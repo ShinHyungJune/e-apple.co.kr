@@ -67,45 +67,45 @@ export default function OrderProductType1({ order, orderProduct, onSuccess }) {
                     }
 
                     <div className="order-product-btn-wrap">
-                        {/* 1:1 문의 버튼은 항상 표시 */}
+                        {/* 1:1 문의 버튼 */}
                         <Link href="/mypage/inquiries/create" className="order-product-btn">
                             1:1문의
                         </Link>
 
-                        {/* 리뷰작성 버튼: 구매확정일 때 */}
+                        {/* 리뷰작성 버튼 */}
                         {['구매확정'].includes(orderProduct.status) && (
                             <Link href={`/mypage/review/create?${queryString}`} className="order-product-btn big blk">
                                 리뷰작성 + 최대 1,500P
                             </Link>
                         )}
 
-                        {/* 교환접수 버튼: 배송중일 때 */}
+                        {/* 교환접수 버튼 */}
                         {['배송중'].includes(orderProduct.status) && (
                             <Link href={`/mypage/orders/exchangeReturns?order_id=${order.id}&order_product_id=${orderProduct.id}&merchant_uid=${order.merchant_uid}&buyer_name=${order.buyer_name}`} className="order-product-btn">
                                 교환접수
                             </Link>
                         )}
 
-                        {/* 반품접수 버튼: 배송중일 때 */}
+                        {/* 반품접수 버튼 */}
                         {['배송중'].includes(orderProduct.status) && (
                             <Link href={`/mypage/orders/exchangeReturns?order_id=${order.id}&order_product_id=${orderProduct.id}&merchant_uid=${order.merchant_uid}&buyer_name=${order.buyer_name}`} className="order-product-btn">
                                 반품접수
                             </Link>
                         )}
 
-                        {/* 취소상세 버튼: 취소완료 또는 취소요청일 때 */}
-                        {['취소완료', '취소요청'].includes(orderProduct.status) && (
+                        {/* 취소상세 버튼 */}
+                        {/* {['취소완료', '취소요청'].includes(orderProduct.status) && (
                             <Link href="" className="order-product-btn blk">
                                 취소상세
                             </Link>
-                        )}
+                        )} */}
 
-                        {/* 교환상세 버튼: 교환완료 또는 교환요청일 때 */}
-                        {['교환완료', '교환요청'].includes(orderProduct.status) && (
+                        {/* 교환상세 버튼 */}
+                        {/* {['교환완료', '교환요청'].includes(orderProduct.status) && (
                             <Link href="" className="order-product-btn blk">
                                 교환상세
                             </Link>
-                        )}
+                        )} */}
 
                         {['배송중'].includes(orderProduct.status) && (
                             <button onClick={() => { confirm() }} className="order-product-btn big blk">

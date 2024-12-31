@@ -131,7 +131,7 @@ export default function page() {
                                 }
                             </ul>
                         </div>
-                    ) : null
+                    ) : (<NoListData message={"검색하신 상품이 없습니다."}/>)
                 }
                 {
                     products.data.length > 0 ? (

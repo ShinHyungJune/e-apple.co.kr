@@ -612,9 +612,9 @@
 .price-information-list > ul > li { display: block; }
 .price-information-list > .price-information-title { font-size: 12px; font-weight: bold; color: #8e8e8e; margin-bottom: 15px; }
 
-.price-information { display: flex; justify-content: space-between; }
-.price-information .label { font-size: 14px; }
-.price-information .price { font-size: 14px; font-weight: 600; color: #202020; text-align: right; }
+.price-information { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px; }
+.price-information .label { font-size: 14px; min-width: fit-content; }
+.price-information .price { font-size: 14px; font-weight: 600; color: #202020; }
 .price-information .price.minus { color: #f01c1c; }
 .price-information .price.underline { text-decoration: underline; }
 .price-information.final { margin-top: 26px; align-items: center; }

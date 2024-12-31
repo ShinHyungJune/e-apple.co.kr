@@ -5,7 +5,6 @@ import {actions} from "@/app/store";
 export default function Error({name}) {
     const dispatch = useDispatch();
     const errors = useSelector(state => state.app.errors);
-    console.log(errors);
 
     useEffect(() => {
         dispatch(actions.setErrors({}));

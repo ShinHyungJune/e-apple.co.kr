@@ -37,7 +37,7 @@ export default function page() {
         agreeTerms: false,
         agreePrivacy: false,
         agreePayment: false,
-        agree_promotion_sms: false
+        is_agree_promotion: false
     });
 
     useEffect(() => {
@@ -279,12 +279,12 @@ export default function page() {
                                 <div className="checkbox-type1">
                                     <input
                                         type="checkbox"
-                                        name="agree_promotion_sms"
-                                        id="agree_promotion_sms"
-                                        checked={form.agree_promotion_sms}
-                                        onChange={(e) => setForm({ ...form, agree_promotion_sms: e.target.checked })}
+                                        name="is_agree_promotion"
+                                        id="is_agree_promotion"
+                                        checked={form.is_agree_promotion}
+                                        onChange={(e) => setForm({ ...form, is_agree_promotion: e.target.checked })}
                                     />
-                                    <label htmlFor="agree_promotion_sms">[선택] 광고성 정보 수신 동의</label>
+                                    <label htmlFor="is_agree_promotion">[선택] 광고성 정보 수신 동의</label>
                                 </div>
                                 <a href="">상세보기</a>
                             </li>

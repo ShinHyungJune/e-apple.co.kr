@@ -76,7 +76,7 @@ export default function page() {
     }, [searchParams])
 
     function show() {
-        ordersApi.show(order_id, (response) => {
+        ordersApi.show(order_id,{}, (response) => {
             setOrder(response.data.data);
         });
     }
@@ -207,7 +207,7 @@ export default function page() {
                 ordersApi.complete(form, (response) => {
                     const order = response.data.data;
 
-                    router.push(`/orders/result?updated_at=${order.updated_at}&merchant_uid=${order.merchant_uid}`);
+                    router.push(`/orders/result?updated_at=${order.updated_at}&merchant_uid=${order.merchant_uid}&buyer_name=${order.buyer_name}`);
                     console.log(order);
                 })
             } else {
@@ -218,6 +218,7 @@ export default function page() {
         });
     }
 
+    
     if (order && isClient)
         return (
             <>

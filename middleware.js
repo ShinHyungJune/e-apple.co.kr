@@ -5,7 +5,7 @@ export function middleware(request){
     const { pathname } = request.nextUrl;
     const pathnameWithParams = request.nextUrl.pathname + request.nextUrl.search;
 
-    if(pathname === "/login" || pathname === '/admin/login' || pathname === '/mypage/carts')
+    if(pathname === "/login" || pathname === '/admin/login' || pathname === '/mypage/carts' || pathname === '/mypage/orders/guest' || pathname === '/mypage/orders/exchangeReturns' || pathname === '/mypage/orders/exchangeReturns/result' )
         return NextResponse.next();
 
     if (pathname.startsWith('/admin')) {

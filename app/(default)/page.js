@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Error from "@/components/Error";
 
-// import Swiper from "swiper";  // Swiper 기본 가져오기
+import mainApi from "@/lib/api/mainApi";
 
 // 리덕스
 import { useDispatch, useSelector } from "react-redux";
@@ -22,8 +22,17 @@ import Section08 from "@/components/mainComponents/Section08";
 
 export default function Start() {
     const router = useRouter();
-    // const categories = useSelector(state => state.app.categories);
 
+    useEffect(()=>{
+        index()
+    },[])
+
+    function index() {
+        mainApi.index({}, (response) => {
+            console.log(response);
+        })
+    }
+    
 
     return (
         <>
@@ -34,13 +43,21 @@ export default function Start() {
             <div className="body main-page">
                 <MainTabMenu activeTab="전체"/>
 
+                {/* 상단 배너 슬라이드 */}
                 <Section01/>
+                {/* 오늘의 특가로 만나는 신선한 과일 */}
                 <Section02/>
+                {/* 오늘의 당도 체크 */}
                 <Section03/>
+                {/* 열매나무 인기상품 */}
                 <Section04/>
+                {/* 이달의 추천 상품 */}
                 <Section05/>
+                {/* 베스트 상품 모음 */}
                 <Section06/>
+                {/* 과즙이 많은 과일 모음 */}
                 <Section07/>
+                {/* 오늘의 후기 */}
                 <Section08/>
             </div>
         </>

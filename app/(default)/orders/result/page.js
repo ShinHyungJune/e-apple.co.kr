@@ -17,7 +17,18 @@ export default function page() {
     const dispatch = useDispatch();
     const updated_at = searchParams.get('updated_at');
     const merchant_uid = searchParams.get('merchant_uid');
+    const buyer_name = searchParams.get('buyer_name');
 
+    const user = useSelector(state => state.app.user);
+    const [isClient, setIsClient] = useState(false);
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    
+
+
+    if (isClient)
     return (
         <>
             <Header />
@@ -27,7 +38,12 @@ export default function page() {
                     <Link href={"/"} className="btn wht">
                         계속 쇼핑하기
                     </Link>
-                    <Link href={""} className="btn org">
+                    <Link href={
+                        user ?
+                        `/mypage/orders`
+                        :
+                        `/mypage/orders/guest?buyer_name=${buyer_name}&merchant_uid=${merchant_uid}`
+                    } className="btn org">
                         주문내역
                     </Link>
                 </div>

@@ -123,8 +123,8 @@ export default function Page() {
                             </Link>
                         </div>
                         <div className="guestOrderOptions">
-                            <a href="" className="guestOrder">비회원 주문하기</a>
-                            <a href="" className="guestOrderLookup">비회원 주문조회</a>
+                            {/* <a href="" className="guestOrder">비회원 주문하기</a> */}
+                            <Link href="/orders/guest" className="guestOrderLookup">비회원 주문조회</Link>
                         </div>
                     </div>
                 </section>

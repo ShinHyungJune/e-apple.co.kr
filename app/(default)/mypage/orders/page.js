@@ -44,10 +44,12 @@ export default function page() {
 
     // 주문취소 버튼
     function cancel(id) {
-        ordersApi.cancel(id, {}, (response) => {
-            dispatch(actions.setMessage("주문취소가 완료되었습니다."));
-            index()
-        })
+        if (window.confirm("주문을 취소하시겠습니까?")) {
+            ordersApi.cancel(id, {}, (response) => {
+                dispatch(actions.setMessage("주문취소가 완료되었습니다."));
+                index();
+            });
+        }
     }
     
 

@@ -99,29 +99,39 @@ const PopupOrder = ({ product, setIsPopupOrder, onlyCart = false, onSuccess }) =
 
     // 장바구니 담기
     function cartStore() {
+        if (selectedOptions.length === 0) {
+            alert("상품을 선택해주세요.");
+            return;
+        }
+
         cartsApi.store(cartForm, (response) => {
-            setIsPopupOrder(false)
-            onSuccess()
+            setIsPopupOrder(false);
+            onSuccess();
         });
     }
 
     // 바로구매
     function store() {
+        if (selectedOptions.length === 0) {
+            alert("상품을 선택해주세요.");
+            return;
+        }
+
         // order_products 배열에 product_id 추가
         const updatedOrderProducts = orderFrom.order_products.map((item) => ({
             ...item,
             product_id: product.id,
         }));
-    
+
         const requestData = {
             ...orderFrom,
             order_products: updatedOrderProducts,
         };
-    
+
         const handleResponse = (response) => {
             router.push(`/orders?order_id=${response.data.data.id}`);
         };
-    
+
         if (user) {
             ordersApi.store(requestData, handleResponse);
         } else if (window.confirm("로그인 하시겠습니까?")) {
@@ -225,7 +235,7 @@ const PopupOrder = ({ product, setIsPopupOrder, onlyCart = false, onSuccess }) =
                                 !onlyCart
                                 &&
                                 <button
-                                    onClick={()=>{store()}}
+                                    onClick={() => { store() }}
                                     className="popup-bt-btn org"
                                 >바로구매
                                 </button>

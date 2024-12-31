@@ -34,7 +34,7 @@ export default function Pagination({ meta, form, setForm }) {
             page: page,
         });
 
-        // document.querySelector("html").scrollTop = 0;
+        document.querySelector("html").scrollTop = 0;
     }
 
     function first() {
