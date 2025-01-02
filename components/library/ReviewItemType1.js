@@ -1,25 +1,28 @@
 import Link from 'next/link';
 import { useEffect, useState } from "react";
+import StarScore from './StarScore';
+import PopupReview from '../popups/PopupReview';
 
-export default function ReviewItemType1() {
-    return (
-        <div className="review-item-type1">
-            <div className="item-content-wrap">
-                <p className="date">2024.00.00 14:00:02</p>
-                <p className="content">
-                    달기도 하고 크기도 꽤 크고 좋아요 수박 먹고싶었는데 맛있는 수박 먹어서 너무 기분이…
-                </p>
-                <div className="star-score">
-                    <i className="xi-star"></i>
-                    <i className="xi-star"></i>
-                    <i className="xi-star"></i>
-                    <i className="xi-star"></i>
-                    <i className="xi-star-o"></i>
+export default function ReviewItemType1({ review }) {
+    // 리뷰팝업
+    const [targetReview, setTargetReview] = useState(null);
+    if (review)
+        return (
+            <>
+                <div className="review-item-type1">
+                    <div className="item-content-wrap">
+                        <p className="date">{review.created_date}</p>
+                        <p className="content">
+                            {review.review}
+                        </p>
+                        <StarScore score={review.rating} />
+                    </div>
+                    <div className="img-wrap ratio-box" onClick={() => setTargetReview(review)}>
+                        <img src={review.img.url} alt={review.img.name} />
+                    </div>
                 </div>
-            </div>
-            <div className="img-wrap ratio-box">
-                <img src="/asset/images/test-img.png" alt="" />
-            </div>
-        </div>
-    );
+                {targetReview && <PopupReview review={targetReview} setReview={setTargetReview} />}
+            </>
+
+        );
 }

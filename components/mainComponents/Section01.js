@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Swiper from "swiper";
-export default function Section01() {
+export default function Section01({ banners = [] }) {
 
-    const [mainBanners, setMainBanners] = useState([]);
+
 
     useEffect(() => {
         let swiper;
@@ -13,7 +13,7 @@ export default function Section01() {
             if (swiper) {
                 swiper.destroy(true, true); // 기존 Swiper 인스턴스가 있으면 삭제
             }
-            swiper = new Swiper(".mySwiper1", {
+            swiper = new Swiper(".mySwiperBanners", {
                 slidesPerView: 1,
                 spaceBetween: 0,
                 loop: true,
@@ -26,68 +26,31 @@ export default function Section01() {
         return () => {
             if (swiper) swiper.destroy(true, true);
         };
-    }, [mainBanners]);
+    }, [banners]);
 
-
+    if (banners.length > 0)
     return (
         <section className="mb-70">
             <div className="swiper-type1">
-                <div className="swiper mySwiper1">
+                <div className="swiper mySwiperBanners">
                     <div className="swiper-wrapper">
-                        <div className="swiper-slide">
-                            <div className="content-box">
-                                <div className="bg-wrap">
-                                    <img src="/images/test-img.png" alt="" />
-                                </div>
-                                <div className="txt-wrap">
-                                    <p className="txt-top">
-                                        해독작용에 탁월한 <br />
-                                        6월의 과일 매실
-                                    </p>
-                                    <p className="txt-bt">
-                                        배탈과 식중독 예방에 좋은 <br />
-                                        매실로 건강한 여름 되세요!
-                                    </p>
-                                </div>
+                        {banners.map((banner, index) => (
+                            <div key={index} className="swiper-slide">
+                                <Link href={banner.url} className="content-box">
+                                    <div className="bg-wrap">
+                                        <img src={banner.img.url} alt="" />
+                                    </div>
+                                    <div className="txt-wrap">
+                                        <p className="txt-top" style={{wordBreak:'break-word'}}>{banner.title}</p>
+                                        <p className="txt-bt" style={{wordBreak:'break-word'}}>{banner.description}</p>
+                                    </div>
+                                </Link>
                             </div>
-                        </div>
-                        <div className="swiper-slide">
-                            <div className="content-box">
-                                <div className="bg-wrap">
-                                    <img src="/images/test-img.png" alt="" />
-                                </div>
-                                <div className="txt-wrap">
-                                    <p className="txt-top">
-                                        해독작용에 탁월한 <br />
-                                        6월의 과일 매실
-                                    </p>
-                                    <p className="txt-bt">
-                                        배탈과 식중독 예방에 좋은 <br />
-                                        매실로 건강한 여름 되세요!
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="swiper-slide">
-                            <div className="content-box">
-                                <div className="bg-wrap">
-                                    <img src="/images/test-img.png" alt="" />
-                                </div>
-                                <div className="txt-wrap">
-                                    <p className="txt-top">
-                                        해독작용에 탁월한 <br />
-                                        6월의 과일 매실
-                                    </p>
-                                    <p className="txt-bt">
-                                        배탈과 식중독 예방에 좋은 <br />
-                                        매실로 건강한 여름 되세요!
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>
         </section>
+
     )
 }

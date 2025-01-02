@@ -60,7 +60,7 @@ const PopupReview = ({ review, setReview }) => {
                         <div className="review-item-top px-20">
                             <div className="star-score-wrap">
                                 <StarScore score={review.rating} />
-                                <p className="user-name">{review.user.email}</p>
+                                <p className="user-name">{review.user?.email}</p>
                             </div>
                             <p className="date">{review.created_date}</p>
                         </div>

@@ -1,10 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from "next/navigation";
 import Link from 'next/link';
 
 export default function Header({ subTitle }) {
     const router = useRouter();
-    const [showTopBanner, setShowTopBanner] = useState(true); // topBanner의 가시성 관리
+    const [showTopBanner, setShowTopBanner] = useState(true); // 초기값 설정
+
+    // 컴포넌트가 마운트될 때 localStorage에서 상태를 복원
+    useEffect(() => {
+        const bannerState = localStorage.getItem('showTopBanner');
+        if (bannerState !== null) {
+            setShowTopBanner(JSON.parse(bannerState)); // 문자열을 불리언으로 변환
+        }
+    }, []);
+
+    // 상태 변경 시 localStorage에 저장
+    const handleCloseBanner = () => {
+        setShowTopBanner(false);
+        localStorage.setItem('showTopBanner', JSON.stringify(false)); // 상태를 저장
+    };
 
 
 
@@ -16,7 +30,7 @@ export default function Header({ subTitle }) {
                         <Link href="/">
                             회원가입하고 열매나무의 신선한 상품을 할인받아보세요!
                         </Link>
-                        <button onClick={() => setShowTopBanner(false)}>
+                        <button onClick={handleCloseBanner}>
                             <i className="xi-close"></i>
                         </button>
                     </div>

@@ -119,12 +119,12 @@ export default function page() {
                         <div className="mypage-menu">
                             <p className="mypage-menu-title">열매나무</p>
                             <ul>
-                                <li>
+                                {/* <li>
                                     <Link href="">브랜드 소개</Link>
                                 </li>
                                 <li>
                                     <Link href="">배송 및 이용 안내</Link>
-                                </li>
+                                </li> */}
                                 <li>
                                     <Link href="">개인정보처리방침</Link>
                                 </li>

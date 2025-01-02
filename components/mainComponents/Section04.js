@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import ProductItemType1 from "../library/ProductItemType1";
-export default function Section04() {
+export default function Section04({ Products }) {
 
 
     return (
@@ -13,12 +13,15 @@ export default function Section04() {
 
             <div className="item-list-type1">
                 <ul>
-                    <li>
-                        <ProductItemType1/>
-                    </li>
-                    <li>
-                        <ProductItemType1/>
-                    </li>
+                    {
+                        Products.map((saleProduct) => {
+                            return (
+                                <li key={saleProduct.id}>
+                                    <ProductItemType1 product={saleProduct} />
+                                </li>
+                            )
+                        })
+                    }
                 </ul>
             </div>
 

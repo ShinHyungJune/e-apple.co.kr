@@ -63,19 +63,19 @@ export default function page() {
                     <div className="tab-menu-type3 mb-20 mt-10">
                         <div className="tab-menu-bar">
                             <button
-                                className={`tab-item ${form.is_answered === null ? 'active' : ''}`}
+                                className={`tab-item ${form.is_answered == null ? 'active' : ''}`}
                                 onClick={() => setForm((prevForm) => ({ ...prevForm, is_answered: null }))}
                             >
                                 전체
                             </button>
                             <button
-                                className={`tab-item ${form.is_answered === 1 ? 'active' : ''}`}
+                                className={`tab-item ${form.is_answered == 1 ? 'active' : ''}`}
                                 onClick={() => setForm((prevForm) => ({ ...prevForm, is_answered: 1 }))}
                             >
                                 답변완료
                             </button>
                             <button
-                                className={`tab-item ${form.is_answered === 0 ? 'active' : ''}`}
+                                className={`tab-item ${form.is_answered == 0 ? 'active' : ''}`}
                                 onClick={() => setForm((prevForm) => ({ ...prevForm, is_answered: 0 }))}
                             >
                                 답변대기
@@ -99,14 +99,14 @@ export default function page() {
                                                         <div
                                                             className="qna-item-top"
                                                             onClick={() => {
-                                                                if (inquiry.is_answer) {
+                                                                if (inquiry.is_answered) {
                                                                     setVisibleItemId(isVisible ? null : index);
                                                                 }
                                                             }} // 클릭 시 열고 닫기 (답변 있을 때만)
                                                         >
                                                             <div className="date-btn-wrap">
                                                                 <p className="date-txt">{inquiry.created_at}</p>
-                                                                {inquiry.is_answer ? (
+                                                                {inquiry.is_answered ? (
                                                                     <p className="state-txt active">답변완료</p>
                                                                 ) : (
                                                                     <p className="state-txt">답변대기</p>
@@ -129,7 +129,7 @@ export default function page() {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        {isVisible && inquiry.is_answer && (
+                                                        {isVisible && inquiry.is_answered && (
                                                             <div className="qna-item-bt">
                                                                 <div className="category-wrap">
                                                                     <p className="category">답변</p>

@@ -4,9 +4,9 @@ export default function ProductItemType2({categorie}) {
     if(categorie)
     return (
         <div className="item-type2">
-            <Link href="/" className="img-wrap">
+            <div className="img-wrap">
                 <img src={categorie.img.url} alt={categorie.title} />
-            </Link>
+            </div>
             <div className="txt-wrap">
                 <p className="txt-top">{categorie.title}</p>
                 <p className="txt-bt">

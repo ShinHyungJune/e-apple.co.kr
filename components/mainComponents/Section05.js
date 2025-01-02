@@ -1,82 +1,82 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Swiper from "swiper";
 import ProductItemType2 from "../library/ProductItemType2";
 import ProductItemType3 from "../library/ProductItemType3";
-export default function Section05() {
+
+export default function Section05({ monthlySuggestionProducts = [] }) {
+    const [activeIndex, setActiveIndex] = useState(0); // 활성화된 탭의 인덱스 상태 관리
+    const swiperRef = useRef(null); // Swiper 인스턴스를 관리하기 위한 Ref
 
     useEffect(() => {
-        let swiper;
+        // Swiper 초기화
+        swiperRef.current = new Swiper(".mySwiperMonthlySuggestionProducts", {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            speed:1000,
+            on: {
+                slideChange: () => {
+                    if (swiperRef.current) {
+                        setActiveIndex(swiperRef.current.activeIndex); // 슬라이드 변경 시 activeIndex 업데이트
+                    }
+                },
+            },
+        });
 
-        // Swiper 초기화 함수
-        const initializeSwiper2 = () => {
-            if (swiper) {
-                swiper.destroy(true, true); // 기존 Swiper 인스턴스가 있으면 삭제
-            }
-            swiper = new Swiper(".mySwiper3", {
-                slidesPerView: 1,
-                spaceBetween: 10,
-                loop: true,
-            });
-        };
-
-        initializeSwiper2();
-
-        // 컴포넌트 언마운트 시 Swiper 인스턴스 삭제
         return () => {
-            if (swiper) swiper.destroy(true, true);
+            if (swiperRef.current) swiperRef.current.destroy(true, true); // 언마운트 시 삭제
         };
-    }, []);
+    }, [monthlySuggestionProducts]);
 
-    return (
-        <section className="pt-40 mb-60">
-            <div className="section-title-wrap-type1">
-                <p className="section-title">이달의 추천 상품</p>
-            </div>
+    // 특정 슬라이드로 이동하는 함수
+    const handleTabClick = (index) => {
+        if (swiperRef.current) {
+            swiperRef.current.slideTo(index); // Swiper의 slideTo 메서드를 사용해 이동
+            setActiveIndex(index); // 클릭된 탭을 활성화
+        }
+    };
 
-            <div className="tab-menu-type1">
-                <ul>
-                    <li>국산</li>
-                    <li className="active">수입</li>
-                    <li>제철</li>
-                    <li>가공품</li>
-                    <li>대용량</li>
-                    <li>소용량</li>
-                </ul>
-            </div>
+    if (monthlySuggestionProducts.length > 0)
+        return (
+            <section className="pt-40 mb-60">
+                <div className="section-title-wrap-type1">
+                    <p className="section-title">이달의 추천 상품</p>
+                </div>
 
-            <div className="swiper-type3 mb-40">
-                <div className="swiper mySwiper3">
-                    <div className="swiper-wrapper">
-                        <div className="swiper-slide">
-                            <ProductItemType2 />
-                            <div className="item-list-type3 mt-40">
-                                <ul>
-                                    <li>
-                                        <ProductItemType3 />
-                                    </li>
-                                    <li>
-                                        <ProductItemType3 />
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div className="swiper-slide">
-                            <ProductItemType2 />
-                            <div className="item-list-type3 mt-40">
-                                <ul>
-                                    <li>
-                                        <ProductItemType3 />
-                                    </li>
-                                    <li>
-                                        <ProductItemType3 />
-                                    </li>
-                                </ul>
-                            </div>
+                <div className="tab-menu-type1">
+                    <ul className="px-20">
+                        {monthlySuggestionProducts.map((monthlySuggestionProduct, index) => (
+                            <li
+                                key={monthlySuggestionProduct.id}
+                                className={index === activeIndex ? "active" : ""}
+                                onClick={() => handleTabClick(index)} // 클릭 시 슬라이드 이동
+                            >
+                                {monthlySuggestionProduct.category_title}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                <div className="swiper-type3 mb-40">
+                    <div className="swiper mySwiperMonthlySuggestionProducts">
+                        <div className="swiper-wrapper">
+                            {monthlySuggestionProducts.map((monthlySuggestionProduct) => (
+                                <div className="swiper-slide" key={monthlySuggestionProduct.id}>
+                                    <ProductItemType2 categorie={monthlySuggestionProduct} />
+                                    <div className="item-list-type3 mt-40">
+                                        <ul>
+                                            {monthlySuggestionProduct.products.map((product) => (
+                                                <li key={product.id}>
+                                                    <ProductItemType3 product={product} />
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    )
+            </section>
+        );
 }

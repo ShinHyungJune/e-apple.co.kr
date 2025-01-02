@@ -126,8 +126,8 @@
 
 /* 텝 메뉴 */
 .tab-menu-type1 { display: block; margin-bottom: 20px; }
-.tab-menu-type1 > ul { display: flex; gap: 20px; justify-content: center; }
-.tab-menu-type1 > ul > li { color: #AAAAAA; cursor: pointer; position: relative; }
+.tab-menu-type1 > ul { display: flex; gap: 10px 20px; justify-content: center; flex-wrap: wrap; }
+.tab-menu-type1 > ul > li { color: #AAAAAA; cursor: pointer; position: relative; min-width: fit-content; }
 .tab-menu-type1 > ul > li.active { color: #FF990D; }
 .tab-menu-type1 > ul > li.active::before { width: 100%; height: 2px; background-color: #FF990D; position: absolute; left: 0; top: calc(100% + 2px); content: ''; }
 
@@ -304,7 +304,7 @@
 .review-item-type1 .item-content-wrap { width: calc(100% - 80px); padding-right: 30px; }
 .review-item-type1 .item-content-wrap .date { font-size: 13px; color: #303030; margin-bottom: 10px; }
 .review-item-type1 .item-content-wrap .content { font-size: 15px; color: #303030; margin-bottom: 5px; }
-.review-item-type1 .img-wrap { width: 80px; border-radius: 10px; background-color: #FF8900; overflow: hidden; }
+.review-item-type1 .img-wrap { width: 80px; height: 80px; border-radius: 10px; background-color: #FF8900; overflow: hidden; cursor: pointer; }
 .review-item-type1 .img-wrap > img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
 
 

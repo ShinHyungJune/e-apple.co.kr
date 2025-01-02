@@ -318,9 +318,9 @@ export default function page(props) {
                             </ul>
                         </div>
 
-                        <div className="underline-btn-wrap mb-60">
+                        {/* <div className="underline-btn-wrap mb-60">
                             <button className="underline-btn">영수증 보기</button>
-                        </div>
+                        </div> */}
                     </section>
                 </div>
             </>

@@ -76,7 +76,7 @@ export default function page() {
     }, [searchParams])
 
     function show() {
-        ordersApi.show(order_id,{}, (response) => {
+        ordersApi.show(order_id, {}, (response) => {
             setOrder(response.data.data);
         });
     }
@@ -218,7 +218,7 @@ export default function page() {
         });
     }
 
-    
+
     if (order && isClient)
         return (
             <>
@@ -258,10 +258,15 @@ export default function page() {
                             <div>
                                 <div className="input-txt-box-type1">
                                     <input
-                                        type="text"
+                                        type="text" // number 대신 text로 변경
                                         name="buyer_contact"
                                         value={form.buyer_contact}
-                                        onChange={changeForm}
+                                        onChange={(e) => {
+                                            const value = e.target.value.replace(/[^0-9]/g, ""); // 숫자만 허용
+                                            if (value.length <= 11) {
+                                                changeForm({ target: { name: "buyer_contact", value } }); // 11자리까지만 업데이트
+                                            }
+                                        }}
                                         placeholder="휴대폰번호를 입력해주세요. (“-“제외)"
                                     />
                                 </div>
@@ -296,10 +301,15 @@ export default function page() {
                             <div>
                                 <div className="input-txt-box-type1">
                                     <input
-                                        type="text"
+                                        type="text" // number 대신 text로 변경
                                         name="delivery_phone"
                                         value={form.delivery_phone}
-                                        onChange={changeForm}
+                                        onChange={(e) => {
+                                            const value = e.target.value.replace(/[^0-9]/g, ""); // 숫자만 허용
+                                            if (value.length <= 11) {
+                                                changeForm({ target: { name: "delivery_phone", value } }); // 11자리까지만 업데이트
+                                            }
+                                        }}
                                         placeholder="휴대폰번호를 입력해주세요. (“-“제외)"
                                     />
                                 </div>

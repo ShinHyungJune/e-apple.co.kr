@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Link from 'next/link';
 import { formatDate } from "@/lib/util/formatDate";
+import ordersApi from "@/lib/api/ordersApi";
 
 export default function OrderProductType1({ order, orderProduct, onSuccess }) {
     const router = useRouter();
@@ -19,7 +20,6 @@ export default function OrderProductType1({ order, orderProduct, onSuccess }) {
     // 주문확정 버튼
     function confirm() {
         ordersApi.confirm(orderProduct.id, {}, (response) => {
-            console.log(response)
             onSuccess();
         })
     }
