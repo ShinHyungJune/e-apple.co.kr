@@ -132,7 +132,7 @@ export default function page() {
         if (form.user_coupon_discount_amount) {
             totalCouponDiscount = form.user_coupon_discount_amount; // 고정 금액 쿠폰
         } else if (form.user_coupon_discount_rate) {
-            totalCouponDiscount = Math.floor(discountedPrice * (form.user_coupon_discount_rate / 100)); // 할인율 적용
+            totalCouponDiscount = Math.round(discountedPrice * (form.user_coupon_discount_rate / 100)); // 할인율 적용 (반올림)
         }
 
         // 적립금 사용 금액 처리 (숫자 변환)
