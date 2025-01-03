@@ -91,6 +91,7 @@ export default function page() {
             total_order_amount: order.total_amount,
         }, (response) => {
             setUserCoupons(response.data.data)
+            console.log(response.data.data);
         });
     }
 
@@ -367,12 +368,19 @@ export default function page() {
                                                 {userCoupons.map((userCoupon) => (
                                                     <option key={userCoupon.user_coupon_id} value={userCoupon.user_coupon_id}>
                                                         {userCoupon.name}
+                                                        {
+                                                            userCoupon.type == "rate" ?
+                                                            ` ${userCoupon.discount_rate}% 할인`
+                                                            : 
+                                                            ` ${userCoupon.discount_amount.toLocaleString()}원 할인`
+                                                        }
                                                     </option>
                                                 ))}
                                             </select>
                                             <i className="xi-angle-down"></i>
                                         </div>
                                         <Error name={'user_coupon_id'} />
+                                        <Error name={'coupon_discount_amount'} />
                                     </div>
                                 </div>
                             ) : null}
@@ -476,52 +484,52 @@ export default function page() {
                         </section>
 
                         {/* <section className="bd-bt">
-                                <div className="input-list-type2 pt-20 pb-20 px-20">
-                                    <div className="input-list-title-wrap">
-                                        <p className="input-list-title">배송일</p>
+                            <div className="input-list-type2 pt-20 pb-20 px-20">
+                                <div className="input-list-title-wrap">
+                                    <p className="input-list-title">배송일</p>
+                                </div>
+                                <div>
+                                    <div className="radiobox-list-type1">
+                                        <label className="option">
+                                            <input type="radio" name="delivery" value="default" defaultChecked />
+                                            <span>기본배송</span>
+                                        </label>
+                                        <label className="option selected">
+                                            <input type="radio" name="delivery" value="scheduled" />
+                                            <span>지정일 배송</span>
+                                        </label>
                                     </div>
+                                </div>
+                                <div>
                                     <div>
-                                        <div className="radiobox-list-type1">
-                                            <label className="option">
-                                                <input type="radio" name="delivery" value="default" defaultChecked />
-                                                <span>기본배송</span>
-                                            </label>
-                                            <label className="option selected">
-                                                <input type="radio" name="delivery" value="scheduled" />
-                                                <span>지정일 배송</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div>
-                                            <div className="input-txt-box-type1">
-                                                <input type="date" name="delivery_date" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="input-list-title-wrap mt-10">
-                                        <p className="input-list-title">주의사항</p>
-                                    </div>
-                                    <div>
-                                        <div className="info-message-type2">
-                                            <ul className="info-message-list">
-                                                <li>
-                                                    <div className="num">01.</div>
-                                                    <p>주문일 기준 2일 이후부터 선택 가능합니다.</p>
-                                                </li>
-                                                <li>
-                                                    <div className="num">02.</div>
-                                                    <p>
-                                                        오늘On 배송 상품의 경우 토요일 도착으로 지정 시 새벽 배송으로 진행되어,
-                                                        <br />
-                                                        토요일 아침 7시 전 도착합니다.
-                                                    </p>
-                                                </li>
-                                            </ul>
+                                        <div className="input-txt-box-type1">
+                                            <input type="date" name="delivery_date" />
                                         </div>
                                     </div>
                                 </div>
-                            </section> */}
+                                <div className="input-list-title-wrap mt-10">
+                                    <p className="input-list-title">주의사항</p>
+                                </div>
+                                <div>
+                                    <div className="info-message-type2">
+                                        <ul className="info-message-list">
+                                            <li>
+                                                <div className="num">01.</div>
+                                                <p>주문일 기준 2일 이후부터 선택 가능합니다.</p>
+                                            </li>
+                                            <li>
+                                                <div className="num">02.</div>
+                                                <p>
+                                                    오늘On 배송 상품의 경우 토요일 도착으로 지정 시 새벽 배송으로 진행되어,
+                                                    <br />
+                                                    토요일 아침 7시 전 도착합니다.
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </section> */}
 
                         <section className="bd-bt pt-20 pb-20">
                             <div className="agreement-checkbox-list px-20">

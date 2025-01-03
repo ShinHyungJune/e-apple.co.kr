@@ -159,7 +159,9 @@ export default function page(props) {
                                     <li>
                                         <div className="price-information">
                                             <p className="label">할인금액</p>
-                                            <p className="price minus">-{(totalDiscountPrice + order.coupon_discount + order.use_points).toLocaleString()}원</p>
+                                            <p className="price minus">
+                                                -{(totalDiscountPrice + (order.coupon_discount || 0) + (order.use_points || 0)).toLocaleString()}원
+                                            </p>
                                         </div>
                                     </li>
                                     <li>
@@ -168,18 +170,24 @@ export default function page(props) {
                                             <p className="price minus">-{totalDiscountPrice.toLocaleString()}원</p>
                                         </div>
                                     </li>
-                                    <li>
-                                        <div className="price-information sub">
-                                            <p className="label">상품쿠폰</p>
-                                            <p className="price minus">-{order.coupon_discount.toLocaleString()}원</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="price-information sub">
-                                            <p className="label">적립금 사용</p>
-                                            <p className="price minus">-{order.use_points.toLocaleString()}원</p>
-                                        </div>
-                                    </li>
+                                    {
+                                        order.coupon_discount &&
+                                        <li>
+                                            <div className="price-information sub">
+                                                <p className="label">상품쿠폰</p>
+                                                <p className="price minus">-{order.coupon_discount.toLocaleString()}원</p>
+                                            </div>
+                                        </li>
+                                    }
+                                    {
+                                        order.use_points == 0 &&
+                                        <li>
+                                            <div className="price-information sub">
+                                                <p className="label">적립금 사용</p>
+                                                <p className="price minus">-{order.use_points.toLocaleString()}원</p>
+                                            </div>
+                                        </li>
+                                    }
                                     <li>
                                         <div className="price-information">
                                             <p className="label">배송비</p>
