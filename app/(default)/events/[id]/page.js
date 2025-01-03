@@ -48,7 +48,7 @@ export default function page(props) {
                             </div>
                             <div className="board-content-wrap">
                                 <EditorContent description={board.content} />
-                                <div className="mt-20">
+                                <div className="mt-20 px-20">
                                     <InputFiles onlyShow={true} defaultValue={board.files}/>
                                 </div>
                             </div>

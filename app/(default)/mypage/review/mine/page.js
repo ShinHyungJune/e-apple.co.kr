@@ -47,49 +47,52 @@ export default function page() {
         })
     }
 
-
-    if (isClient)
-        return (
-            <>
-                <Header subTitle={'상품 리뷰'} />
-                <div className="body">
-                    <div className="tab-menu-type2">
-                        <ul>
-                            <li>
-                                <Link href="/mypage/review/available" className="">
-                                    작성 가능한 리뷰 ({user.available_product_reviews_count})
-                                </Link>
-                            </li>
-                            <li className="active">
-                                <Link href="/mypage/review/mine">
-                                    내 리뷰 ({user.product_reviews_count})
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <section>
-                        <div className="order-product-list-type1">
+    return (
+        <>
+            <Header subTitle={'상품 리뷰'} />
+            <div className="body">
+                {
+                    isClient &&
+                    <>
+                        <div className="tab-menu-type2">
                             <ul>
-                                {
-                                    reviews.data.map((review) => {
-                                        return (
-                                            <li key={review.id}>
-                                                <ReviewMine review={review} onSuccess={()=>{index()}} />
-                                            </li>
-                                        )
-                                    })
-                                }
+                                <li>
+                                    <Link href="/mypage/review/available" className="">
+                                        작성 가능한 리뷰 ({user.available_product_reviews_count})
+                                    </Link>
+                                </li>
+                                <li className="active">
+                                    <Link href="/mypage/review/mine">
+                                        내 리뷰 ({user.product_reviews_count})
+                                    </Link>
+                                </li>
                             </ul>
                         </div>
 
-                        <Pagination
-                            form={form}
-                            setForm={setForm}
-                            meta={reviews.meta}
-                        />
-                    </section>
-                </div>
-            </>
-        );
+                        <section>
+                            <div className="order-product-list-type1">
+                                <ul>
+                                    {
+                                        reviews.data.map((review) => {
+                                            return (
+                                                <li key={review.id}>
+                                                    <ReviewMine review={review} onSuccess={() => { index() }} />
+                                                </li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                            </div>
+
+                            <Pagination
+                                form={form}
+                                setForm={setForm}
+                                meta={reviews.meta}
+                            />
+                        </section>
+                    </>
+                }
+            </div>
+        </>
+    );
 }

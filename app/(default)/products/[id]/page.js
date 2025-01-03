@@ -77,64 +77,68 @@ export default function page(params) {
 
 
 
-    
 
 
 
-    if (product)
-        return (
-            <>
-                <Header />
+    return (
+        <>
+            <Header />
 
-                <div className="body">
-                    <div className="tab-menu-type2">
-                        <ul>
-                            <li className="active">
-                                <a href="#description">상품설명</a>
-                            </li>
-                            <li>
-                                <a href="#Information">상세정보</a>
-                            </li>
-                            <li>
-                                <a href="#review">후기</a>
-                            </li>
-                            <li>
-                                <a href="#Inquiry">문의</a>
-                            </li>
-                        </ul>
-                    </div>
+            <div className="body">
+                {
+                    product &&
+                    <>
+                        <div className="tab-menu-type2">
+                            <ul>
+                                <li className="active">
+                                    <a href="#description">상품설명</a>
+                                </li>
+                                <li>
+                                    <a href="#Information">상세정보</a>
+                                </li>
+                                <li>
+                                    <a href="#review">후기</a>
+                                </li>
+                                <li>
+                                    <a href="#Inquiry">문의</a>
+                                </li>
+                            </ul>
+                        </div>
 
-                    <div className="productDetails-buy-btn-wrap">
-                        <button className="cart-btn" onClick={() => { setIsPopupOrder(true) }}></button>
-                        <button className="productDetails-buy-btn" onClick={() => { setIsPopupOrder(true) }}>구매하기</button>
-                    </div>
+                        <div className="productDetails-buy-btn-wrap">
+                            <button className="cart-btn" onClick={() => { setIsPopupOrder(true) }}></button>
+                            <button className="productDetails-buy-btn" onClick={() => { setIsPopupOrder(true) }}>구매하기</button>
+                        </div>
 
-                    {/* 상세설명 */}
-                    <ProductDescription product={product} />
+                        {/* 상세설명 */}
+                        <ProductDescription product={product} />
 
-                    {/* 상세정보 */}
-                    <ProductInformation product={product} />
+                        {/* 상세정보 */}
+                        <ProductInformation product={product} />
 
-                    {/* 후기 */}
-                    <ProductReview product={product} />
+                        {/* 후기 */}
+                        <ProductReview product={product} />
 
-                    {/* 문의 */}
-                    <ProductInquiry product={product} />
+                        {/* 문의 */}
+                        <ProductInquiry product={product} />
 
-                    {/* 상품 구매 */}
-                    {isPopupOrder ? <PopupOrder product={product} setIsPopupOrder={setIsPopupOrder} onSuccess={() => {setShowToast(true);}} /> : null}
+                        {/* 상품 구매 */}
+                        {isPopupOrder ? <PopupOrder product={product} setIsPopupOrder={setIsPopupOrder} onSuccess={() => { setShowToast(true); }} /> : null}
 
-                    {/* 장바구니 추가 */}
-                    {showToast && (
-                        <ToastAlert
-                            message="장바구니 담기 완료"
-                            navigateText="장바구니로 이동" // 문구 동적으로 설정
-                            onNavigate={()=>{router.push("/mypage/carts")}} // 버튼 클릭 시 호출
-                            duration={3000}
-                            onClose={() => setShowToast(false)} // 알림 닫힌 후 상태 초기화
-                        />
-                    )}
-                </div>
-            </>
-        );
+                        {/* 장바구니 추가 */}
+                        {showToast && (
+                            <ToastAlert
+                                message="장바구니 담기 완료"
+                                navigateText="장바구니로 이동" // 문구 동적으로 설정
+                                onNavigate={() => { router.push("/mypage/carts") }} // 버튼 클릭 시 호출
+                                duration={3000}
+                                onClose={() => setShowToast(false)} // 알림 닫힌 후 상태 초기화
+                            />
+                        )}
+                    </>
+                }
+
+            </div>
+        </>
+    );
 }

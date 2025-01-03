@@ -42,31 +42,33 @@ export default function Start() {
             <div className="gradient-bg"></div>
 
             <Header />
+            <div className="body main-page">
+                {
+                    data
+                    &&
+                    <>
+                        <MainTabMenu activeTab="전체" />
 
-            {
-                data
-                &&
-                <div className="body main-page">
-                    <MainTabMenu activeTab="전체" />
+                        {/* 상단 배너 슬라이드 */}
+                        <Section01 banners={data.banners} />
+                        {/* 오늘의 특가로 만나는 신선한 과일 */}
+                        <Section02 Products={data.saleProducts} />
+                        {/* 오늘의 당도 체크 */}
+                        <Section03 sweetness={data.sweetness.items} standard_datetime={data.sweetness.standard_datetime} />
+                        {/* 열매나무 인기상품 */}
+                        <Section04 Products={data.popularProducts} />
+                        {/* 이달의 추천 상품 */}
+                        <Section05 monthlySuggestionProducts={data.monthlySuggestionProducts} />
+                        {/* 베스트 상품 모음 */}
+                        <Section06 Products={data.bestProducts} />
+                        {/* 과즙이 많은 과일 모음 */}
+                        <Section07 Products={data.juicyProducts} />
+                        {/* 오늘의 후기 */}
+                        <Section08 reviews={data.reviews} />
+                    </>
+                }
+            </div>
 
-                    {/* 상단 배너 슬라이드 */}
-                    <Section01 banners={data.banners} />
-                    {/* 오늘의 특가로 만나는 신선한 과일 */}
-                    <Section02 Products={data.saleProducts} />
-                    {/* 오늘의 당도 체크 */}
-                    <Section03 sweetness={data.sweetness.items} standard_datetime={data.sweetness.standard_datetime} />
-                    {/* 열매나무 인기상품 */}
-                    <Section04 Products={data.popularProducts} />
-                    {/* 이달의 추천 상품 */}
-                    <Section05 monthlySuggestionProducts={data.monthlySuggestionProducts} />
-                    {/* 베스트 상품 모음 */}
-                    <Section06 Products={data.bestProducts} />
-                    {/* 과즙이 많은 과일 모음 */}
-                    <Section07 Products={data.juicyProducts} />
-                    {/* 오늘의 후기 */}
-                    <Section08 reviews={data.reviews} />
-                </div>
-            }
 
         </>
     );

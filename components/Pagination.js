@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function Pagination({ meta, form, setForm }) {
+export default function Pagination({ meta, form, setForm, noScroll = false }) {
     const [pages, setPages] = useState([]);
     const [currentSection, setCurrentSection] = useState(0); // 페이지 섹션 관리
 
@@ -34,7 +34,9 @@ export default function Pagination({ meta, form, setForm }) {
             page: page,
         });
 
-        document.querySelector("html").scrollTop = 0;
+        if (!noScroll) {
+            document.querySelector("html").scrollTop = 0;
+        }
     }
 
     function first() {

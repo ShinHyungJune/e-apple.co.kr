@@ -49,79 +49,84 @@ export default function page() {
     }
 
 
-    if (isClient)
-        return (
-            <>
-                <Header subTitle={'회원등급'} />
-                <div className="body">
-                    <section className="px-20 pt-20">
-                        <div className="user-rank-wrap">
-                            <div className="user-rank">
-                                <div className="img-wrap">
-                                    <img src="/asset/images/test-img.png" alt="" />
-                                </div>
-                                <div className="txt-wrap">
-                                    <p className="label">회원등급</p>
-                                    <p className="user-rank">{user?.level}</p>
+    return (
+        <>
+            <Header subTitle={'회원등급'} />
+            <div className="body">
+                {
+                    isClient &&
+                    <>
+                        <section className="px-20 pt-20">
+                            <div className="user-rank-wrap">
+                                <div className="user-rank">
+                                    <div className="img-wrap">
+                                        <img src="/asset/images/test-img.png" alt="" />
+                                    </div>
+                                    <div className="txt-wrap">
+                                        <p className="label">회원등급</p>
+                                        <p className="user-rank">{user?.level}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
-                    <section>
-                        <div className="price-information-list mb-20 pb-20 px-20 bd-bt">
-                            <p className="price-information-title">등급별 혜택</p>
-                            <ul>
-                                <li>
-                                    <div className="price-information">
-                                        <p className="label">일반</p>
-                                        <p className="price">1% 적립, 이전달 0원 이상 구매</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className="price-information">
-                                        <p className="label">FAMILY</p>
-                                        <p className="price">2% 적립, 이전달 100,000원 이상 구매</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className="price-information">
-                                        <p className="label">VIP</p>
-                                        <p className="price">2% 적립, 이전달 100,000원 이상 구매</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </section>
-                    <section className="mb-30">
-                        <div className="coupon-list px-20">
-                            <p className="coupon-list-title">다운로드 가능 쿠폰 목록</p>
-                            {
-                                coupons.data.length > 0 ? (
-                                    <ul>
-                                        {
-                                            coupons.data.map((coupon) => {
-                                                return (
-                                                    <li key={coupon.id}>
-                                                        <CouponItem coupon={coupon} onSuccess={() => { indexUserCoupons(); indexCoupons(); }} />
-                                                    </li>
-                                                )
-                                            })
-                                        }
-                                    </ul>
-                                ) : (<NoListData message={"쿠폰이 없습니다."} />)
-                            }
-                        </div>
-                    </section>
-                    <section>
-                        <div className="gradeNotice-wrap px-20 pt-20 pb-20">
-                            <p className="label">등급 유의사항</p>
-                            <p className="gradeNotice-content">
-                                혜택 이용 시 주의사항, <br />
-                                쿠폰이라면 이용기간 등
-                            </p>
-                        </div>
-                    </section>
-                </div>
-            </>
-        );
+                        </section>
+                        <section>
+                            <div className="price-information-list mb-20 pb-20 px-20 bd-bt">
+                                <p className="price-information-title">등급별 혜택</p>
+                                <ul>
+                                    <li>
+                                        <div className="price-information">
+                                            <p className="label">일반</p>
+                                            <p className="price">1% 적립, 이전달 0원 이상 구매</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div className="price-information">
+                                            <p className="label">FAMILY</p>
+                                            <p className="price">2% 적립, 이전달 100,000원 이상 구매</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div className="price-information">
+                                            <p className="label">VIP</p>
+                                            <p className="price">2% 적립, 이전달 100,000원 이상 구매</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section className="mb-30">
+                            <div className="coupon-list px-20">
+                                <p className="coupon-list-title">다운로드 가능 쿠폰 목록</p>
+                                {
+                                    coupons.data.length > 0 ? (
+                                        <ul>
+                                            {
+                                                coupons.data.map((coupon) => {
+                                                    return (
+                                                        <li key={coupon.id}>
+                                                            <CouponItem coupon={coupon} onSuccess={() => { indexUserCoupons(); indexCoupons(); }} />
+                                                        </li>
+                                                    )
+                                                })
+                                            }
+                                        </ul>
+                                    ) : (<NoListData message={"쿠폰이 없습니다."} />)
+                                }
+                            </div>
+                        </section>
+                        <section>
+                            <div className="gradeNotice-wrap px-20 pt-20 pb-20">
+                                <p className="label">등급 유의사항</p>
+                                <p className="gradeNotice-content">
+                                    혜택 이용 시 주의사항, <br />
+                                    쿠폰이라면 이용기간 등
+                                </p>
+                            </div>
+                        </section>
+                    </>
+                }
+
+            </div>
+        </>
+    );
 }

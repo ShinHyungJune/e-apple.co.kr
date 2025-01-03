@@ -46,83 +46,85 @@ export default function page() {
 
 
 
-    console.log(user);
+    return (
+        <>
+            <Header subTitle={"회원정보수정"} />
+            <div className="body">
+                {
+                    isClient &&
+                    <>
+                        <section>
+                            {/* 로그인 정보 */}
+                            <div className="login-info-wrap px-20 pb-20">
+                                <p className="label">로그인 정보</p>
+                                <div className="sns-login-info-list bd-bt-sm pb-20">
+                                    <ul>
+                                        <li>
+                                            <img src="/images/sns-kakao-off.png" alt="카카오 로그인" />
+                                        </li>
+                                        <li>
+                                            <img src="/images/sns-naver-off.png" alt="네이버 로그인" />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
 
-    if (isClient)
-        return (
-            <>
-                <Header subTitle={"회원정보수정"} />
-                <div className="body">
-                    <section>
-                        {/* 로그인 정보 */}
-                        <div className="login-info-wrap px-20 pb-20">
-                            <p className="label">로그인 정보</p>
-                            <div className="sns-login-info-list bd-bt-sm pb-20">
-                                <ul>
+                            {/* 회원 정보 */}
+                            <div className="price-information-list pb-20 px-20">
+                                <p className="price-information-title">회원정보</p>
+                                <ul className="bd-bt-sm pb-20">
                                     <li>
-                                        <img src="/images/sns-kakao-off.png" alt="카카오 로그인" />
+                                        <div className="price-information">
+                                            <p className="label">성명</p>
+                                            <p className="price">{user.name}</p>
+                                        </div>
                                     </li>
                                     <li>
-                                        <img src="/images/sns-naver-off.png" alt="네이버 로그인" />
+                                        <div className="price-information">
+                                            <p className="label">연락처</p>
+                                            <p className="price">{user.phone}</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div className="price-information">
+                                            <p className="label">이메일</p>
+                                            <p className="price">{user.email}</p>
+                                        </div>
+                                    </li>
+                                    <li className="mt-10">
+                                        <Link href="/mypage/users/password" className="btn wht">
+                                            비밀번호 변경
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
-                        </div>
 
-                        {/* 회원 정보 */}
-                        <div className="price-information-list pb-20 px-20">
-                            <p className="price-information-title">회원정보</p>
-                            <ul className="bd-bt-sm pb-20">
-                                <li>
-                                    <div className="price-information">
-                                        <p className="label">성명</p>
-                                        <p className="price">{user.name}</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className="price-information">
-                                        <p className="label">연락처</p>
-                                        <p className="price">{user.phone}</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className="price-information">
-                                        <p className="label">이메일</p>
-                                        <p className="price">{user.email}</p>
-                                    </div>
-                                </li>
-                                <li className="mt-10">
-                                    <Link href="/mypage/users/password" className="btn wht">
-                                        비밀번호 변경
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div>
+                            {/* 동의 체크박스 */}
+                            <div className="agreement-checkbox-list px-20 bd-bt pb-20 mb-40">
+                                <ul>
+                                    <li>
+                                        <div className="checkbox-type1">
+                                            <input
+                                                type="checkbox"
+                                                checked={user.is_agree_promotion} // true이면 체크, false이면 체크 해제
+                                                id="checkbox-02"
+                                                onChange={update} // update 함수 연결
+                                            />
+                                            <label htmlFor="checkbox-02">광고성 정보 수신 동의</label>
+                                        </div>
+                                        <a href="#">상세보기</a>
+                                    </li>
+                                </ul>
+                            </div>
 
-                        {/* 동의 체크박스 */}
-                        <div className="agreement-checkbox-list px-20 bd-bt pb-20 mb-40">
-                            <ul>
-                                <li>
-                                    <div className="checkbox-type1">
-                                        <input
-                                            type="checkbox"
-                                            checked={user.is_agree_promotion} // true이면 체크, false이면 체크 해제
-                                            id="checkbox-02"
-                                            onChange={update} // update 함수 연결
-                                        />
-                                        <label htmlFor="checkbox-02">광고성 정보 수신 동의</label>
-                                    </div>
-                                    <a href="#">상세보기</a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        {/* 영수증 보기 버튼 */}
-                        <div className="underline-btn-wrap mb-60">
-                            <button onClick={() => { destroy() }} className="underline-btn">회원탈퇴</button>
-                        </div>
-                    </section>
-                </div>
-            </>
-        );
+                            {/* 영수증 보기 버튼 */}
+                            <div className="underline-btn-wrap mb-60">
+                                <button onClick={() => { destroy() }} className="underline-btn">회원탈퇴</button>
+                            </div>
+                        </section>
+                    </>
+                }
+            </div>
+        </>
+    );
 }

@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "@/app/store";
 import couponsApi from "@/lib/api/couponsApi";
-
+import usersApi from "@/lib/api/usersApi";
 
 const CouponItem = ({ coupon, onSuccess }) => {
     const dispatch = useDispatch();
@@ -13,8 +13,10 @@ const CouponItem = ({ coupon, onSuccess }) => {
     function couponsDownload(id) {
         couponsApi.download(id, {}, (response) => {
             let message = response.data.message
-            console.log(message)
             dispatch(actions.setMessage(message));
+            if (user) {
+                usersApi.show();
+            }
             onSuccess()
         });
     }

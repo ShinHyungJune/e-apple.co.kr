@@ -211,6 +211,7 @@ const ProductReview = ({ product }) => {
                     form={form}
                     setForm={setForm}
                     meta={reviews.meta}
+                    noScroll={true}
                 />
             </section>
             {targetReview && <PopupReview review={targetReview} setReview={setTargetReview} />}

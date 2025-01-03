@@ -112,6 +112,7 @@ const ProductInquiry = ({ product }) => {
                     form={form}
                     setForm={setForm}
                     meta={inquirys.meta}
+                    noScroll={true}
                 />
             </section>
             {

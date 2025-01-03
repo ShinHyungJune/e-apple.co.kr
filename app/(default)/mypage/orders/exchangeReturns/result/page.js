@@ -20,7 +20,7 @@ export default function page() {
 
     return (
         <>
-            <Header subTitle={'교환/반품'} />
+            <Header/>
             <div className="body">
                 <div className="btn-wrap-fixed">
                     <Link href={"/mypage/orders"} className="btn org">닫기</Link>
