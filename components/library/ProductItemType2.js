@@ -5,7 +5,7 @@ export default function ProductItemType2({categorie}) {
     return (
         <div className="item-type2">
             <div className="img-wrap">
-                <img src={categorie.img.url} alt={categorie.title} />
+                <img src={categorie.img?.url} alt={categorie.title} />
             </div>
             <div className="txt-wrap">
                 <p className="txt-top">{categorie.title}</p>
