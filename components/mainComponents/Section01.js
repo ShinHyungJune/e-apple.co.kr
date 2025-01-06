@@ -36,7 +36,7 @@ export default function Section01({ banners = [] }) {
                     <div className="swiper-wrapper">
                         {banners.map((banner, index) => (
                             <div key={index} className="swiper-slide">
-                                <Link href={banner.url} className="content-box">
+                                <Link href={banner.url ? banner.url : "/"} className="content-box">
                                     <div className="bg-wrap">
                                         <img src={banner.img.url} alt="" />
                                     </div>
