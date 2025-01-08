@@ -178,11 +178,11 @@ export default function page() {
         ordersApi.update(order_id, form, (response) => {
             const data = response.data.data;
             console.log(data);
-            pay(data.imp_code, data.m_redirect_url, data.order);
+            pay(data.imp_code, data.m_redirect_url, data.order, order.orderProducts[0]?.product.name);
         });
     }
 
-    const pay = (impCode, redirectUrl, order) => {
+    const pay = (impCode, redirectUrl, order, product_name) => {
         let IMP = window.IMP; // 생략가능
 
         IMP.init(impCode); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
@@ -192,7 +192,7 @@ export default function page() {
             pay_method: order.pay_method_method,
             merchant_uid: order.merchant_uid,
             customer_id: order.merchant_uid,
-            name: order.buyer_name,
+            name: product_name ? product_name : "열매나무 상품",
             escrow: order.pay_method_method === 'card' ? false : true,
             goods_name: order.format_preset_products,
             amount: order.price,
@@ -222,7 +222,6 @@ export default function page() {
             }
         });
     }
-
 
     return (
         <>
