@@ -67,7 +67,15 @@ export default function page() {
     }
 
     const search = () => {
-        Index()
+        const queryString = new URLSearchParams({
+            ...form
+        }).toString();
+    
+        // URL 업데이트
+        window.history.pushState(null, '', `?${queryString}`);
+    
+        // 검색 실행
+        Index();
     };
 
 
