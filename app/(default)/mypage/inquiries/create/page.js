@@ -22,7 +22,7 @@ export default function page() {
     const [form, setForm] = useState({
         type: "",
         content: "",
-        images: [],
+        imgs: [],
     });
 
     const changeForm = (event) => {
@@ -133,8 +133,8 @@ export default function page() {
                             <InputImages
                                 multiple={true}
                                 defaultValue={[]}
-                                onChange={(data) => {setForm({ ...form, images: data })}}
-                                onRemove={(data) => {setForm({...form, images_remove_ids: data})}}
+                                onChange={(data) => {setForm({ ...form, imgs: data })}}
+                                onRemove={(data) => {setForm({...form, imgs_remove_ids: data})}}
                             />
                         </div>
                     </div>

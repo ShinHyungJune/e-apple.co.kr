@@ -19,8 +19,8 @@ export default function page() {
     const [orderProduct, setOrderProduct] = useState(null);
     const [reviewItem, setReviewItem] = useState(null);
     const [form, setForm] = useState({
-        images: [],
-        files_remove_ids: [],
+        imgs: [],
+        imgs_remove_ids: [],
         rating: "5",
         review: "",
     });
@@ -170,8 +170,8 @@ export default function page() {
                                     <InputImages
                                         multiple={true}
                                         defaultValue={reviewItem && reviewItem.imgs ? reviewItem.imgs : []}
-                                        onChange={(data) => { setForm({ ...form, images: data }) }}
-                                        onRemove={(data) => { setForm({ ...form, files_remove_ids: data }) }}
+                                        onChange={(data) => { setForm({ ...form, imgs: data }) }}
+                                        onRemove={(data) => { setForm({ ...form, imgs_remove_ids: data }) }}
                                     />
                                 </div>
                             </div>

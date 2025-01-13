@@ -31,9 +31,9 @@ export default function Section07({ Products = [] }) {
             <section className="mb-60">
                 <div className="section-title-wrap-type2">
                     <p className="section-title">과즙이 많은 과일 모음</p>
-                    {/* <Link href="/" className="view-all-btn-type2">
+                    <Link href="/products?tag=juicy" className="view-all-btn-type2">
                         전체보기 <i className="xi-angle-right-min"></i>
-                    </Link> */}
+                    </Link>
                 </div>
 
                 <div className="swiper-type4">

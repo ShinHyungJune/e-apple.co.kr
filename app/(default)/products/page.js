@@ -22,12 +22,14 @@ export default function page() {
     const [categorie, setCategorie] = useState();
 
     const [form, setForm] = useState({
+        tag: searchParams.get("tag") || "",
         page: searchParams.get('page') || 1,
         order_column: searchParams.get("order_column") || "created_at",
         order_direction: searchParams.get("order_direction") || "desc",
         category_id: searchParams.get("category_id") || "",
         subcategory_id: searchParams.get("subcategory_id") || "",
     });
+
 
     // 상품 리스트
     const [products, setProducts] = useState({
@@ -44,7 +46,7 @@ export default function page() {
     // 페이지 초기화: page 외 값이 변경될 때만 실행
     useEffect(() => {
         if (isFirstRender) return setIsFirstRender(false);
-    
+
         setForm({ ...form, page: "1" });
     }, [JSON.stringify({ ...form, page: undefined })]);
 
@@ -57,7 +59,7 @@ export default function page() {
 
     // 상품 목록 API 호출
     function indexProducts() {
-        productsApi.index("", form, (response) => {
+        productsApi.index(form.tag, form, (response) => {
             setProducts(response.data);
         });
     }
@@ -66,10 +68,11 @@ export default function page() {
     useEffect(() => {
         setForm({
             ...form,
+            tag: searchParams.get("tag") || "",
             category_id: searchParams.get('category_id') || "",
             subcategory_id: searchParams.get('subcategory_id') || "",
         });
-    
+
         indexCategories()
     }, [searchParams]);
 
@@ -83,8 +86,6 @@ export default function page() {
             setCategorie(matchedCategorie || ""); // 일치하는 항목이 없으면 null
         });
     }
-
-
     return (
         <>
             <div className="gradient-bg"></div>
@@ -94,11 +95,22 @@ export default function page() {
             <div className="body main-page">
                 <section className="mb-60 mt-35">
                     <div className="section-title-wrap-type2">
-                        <p className="section-title">{categorie?.text}</p>
+                        {
+                            form.tag ? (
+                                <p className="section-title">
+                                    {form.tag === "sale"
+                                        ? "특가로 만나는 신선한 과일"
+                                        : form.tag === "juicy"
+                                            ? "과즙이 많은 과일"
+                                            : ""}
+                                </p>
+                            ) : (
+                                <p className="section-title">{categorie?.text}</p>
+                            )
+                        }
                     </div>
-
                     <>
-                        {categorie?.items && (
+                        {form.tag === "" && categorie?.items && (
                             <div className="main-tab-menu scroll-hidden">
                                 <div className="tab-menu-bar">
                                     {/* 전체 버튼 */}
@@ -126,27 +138,30 @@ export default function page() {
                         )}
                     </>
 
-                    <div className="filter-wrap-type1 px-20 mt-20">
-                        <p className="total-count">총 {products.meta.total}개</p>
-                        <select
-                            name="order"
-                            id="order"
-                            value={`${form.order_column},${form.order_direction}`}
-                            onChange={(e) => {
-                                const [order_column, order_direction] = e.target.value.split(',');
-                                setForm((prevForm) => ({
-                                    ...prevForm,
-                                    order_column: order_column,
-                                    order_direction: order_direction,
-                                }));
-                            }}
-                        >
-                            <option value="created_at,desc">신상품</option>
-                            <option value="reviews_count,desc">리뷰 많은순</option>
-                            <option value="price,desc">높은가격순</option>
-                            <option value="price,asc">낮은가격순</option>
-                        </select>
-                    </div>
+                    {form.tag === "" && (
+                        <div className="filter-wrap-type1 px-20 mt-20">
+                            <p className="total-count">총 {products.meta.total}개</p>
+                            <select
+                                name="order"
+                                id="order"
+                                value={`${form.order_column},${form.order_direction}`}
+                                onChange={(e) => {
+                                    const [order_column, order_direction] = e.target.value.split(',');
+                                    setForm((prevForm) => ({
+                                        ...prevForm,
+                                        order_column: order_column,
+                                        order_direction: order_direction,
+                                    }));
+                                }}
+                            >
+                                <option value="created_at,desc">신상품</option>
+                                <option value="reviews_count,desc">리뷰 많은순</option>
+                                <option value="price,desc">높은가격순</option>
+                                <option value="price,asc">낮은가격순</option>
+                            </select>
+                        </div>
+                    )}
+
 
                     <div className="item-list-type1 mt-20">
                         {

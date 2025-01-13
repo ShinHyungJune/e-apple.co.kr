@@ -71,17 +71,21 @@ export default function page() {
 
                         <section>
                             <div className="order-product-list-type1">
-                                <ul>
-                                    {
-                                        reviews.data.map((review) => {
-                                            return (
-                                                <li key={review.id}>
-                                                    <ReviewMine review={review} onSuccess={() => { index() }} />
-                                                </li>
-                                            )
-                                        })
-                                    }
-                                </ul>
+                                {
+                                    reviews.data.length > 0 ? (
+                                        <ul>
+                                            {
+                                                reviews.data.map((review) => {
+                                                    return (
+                                                        <li key={review.id}>
+                                                            <ReviewMine review={review} onSuccess={() => { index() }} />
+                                                        </li>
+                                                    )
+                                                })
+                                            }
+                                        </ul>
+                                    ) : (<NoListData />)
+                                }
                             </div>
 
                             <Pagination

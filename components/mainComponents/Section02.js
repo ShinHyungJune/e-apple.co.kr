@@ -63,7 +63,7 @@ export default function Section02({ Products = [] }) {
                 </div>
 
                 <div className="view-all-btn-wrap">
-                    <Link href="/" className="view-all-btn-type1">
+                    <Link href="/products?tag=sale" className="view-all-btn-type1">
                         전체보기 <i className="xi-angle-right-min"></i>
                     </Link>
                 </div>
