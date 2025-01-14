@@ -13,11 +13,11 @@ const Footer = () => {
                 <div className="ft-tab">
                     {/*<Link href="/customer-service">고객센터</Link>
                     <span></span>*/}
-                    <Link href="/contents/privacy-policy">개인정보처리방침</Link>
+                    <Link href="/contents/privacyPolicy">개인정보처리방침</Link>
                     <span></span>
-                    <Link href="/contents/terms-of-service">이용약관</Link>
+                    <Link href="/contents/termsOfService">이용약관</Link>
                     <span></span>
-                    <Link href="/contents/refund-policy">배송/교환/취소/환불 규정</Link>
+                    <Link href="/contents/refundPolicy">배송/교환/취소/환불 규정</Link>
                 </div>
                 <p className="footer-information">
                     주소: 경상남도 거창군 고제면 고제로 740-8<br />
