@@ -5,11 +5,11 @@ const Footer = () => {
         <div className="footer">
             <div className="footer-top">
                 <h3>고객센터</h3>
-                <p className="contact">0000-0000</p>
+                <p className="contact">1544-1234</p>
                 <p className="businessHours">평일 09:00~ 18:00 (주말 및 공휴일 휴무)</p>
             </div>
             <div className="footer-bt">
-                <h2>(주) 열매나무</h2>
+                <h2>농업회사법인 열매나무 주식회사</h2>
                 <div className="ft-tab">
                     <Link href="/customer-service">고객센터</Link>
                     <span></span>
