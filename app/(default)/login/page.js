@@ -99,7 +99,7 @@ export default function Page() {
                         <Link href="/users/findPassword" className="findPassword">비밀번호 찾기</Link>
                     </div>
                     <div className="input-list-type2 px-20">
-                        <div>
+                        {/*<div>
                             <a href={`${process.env.NEXT_PUBLIC_API_URL}/openLoginPop/kakaoCustom`} className="btn ylw">
                                 <img src="/images/sns-login-kakao.png" alt="" />
                                 카카오 로그인
@@ -110,7 +110,7 @@ export default function Page() {
                                 <img src="/images/sns-login-naver.png" alt="" />
                                 네이버 로그인
                             </a>
-                        </div>
+                        </div>*/}
                     </div>
                 </section>
 
