@@ -9,7 +9,7 @@ export function middleware(request){
         return NextResponse.next();
 
     if (pathname.startsWith('/admin')) {
-        if (!user || !user.admin)
+        if (!user || !user.is_admin)
             return NextResponse.redirect(new URL('/admin/login?redirect=' + pathnameWithParams, request.url));
     }
 
