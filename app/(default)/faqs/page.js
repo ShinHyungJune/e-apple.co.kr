@@ -49,7 +49,7 @@ export default function page() {
         })
     }
 
-    console.log(initFaqs);
+    console.log(faqs);
 
     useEffect(() => {
         boardsIndex()
@@ -150,7 +150,7 @@ export default function page() {
                                                                 </div>
                                                                 <div className="content-txt-wrap">
                                                                     <p>
-                                                                        {faq.content_answer}
+                                                                        {faq.content}
                                                                     </p>
                                                                 </div>
                                                             </div>
