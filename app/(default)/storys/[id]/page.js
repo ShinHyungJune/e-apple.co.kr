@@ -48,13 +48,13 @@ export default function page(props) {
                                 <p className="board-date">{formatDate(board.created_at)}</p>
                             </div>
                             <div className="board-content-wrap">
-                                {
+                                {/* {
                                     board.file ?
                                     <div className="img-wrap">
                                         <img src={board.file.url} alt="" />
                                     </div>
                                     : null
-                                }
+                                } */}
                                 <EditorContent description={board.content} />
                                 {/* <div className="mt-20 px-20">
                                     <InputFiles onlyShow={true} defaultValue={board.files}/>
