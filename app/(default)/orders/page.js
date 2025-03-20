@@ -58,7 +58,7 @@ export default function page() {
         agreeAll: false,
         agreeTerms: false,
         agreePrivacy: false,
-        agreePayment: false,
+        // agreePayment: false,
     });
     const changeForm = (event) => {
         const { name, value, type, checked } = event.target;
@@ -170,10 +170,14 @@ export default function page() {
 
     // 결제시도
     function update() {
-        if (!form.agreeTerms || !form.agreePrivacy || !form.agreePayment) {
-            dispatch(actions.setMessage("필수 약관에 동의해 주세요."));
-            return; // 전송 중단
-        }
+        if (
+            !form.agreeTerms || 
+            !form.agreePrivacy
+            // !form.agreePayment
+        ) {
+                dispatch(actions.setMessage("필수 약관에 동의해 주세요."));
+                return; // 전송 중단
+            }
 
         ordersApi.update(order_id, form, (response) => {
             const data = response.data.data;
@@ -544,8 +548,8 @@ export default function page() {
                                                 form.agreeTerms
                                                 &&
                                                 form.agreePrivacy
-                                                &&
-                                                form.agreePayment
+                                                // &&
+                                                // form.agreePayment
                                             }
                                             onChange={(e) => {
                                                 const { checked } = e.target;
@@ -553,7 +557,7 @@ export default function page() {
                                                     ...form,
                                                     agreeTerms: checked,
                                                     agreePrivacy: checked,
-                                                    agreePayment: checked,
+                                                    // agreePayment: checked,
                                                     // agree_promotion_sms: checked,
                                                 });
                                             }}
@@ -571,9 +575,9 @@ export default function page() {
                                                 checked={form.agreeTerms}
                                                 onChange={(e) => setForm({ ...form, agreeTerms: e.target.checked })}
                                             />
-                                            <label htmlFor="agreeTerms">[필수] 개인정보 수집 및 이용 동의</label>
+                                            <label htmlFor="agreeTerms">[필수] 개인정보처리 동의</label>
                                         </div>
-                                        <a href="">상세보기</a>
+                                        <Link href="/contents/privacyPolicy">상세보기</Link>
                                     </li>
                                     <li>
                                         <div className="checkbox-type1">
@@ -584,11 +588,11 @@ export default function page() {
                                                 checked={form.agreePrivacy}
                                                 onChange={(e) => setForm({ ...form, agreePrivacy: e.target.checked })}
                                             />
-                                            <label htmlFor="agreePrivacy">[필수] 개인정보 제 3자 제공 동의</label>
+                                            <label htmlFor="agreePrivacy">[필수] 이용약관 동의</label>
                                         </div>
-                                        <a href="">상세보기</a>
+                                        <Link href="/contents/termsOfService">상세보기</Link>
                                     </li>
-                                    <li>
+                                    {/* <li>
                                         <div className="checkbox-type1">
                                             <input
                                                 type="checkbox"
@@ -600,7 +604,7 @@ export default function page() {
                                             <label htmlFor="agreePayment">[필수] 전자결제대행 이용 동의</label>
                                         </div>
                                         <a href="">상세보기</a>
-                                    </li>
+                                    </li> */}
                                 </ul>
                             </div>
                         </section>

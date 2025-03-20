@@ -36,7 +36,7 @@ export default function page() {
         agreeAll: false,
         agreeTerms: false,
         agreePrivacy: false,
-        agreePayment: false,
+        // agreePayment: false,
         is_agree_promotion: false
     });
 
@@ -73,7 +73,7 @@ export default function page() {
     const store = () => {
         
         // 필수 약관 동의가 false일 때
-        if (!form.agreeTerms || !form.agreePrivacy || !form.agreePayment) {
+        if (!form.agreeTerms || !form.agreePrivacy) {
             dispatch(actions.setMessage("필수 약관에 동의해 주세요."));
             return; // 전송 중단
         }
@@ -245,9 +245,9 @@ export default function page() {
                                         checked={form.agreeTerms}
                                         onChange={(e) => setForm({ ...form, agreeTerms: e.target.checked })}
                                     />
-                                    <label htmlFor="agreeTerms">[필수] 개인정보 수집 및 이용 동의</label>
+                                    <label htmlFor="agreeTerms">[필수] 개인정보처리 동의</label>
                                 </div>
-                                <a href="">상세보기</a>
+                                <Link href="/contents/privacyPolicy" >상세보기</Link>
                             </li>
                             <li>
                                 <div className="checkbox-type1">
@@ -258,11 +258,11 @@ export default function page() {
                                         checked={form.agreePrivacy}
                                         onChange={(e) => setForm({ ...form, agreePrivacy: e.target.checked })}
                                     />
-                                    <label htmlFor="agreePrivacy">[필수] 개인정보 제 3자 제공 동의</label>
+                                    <label htmlFor="agreePrivacy">[필수] 이용약관 동의</label>
                                 </div>
-                                <a href="">상세보기</a>
+                                <Link href="/contents/termsOfService">상세보기</Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <div className="checkbox-type1">
                                     <input
                                         type="checkbox"
@@ -274,7 +274,7 @@ export default function page() {
                                     <label htmlFor="agreePayment">[필수] 전자결제대행 이용 동의</label>
                                 </div>
                                 <a href="">상세보기</a>
-                            </li>
+                            </li> */}
                             <li>
                                 <div className="checkbox-type1">
                                     <input
@@ -286,7 +286,7 @@ export default function page() {
                                     />
                                     <label htmlFor="is_agree_promotion">[선택] 광고성 정보 수신 동의</label>
                                 </div>
-                                <a href="">상세보기</a>
+                                <Link href="/contents/privacyPolicy">상세보기</Link>
                             </li>
                         </ul>
                     </div>

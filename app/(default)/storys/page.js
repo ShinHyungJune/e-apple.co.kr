@@ -38,6 +38,8 @@ export default function page() {
         },
     });
 
+    console.log(storys)
+
 
     // 스토리 하위 카테고리
     useEffect(() => {
@@ -111,9 +113,19 @@ export default function page() {
                                             return(
                                                 <li key={story.id}>
                                                     <div className="info-item-type1">
-                                                        <Link href={`/storys/${story.id}`} className="info-item-img-wrap">
-                                                            <img src={story.file.url} alt={story.title} />
-                                                        </Link>
+                                                        {
+                                                            story.file ?
+                                                            <Link href={`/storys/${story.id}`} className="info-item-img-wrap">
+                                                                {
+                                                                    story.file ?
+                                                                        <img src={story.file?.url} alt={story.title} />
+                                                                    :
+                                                                        <img src={""} alt={""} />
+                                                                }
+                                                            </Link>
+                                                            : null
+                                                        }
+                                                        
                                                         <div className="info-item-content-wrap">
                                                             <Link href={`/storys/${story.id}`} className="item-name">{story.title}</Link>
                                                             <p className="date">{formatDate(story.created_at)}</p>

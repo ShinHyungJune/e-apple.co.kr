@@ -371,6 +371,10 @@
 .board-title-wrap{ text-align: center; }
 .board-title-wrap .board-title { font-size: 24px; font-weight: bold; }
 .board-title-wrap .board-date { font-size: 14px; }
+.board-content-wrap { width: 100%; padding: 0 20px; }
+.board-content-wrap .img-wrap { width: 100%; display: block; position: relative; border-radius: 10px; overflow: hidden; margin-bottom: 10px; background-color: #FF990D; }
+.board-content-wrap .img-wrap::before { display: block; width: 100%; padding-top: 44.62%; content: ''; }
+.board-content-wrap .img-wrap img { position: absolute; left: 0; top: 0; width: 100%; height: 100%;}
 
 
 
