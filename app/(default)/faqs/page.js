@@ -120,46 +120,50 @@ export default function page() {
                         {
                             faqs.data.length > 0 ? (
                                 <ul>
-                                    {
-                                        faqs.data.map((faq)=>{
-                                            const isVisible = visibleItemId == faq.id;
+                                    {faqs.data.map((faq) => {
+                                        const isVisible = visibleItemId == faq.id;
 
-                                            return(
-                                                <li key={faq.id}>
-                                                    <div className="qna-item-type1">
-                                                        <div
-                                                            className="qna-item-top"
-                                                            onClick={() =>
-                                                                setVisibleItemId(isVisible ? null : faq.id)
-                                                            } // 클릭 시 열고 닫기
-                                                        >
-                                                            <div className="category-wrap">
-                                                                <p className="category-txt">주문결제</p>
-                                                            </div>
-                                                            <div className="content-txt-wrap">
-                                                                <div className="content-txt">
-                                                                    {faq.title}
-                                                                </div>
+                                        // category text 찾기
+                                        const category = initFaqs.find(item => item.value == faq.category_id);
+
+                                        return (
+                                            <li key={faq.id}>
+                                                <div className="qna-item-type1">
+                                                    <div
+                                                        className="qna-item-top"
+                                                        onClick={() =>
+                                                            setVisibleItemId(isVisible ? null : faq.id)
+                                                        } // 클릭 시 열고 닫기
+                                                    >
+                                                        <div className="category-wrap">
+                                                            <p className="category-txt">
+                                                                {category ? category.text : ""}
+                                                            </p>
+                                                        </div>
+                                                        <div className="content-txt-wrap">
+                                                            <div className="content-txt">
+                                                                {faq.title}
                                                             </div>
                                                         </div>
-                                                        
-                                                        {isVisible && ( // 항목이 열렸을 때만 보이게 함
-                                                            <div className="qna-item-bt">
-                                                                <div className="category-wrap">
-                                                                    <p className="category">A</p>
-                                                                </div>
-                                                                <div className="content-txt-wrap">
-                                                                    <p>
-                                                                        {faq.content}
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        )}
                                                     </div>
-                                                </li>
-                                            )
-                                        })
-                                    }
+
+                                                    {isVisible && (
+                                                        <div className="qna-item-bt">
+                                                            <div className="category-wrap">
+                                                                <p className="category">A</p>
+                                                            </div>
+                                                            <div className="content-txt-wrap">
+                                                                <p>
+                                                                    {faq.content}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </li>
+                                        );
+                                    })}
+
                                 </ul>
                             ) : (
                                 <NoListData message="FAQ가 없습니다." />
