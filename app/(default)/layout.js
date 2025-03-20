@@ -1,5 +1,6 @@
 "use client";
 import "@/public/css/swiper.min.css";
+import "@/public/css/xeicon.min.css"
 import "@/public/css/module.css";
 import "@/public/css/quill.css";
 import "@/public/css/common.css";
