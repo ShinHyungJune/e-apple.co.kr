@@ -19,6 +19,8 @@ export default function page() {
     const [orderProduct, setOrderProduct] = useState(null);
     const [reviewItem, setReviewItem] = useState(null);
     const [form, setForm] = useState({
+        product_id: "",
+        product_option_id: "",
         imgs: [],
         imgs_remove_ids: [],
         rating: "5",
@@ -40,11 +42,21 @@ export default function page() {
     useEffect(() => {
         if (order_product_id) {
             ordersApi.show_order_products(order_product_id, (response) => {
-                setOrderProduct(response.data.data);
-                console.log(response.data.data);
+                const data = response.data.data;
+                setOrderProduct(data);
+                console.log(data);
+    
+                // form 업데이트
+                setForm((prevForm) => ({
+                    ...prevForm,
+                    product_id: data.product.id,
+                    product_option_id: data.productOption.id,
+                }));
             });
         }
-    }, [searchParams])
+    }, [searchParams]);
+
+    console.log(form)
 
 
     const changeForm = (event) => {

@@ -79,7 +79,7 @@ const ProductInquiry = ({ product }) => {
                                                         {
                                                             inquiry.is_visible == 1 ?
                                                                 <p>
-                                                                    {inquiry.title} <br />
+                                                                    제목: {inquiry.title} <br />
                                                                     {inquiry.content}
                                                                 </p>
                                                                 : "비밀글 입니다"

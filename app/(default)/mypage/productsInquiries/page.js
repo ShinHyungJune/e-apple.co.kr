@@ -116,7 +116,10 @@ export default function page() {
                                                                 <p className="category-txt">{inquiry.product.name}</p>
                                                             </div>
                                                             <div className="content-txt-wrap">
-                                                                <div className="content-txt">{inquiry.content}</div>
+                                                                <div className="content-txt">
+                                                                    제목: {inquiry.title} <br />
+                                                                    {inquiry.content}
+                                                                </div>
                                                                 <div className="btn-wrap">
                                                                     <button
                                                                         className="add-option-btn"

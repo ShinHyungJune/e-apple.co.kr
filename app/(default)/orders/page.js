@@ -214,6 +214,8 @@ export default function page() {
                     const order = response.data.data;
 
                     router.push(`/orders/result?updated_at=${order.updated_at}&merchant_uid=${order.merchant_uid}&buyer_name=${order.buyer_name}`);
+                },(error)=>{
+                    alert("결제에 실패하였습니다. 문의해 주시기 바랍니다.");
                 })
             } else {
                 let msg = response.error_msg;
