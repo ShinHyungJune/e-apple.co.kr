@@ -14,8 +14,8 @@ export default function ProductItemType3({product}) {
                     {product.name}
                 </Link>
                 <div className="price-wrap">
-                    <p className="discounted-price">{product.price.toLocaleString()}원</p>
-                    <p className="original-price">{product.original_price.toLocaleString()}원</p>
+                    <p className="discounted-price">{product.price?.toLocaleString()}원</p>
+                    <p className="original-price">{product.original_price?.toLocaleString()}원</p>
                 </div>
                 <div className="sub-content">
                     <p><i className="xi-star-o"></i>{product.average_rating ? parseFloat(product.average_rating).toFixed(1) :"0"}</p>

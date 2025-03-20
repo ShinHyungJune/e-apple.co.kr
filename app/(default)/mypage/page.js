@@ -127,10 +127,10 @@ export default function page() {
                                     <Link href="">배송 및 이용 안내</Link>
                                 </li> */}
                                     <li>
-                                        <Link href="">개인정보처리방침</Link>
+                                        <Link href="/contents/privacyPolicy">개인정보처리방침</Link>
                                     </li>
                                     <li>
-                                        <Link href="">이용약관</Link>
+                                        <Link href="/contents/termsOfService">이용약관</Link>
                                     </li>
                                 </ul>
                             </div>

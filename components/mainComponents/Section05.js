@@ -36,6 +36,8 @@ export default function Section05({ monthlySuggestionProducts = [] }) {
         }
     };
 
+    console.log(monthlySuggestionProducts)
+
     if (monthlySuggestionProducts.length > 0)
         return (
             <section className="pt-40 mb-60">
@@ -65,8 +67,8 @@ export default function Section05({ monthlySuggestionProducts = [] }) {
                                     <ProductItemType2 categorie={monthlySuggestionProduct} />
                                     <div className="item-list-type3 mt-40">
                                         <ul>
-                                            {monthlySuggestionProduct.products.map((product) => (
-                                                <li key={product.id}>
+                                            {monthlySuggestionProduct.products.map((product, index) => (
+                                                <li key={index}>
                                                     <ProductItemType3 product={product} />
                                                 </li>
                                             ))}
