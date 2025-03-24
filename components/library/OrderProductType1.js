@@ -30,7 +30,27 @@ export default function OrderProductType1({ order, orderProduct, onSuccess }) {
                 <div className="order-product-item-type1 px-20">
                     <div className="order-status-wrap">
                         <div className="order-status-box">
-                            <p className="order-status">{orderProduct.status}</p>
+                            {orderProduct.exchangeReturns.length > 0 ? (() => {
+                                const lastReturn = orderProduct.exchangeReturns.at(-1); // 마지막 요소 가져오기 (안되면 length - 1 써도 돼)
+                                const typeText = lastReturn.type == "exchange" ? "교환" : "반품";
+
+                                const statusMap = {
+                                    "접수완료": "접수완료",
+                                    "승인": "승인",
+                                    "처리중": "중",
+                                    "완료됨": "완료",
+                                    "거부됨": "실패"
+                                };
+
+                                const statusText = statusMap[lastReturn.status];
+
+                                return statusText ? (
+                                    <p className="order-status">{typeText}{statusText}</p>
+                                ) : null;
+                            })() : (
+                                <p className="order-status">{orderProduct.status}</p>
+                            )}
+
                             <span></span>
                             <p className="date">{formatDate(orderProduct.updated_at)}</p>
                         </div>
