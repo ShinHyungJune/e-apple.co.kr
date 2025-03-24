@@ -752,7 +752,7 @@
 .order-product-item-type1 .order-status-wrap .order-status-box > span { width: 2px; height: 2px; background-color: #373948; border-radius: 100%; display: block; }
 .order-product-item-type1 .order-status-wrap .shipping-fee { font-size: 12px; color: #373948; }
 
-.order-product-item-type1 .order-tracking { display: flex; gap: 10px; }
+.order-product-item-type1 .order-tracking { display: flex; gap: 10px; align-items: baseline; }
 .order-product-item-type1 .order-tracking .order-tracking-labal { font-size: 14px; color: #202020; }
 .order-product-item-type1 .order-tracking .tracking-number { font-size: 14px; font-weight: 500; color: #345bff; text-decoration: underline; }
 

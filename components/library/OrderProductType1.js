@@ -76,11 +76,11 @@ export default function OrderProductType1({ order, orderProduct, onSuccess }) {
                     </div>
 
                     {
-                        order.delivery_tracking_number ?
+                        orderProduct.delivery_tracking_number ?
                             <div className="order-tracking mb-20">
                                 <p className="order-tracking-labal">주문배송조회</p>
                                 <Link href="">
-                                    <span className="tracking-number">{order.delivery_tracking_number}</span>
+                                    <span className="tracking-number">{orderProduct.delivery_tracking_number}</span>
                                 </Link>
                             </div>
                             : null
