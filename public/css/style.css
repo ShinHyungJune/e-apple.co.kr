@@ -153,9 +153,9 @@
 .swiper-type1 .swiper .swiper-slide .content-box { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; border-radius: 15px; }
 .swiper-type1 .swiper .swiper-slide .content-box .bg-wrap { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: #FF990D; }
 .swiper-type1 .swiper .swiper-slide .content-box .bg-wrap > img { width: 100%; height: 100%; }
-.swiper-type1 .swiper .swiper-slide .content-box .txt-wrap { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 56px; text-align: center; }
-.swiper-type1 .swiper .swiper-slide .content-box .txt-wrap .txt-top { margin-bottom: 15px; font-size: 24px; font-weight: bold; color: #fff; }
-.swiper-type1 .swiper .swiper-slide .content-box .txt-wrap .txt-bt { padding-top: 15px; font-size: 14px; color: #fff; position: relative; }
+.swiper-type1 .swiper .swiper-slide .content-box .txt-wrap { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 56px; text-align: center; padding: 0 8px 8px; }
+.swiper-type1 .swiper .swiper-slide .content-box .txt-wrap .txt-top { margin-bottom: 15px; font-size: 24px; font-weight: bold; color: #fff; white-space: pre-line; word-break: keep-all; }
+.swiper-type1 .swiper .swiper-slide .content-box .txt-wrap .txt-bt { padding-top: 15px; font-size: 14px; color: #fff; position: relative; white-space: pre-line; word-break: keep-all; }
 .swiper-type1 .swiper .swiper-slide .content-box .txt-wrap .txt-bt::before { content: ''; position: absolute; left: 50%; top: 0; transform: translate(-50%, -50%); width: 260px; height: 1px; background-color: #FFFFFF; }
 
 /* 스와이퍼 타입2 */

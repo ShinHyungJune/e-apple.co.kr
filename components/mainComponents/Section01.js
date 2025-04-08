@@ -41,8 +41,8 @@ export default function Section01({ banners = [] }) {
                                         <img src={banner.img.url} alt="" />
                                     </div>
                                     <div className="txt-wrap">
-                                        <p className="txt-top" style={{wordBreak:'break-word'}}>{banner.title}</p>
-                                        <p className="txt-bt" style={{wordBreak:'break-word'}}>{banner.description}</p>
+                                        <p className="txt-top">{banner.title}</p>
+                                        <p className="txt-bt">{banner.description}</p>
                                     </div>
                                 </Link>
                             </div>
