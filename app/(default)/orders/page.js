@@ -13,6 +13,7 @@ import ordersApi from "@/lib/api/ordersApi";
 import AddressInput from "@/components/AddressInput";
 import couponsApi from "@/lib/api/couponsApi";
 import PopupOrdersDeliveryAddresses from "@/components/popups/PopupOrdersDeliveryAddresses";
+import deliveryAddressesApi from "@/lib/api/deliveryAddressesApi";
 
 export default function page() {
     const router = useRouter();
@@ -60,6 +61,9 @@ export default function page() {
         agreePrivacy: false,
         // agreePayment: false,
     });
+    useEffect(()=>{
+          console.log(form)
+    },[form])
     const changeForm = (event) => {
         const { name, value, type, checked } = event.target;
         setForm({
@@ -72,10 +76,10 @@ export default function page() {
         show()
     }, [searchParams])
 
+
     function show() {
         ordersApi.show(order_id, {}, (response) => {
             setOrder(response.data.data);
-            console.log(response.data.data)
         });
     }
 
@@ -85,13 +89,28 @@ export default function page() {
         }
     }, [order])
 
+
+    // 유저정보고 배송지 뿌리기
+    useEffect(() => {
+        if (user) {
+            setForm(prevForm => ({
+                ...prevForm,
+                delivery_name: user.name || "",
+                delivery_phone: user.phone || "",
+                delivery_postal_code: user.postal_code || "",
+                delivery_address: user.address || user.address,
+                delivery_address_detail: user.address_detail || ""
+            }));
+        }
+    }, [user]);
+
+
     // 사용자 쿠폰 리스트
     function indexUserCoupons() {
         couponsApi.indexUserCoupons({
             total_order_amount: order.total_amount,
         }, (response) => {
             setUserCoupons(response.data.data)
-            console.log(response.data.data);
         });
     }
 
@@ -171,13 +190,15 @@ export default function page() {
     // 결제시도
     function update() {
         if (
-            !form.agreeTerms || 
+            !form.agreeTerms ||
             !form.agreePrivacy
-            // !form.agreePayment
         ) {
-                dispatch(actions.setMessage("필수 약관에 동의해 주세요."));
-                return; // 전송 중단
-            }
+            dispatch(actions.setMessage("필수 약관에 동의해 주세요."));
+            return; // 전송 중단
+        }
+
+
+
 
         ordersApi.update(order_id, form, (response) => {
             const data = response.data.data;
@@ -229,6 +250,26 @@ export default function page() {
         });
     }
 
+
+    // 요청사항 직접 입력
+    const [isCustom, setIsCustom] = useState(false);
+    const handleSelectChange = (e) => {
+        const value = e.target.value;
+        if (value === 'custom') {
+            setIsCustom(true);
+            setForm({ ...form, delivery_request: '' });
+        } else {
+            setIsCustom(false);
+            setForm({ ...form, delivery_request: value });
+        }
+    };
+
+    const handleInputChange = (e) => {
+        setForm({ ...form, delivery_request: e.target.value });
+    };
+
+
+
     return (
         <>
             <Header />
@@ -237,11 +278,15 @@ export default function page() {
                     order && isClient &&
                     <>
                         {/* 배송지 팝업 */}
-                        <PopupOrdersDeliveryAddresses
-                            setForm={setForm}
-                            isPopup={isPopupOrdersDeliveryAddresses}
-                            setIsPopup={setIsPopupOrdersDeliveryAddresses}
-                        />
+                        {
+                            isPopupOrdersDeliveryAddresses ?
+                                <PopupOrdersDeliveryAddresses
+                                    setForm={setForm}
+                                    isPopup={isPopupOrdersDeliveryAddresses}
+                                    setIsPopup={setIsPopupOrdersDeliveryAddresses}
+                                />
+                            :null
+                        }
 
                         <div className="buy-cart-items-btn-wrap">
                             <p className="price">{totalFinalPrice.toLocaleString()}원</p>
@@ -296,7 +341,6 @@ export default function page() {
                                             배송지 변경 <i className="xi-angle-right-min"></i>
                                         </button>
                                     }
-
                                 </div>
                                 <div>
                                     <div className="input-txt-box-type1">
@@ -334,16 +378,28 @@ export default function page() {
                                     <div className="select-box-type1">
                                         <select
                                             name="delivery_request"
-                                            value={form.delivery_request}
-                                            onChange={changeForm}
+                                            value={isCustom ? 'custom' : form.delivery_request}
+                                            onChange={handleSelectChange}
                                         >
                                             <option value="">배송시 요청사항을 선택해주세요.</option>
                                             <option value="빠른배송 부탁드립니다.">빠른배송 부탁드립니다.</option>
                                             <option value="현관에 두고 연락주세요.">현관에 두고 연락주세요.</option>
+                                            <option value="custom">직접 입력</option>
                                         </select>
                                         <i className="xi-angle-down"></i>
                                     </div>
-                                    <Error name={'delivery_request'} />
+                                    {isCustom && (
+                                        <div className="input-txt-box-type1">
+                                            <input
+                                                type="text"
+                                                placeholder="요청사항을 입력해주세요."
+                                                value={form.delivery_request}
+                                                onChange={handleInputChange}
+                                                className="custom-request-input"
+                                            />
+                                        </div>
+                                    )}
+                                    <Error name="delivery_request" />
                                 </div>
                             </div>
 

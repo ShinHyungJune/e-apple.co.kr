@@ -1,8 +1,16 @@
 import Link from 'next/link';
 import deliveryAddressesApi from "@/lib/api/deliveryAddressesApi";
+import { useRouter } from "next/navigation";
 
-export default function AddressItemType1({ deliveryAddresse, onSuccess, selectedDeliveryAddress, setSelectedDeliveryAddress, noEdit=false }) {
-
+export default function AddressItemType1({ 
+        deliveryAddresse, 
+        onSuccess, 
+        selectedDeliveryAddress, 
+        setSelectedDeliveryAddress, 
+        noEdit=false,
+        onEdit,
+    }) {
+     const router = useRouter();
 
     const destroy = (id) => {
         const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
@@ -30,20 +38,31 @@ export default function AddressItemType1({ deliveryAddresse, onSuccess, selected
                                 : null
                         }
                     </p>
-                    {
-                        noEdit ?
-                        null
-                        :
-                        <div className="btn-wrap">
-                            {
-                                deliveryAddresse.is_default != 1 ?
-                                    <button className="add-option-btn" onClick={() => { destroy(deliveryAddresse.id) }}>삭제</button>
-                                    : null
-                            }
-                            <Link href={`/mypage/deliveryAddresses/create?id=${deliveryAddresse.id}`} className="add-option-btn">수정하기</Link>
-                        </div>
-                    }
-                   
+                    <div className="btn-wrap">
+                        {
+                            deliveryAddresse.is_default != 1 ?
+                                <button className="add-option-btn" onClick={() => { destroy(deliveryAddresse.id) }}>삭제</button>
+                                : null
+                        }
+                        {
+                            !noEdit ?
+                                <a href={""} onClick={(e) => {
+                                    e.preventDefault();
+                                    if (onEdit) {
+                                        onEdit(deliveryAddresse);
+                                    } else {
+                                        router.push(`/mypage/deliveryAddresses/create?id=${deliveryAddresse.id}`);
+                                    }
+                                }} className="add-option-btn"
+                                >
+                                    수정하기
+                                </a>
+                                :
+                                null
+                        }
+                        
+                    </div>
+
                 </div>
                 <div className="address-wrap">
                     <p className="address">

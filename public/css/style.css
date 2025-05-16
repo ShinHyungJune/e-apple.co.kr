@@ -484,9 +484,10 @@
 .gradeNotice-wrap .gradeNotice-content { opacity: 0.5; font-size: 14px; line-height: 1.86; color: #303030; }
 
 
-
-
-
+/* modal-body */
+.modal-body { position: fixed; background-color: #fff; left: calc(100vw / 2); transform: translateX(-50%); top: 0; width: 475px; height: calc(100% - 56px); z-index: 999; padding-top: 40px; box-shadow: rgb(0 0 0 / 16%) 0px 0px 8px; }
+.modal-body .modal-body-close-btn { display: unset; position: absolute; right: 20px; top: 20px; }
+.modal-body .modal-body-close-btn i { font-size: 24px; }
 
 /* 질의 응답 결과 리시트 */
 .qna-list-type1 { display: block; }
@@ -871,5 +872,5 @@
 
 
 
-
+.page-popup-wrap { position: fixed; top: 0; left: 0; }
 

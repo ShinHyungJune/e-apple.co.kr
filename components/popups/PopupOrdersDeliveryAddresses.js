@@ -6,10 +6,13 @@ import AddressItemType1 from "../library/AddressItemType1";
 // 리덕스
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "@/app/store";
-
+import ModalDeliveryCreate from "./ModalDeliveryCreate";
 const PopupOrdersDeliveryAddresses = ({ setForm, isPopup, setIsPopup }) => {
     const router = useRouter();
     const user = useSelector(state => state.app.user);
+
+    const [modalDeliveryCreate , setModalDeliveryCreate] = useState(false)
+    const [modalDeliveryCreateId , setModalDeliveryCreateId] = useState(false)
 
     const [selectedDeliveryAddress, setSelectedDeliveryAddress] = useState();
 
@@ -19,7 +22,6 @@ const PopupOrdersDeliveryAddresses = ({ setForm, isPopup, setIsPopup }) => {
         if (user) {
             index()
         }
-        
     }, [])
     function index() {
         deliveryAddressesApi.index({}, (response) => {
@@ -52,6 +54,25 @@ const PopupOrdersDeliveryAddresses = ({ setForm, isPopup, setIsPopup }) => {
             setIsPopup(false)
         }
     }
+
+    const update = () => {
+        if (selectedDeliveryAddress) {
+            deliveryAddressesApi.update(selectedDeliveryAddress.id, {
+                recipient_name: selectedDeliveryAddress.recipient_name,
+                name: selectedDeliveryAddress.name,
+                phone: selectedDeliveryAddress.phone,
+                postal_code: selectedDeliveryAddress.postal_code,
+                address: selectedDeliveryAddress.address,
+                address_detail: selectedDeliveryAddress.address_detail,
+                delivery_request: selectedDeliveryAddress.delivery_request,
+                is_default: true,
+            }, (response) => {
+                index()
+            });
+        } else {
+            alert("기본 배송지로 설정할 배송지를 선택해주세요")
+        }
+    };
     
 
     if (isPopup)
@@ -64,6 +85,7 @@ const PopupOrdersDeliveryAddresses = ({ setForm, isPopup, setIsPopup }) => {
                         <button className="popup-close-btn" onClick={() => { setIsPopup(false) }}></button>
                     </div>
                     <div className="popup-content-wrap">
+                        
                         <div className="address-list-wrap-type1">
                             {
                                 deliveryAddresses.length > 0 ? (
@@ -77,7 +99,8 @@ const PopupOrdersDeliveryAddresses = ({ setForm, isPopup, setIsPopup }) => {
                                                         onSuccess={() => index()}
                                                         selectedDeliveryAddress={selectedDeliveryAddress}
                                                         setSelectedDeliveryAddress={setSelectedDeliveryAddress}
-                                                        noEdit={true}
+                                                        noEdit={false}
+                                                        onEdit={()=>{setModalDeliveryCreate(true); setModalDeliveryCreateId(deliveryAddresse.id)}}
                                                     />
                                                 </li>
                                             ))}
@@ -86,11 +109,26 @@ const PopupOrdersDeliveryAddresses = ({ setForm, isPopup, setIsPopup }) => {
                             }
                         </div>
                         <div className="popup-bt-btn-wrap">
+                            <button className="popup-bt-btn wht" onClick={() => {setModalDeliveryCreate(true); setModalDeliveryCreateId(false)}}>배송지 추가</button>
+                             <button className="popup-bt-btn wht" onClick={() => {update()}}>기본배송지</button>
                             <button className="popup-bt-btn org" onClick={() => {apply()}}>배송지 적용</button>
                         </div>
                     </div>
                 </div>
             </div>
+            {
+                modalDeliveryCreate ?
+                <ModalDeliveryCreate 
+                    modal={true} 
+                    deliveryId={modalDeliveryCreateId} 
+                    onSuccess={()=>{index()}} 
+                    onClose={()=>{
+                        setModalDeliveryCreate(false); 
+                        setModalDeliveryCreateId(false);
+                    }} 
+                />
+                :null
+            }
         </>
 
     );
