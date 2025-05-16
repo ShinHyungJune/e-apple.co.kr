@@ -26,7 +26,9 @@ export default function Page() {
     }, []);
 
     function login(e) {
-        e.preventDefault();
+        if(e)
+            e.preventDefault();
+
         usersApi.login(
             {
                 token: token,
