@@ -92,17 +92,37 @@ export default function page() {
 
     // 유저정보고 배송지 뿌리기
     useEffect(() => {
-        if (user) {
-            setForm(prevForm => ({
-                ...prevForm,
-                delivery_name: user.name || "",
-                delivery_phone: user.phone || "",
-                delivery_postal_code: user.postal_code || "",
-                delivery_address: user.address || user.address,
-                delivery_address_detail: user.address_detail || ""
-            }));
-        }
-    }, [user]);
+        getDeliveryAddresses()
+    }, []);
+    function getDeliveryAddresses() {
+        deliveryAddressesApi.index({}, (response) => {
+            const addresses = response.data.data;
+
+            // 기본 배송지 찾기
+            const defaultAddress = addresses.find((item) => item.is_default === 1);
+
+            if (defaultAddress) {
+                setForm((prevForm) => ({
+                    ...prevForm,
+                    delivery_name: defaultAddress.name,
+                    delivery_phone: defaultAddress.phone,
+                    delivery_postal_code: defaultAddress.postal_code,
+                    delivery_address: defaultAddress.address,
+                    delivery_address_detail: defaultAddress.address_detail,
+                    delivery_request: defaultAddress.delivery_request,
+                }));
+            }else{
+                setForm(prevForm => ({
+                    ...prevForm,
+                    delivery_name: user.name || "",
+                    delivery_phone: user.phone || "",
+                    delivery_postal_code: user.postal_code || "",
+                    delivery_address: user.address || user.address,
+                    delivery_address_detail: user.address_detail || ""
+                }));
+            }
+        });
+    }
 
 
     // 사용자 쿠폰 리스트
