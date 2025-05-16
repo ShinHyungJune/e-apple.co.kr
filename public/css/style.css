@@ -699,8 +699,10 @@
 
 /* 마이페이지 */
 .mypage-top-box { padding: 0 20px; background: linear-gradient(to top, rgba(255, 137, 0, 0.3), transparent); border-bottom: 2px solid #202020; }
-.mypage-top-box .user-name-wrap { margin-bottom: 50px; }
-.mypage-top-box .user-name-wrap .user-name { font-size: 30px; font-weight: bold; line-height: 0.8; color: #202020; }
+.mypage-top-box .user-name-wrap { margin-bottom: 24px; display: flex; flex-direction: column; }
+.mypage-top-box .user-name-wrap .user-name { font-size: 30px; font-weight: bold; line-height: 1.5; color: #202020; }
+.mypage-top-box .user-name-wrap .user-name span { font-size: 24px; }
+.mypage-top-box .user-name-wrap .user-email {  }
 
  .user-rank-wrap { display: flex; padding-bottom: 15px; border-bottom: 2px solid #2020201A; }
  .user-rank-wrap .user-rank { display: flex; align-items: center; }

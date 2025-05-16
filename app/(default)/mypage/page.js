@@ -41,7 +41,8 @@ export default function page() {
                         {/* 상단 사용자 정보 */}
                         <div className="mypage-top-box">
                             <div className="user-name-wrap">
-                                <p className="user-name">{user?.nickname}</p>
+                                <p className="user-name">{user?.name}{user?.nickname ? <span>({user?.nickname})</span> :""}</p>
+                                <p className="user-email">{user?.email}</p>
                             </div>
                             <div className="user-rank-wrap">
                                 <div className="user-rank">
