@@ -31,7 +31,6 @@ export default function Start() {
 
     function index() {
         mainApi.index({}, (response) => {
-            console.log(response.data.data);
             setData(response.data.data);
         })
     }

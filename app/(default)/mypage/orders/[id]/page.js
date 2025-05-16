@@ -33,12 +33,10 @@ export default function page(props) {
                 merchant_uid: merchant_uid
             }, (response) => {
                 setOrder(response.data.data);
-                console.log(response.data.data);
             })
         } else {
             ordersApi.show(orderId, {}, (response) => {
                 setOrder(response.data.data);
-                console.log(response.data.data);
             })
         }
     }

@@ -51,7 +51,6 @@ export default function page() {
                 delivery_request: selectedDeliveryAddress.delivery_request,
                 is_default: true,
             }, (response) => {
-                console.log(response);
                 index()
             });
         } else {

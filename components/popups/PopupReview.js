@@ -29,7 +29,6 @@ const PopupReview = ({ review, setReview }) => {
         };
     }, [review]);
 
-    console.log(review);
 
     return (
         <div className="popup-wrap">

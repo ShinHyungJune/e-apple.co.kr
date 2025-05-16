@@ -43,7 +43,6 @@ export default function page() {
     function index() {
         product_reviewApi.indexMine(form, (response) => {
             setReviews(response.data);
-            console.log(response.data);
         })
     }
 

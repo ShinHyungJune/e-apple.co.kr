@@ -43,7 +43,6 @@ const ModalDeliveryCreate = ({ modal= false, deliveryId, onSuccess = () =>{}, on
     const show = () => {
         // API 요청
         deliveryAddressesApi.show(deliveryId, (response) => {
-            console.log(response);
             setForm({
                 ...form,
                 ...response.data.data,

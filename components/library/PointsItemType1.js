@@ -1,7 +1,6 @@
 import Link from 'next/link';
 
 export default function PointsItemType1({point}) {
-    console.log(point);
     if(point)
     return (
         <div className="rewardPoints-item-type1">

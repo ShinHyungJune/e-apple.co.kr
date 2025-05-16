@@ -36,7 +36,6 @@ export default function Section05({ monthlySuggestionProducts = [] }) {
         }
     };
 
-    console.log(monthlySuggestionProducts)
 
     if (monthlySuggestionProducts.length > 0)
         return (

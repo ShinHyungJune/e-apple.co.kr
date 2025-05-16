@@ -47,7 +47,6 @@ export default function page() {
         is_agree_promotion: false
     });
 
-    console.log(form)
 
     useEffect(() => {
         if(searchParams.get('socialUser')) {
@@ -64,9 +63,6 @@ export default function page() {
         }
     }, []);
 
-    useEffect(()=>{
-        console.log(form)
-    },[form])
 
 
     const changeForm = (event) => {

@@ -29,7 +29,6 @@ export default function page(props) {
     }, [])
     function boardsShow() {
         boardsApi.show(id, (response) => {
-            console.log(response.data.data);
             setBoard(response.data.data);
         })
     }

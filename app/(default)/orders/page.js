@@ -61,9 +61,6 @@ export default function page() {
         agreePrivacy: false,
         // agreePayment: false,
     });
-    useEffect(()=>{
-          console.log(form)
-    },[form])
     const changeForm = (event) => {
         const { name, value, type, checked } = event.target;
         setForm({
@@ -89,6 +86,7 @@ export default function page() {
         }
     }, [order])
 
+  
 
     // 유저정보고 배송지 뿌리기
     useEffect(() => {
@@ -222,7 +220,6 @@ export default function page() {
 
         ordersApi.update(order_id, form, (response) => {
             const data = response.data.data;
-            console.log(data);
             pay(data.imp_code, data.m_redirect_url, data.order, order.orderProducts[0]?.product.name);
         });
     }

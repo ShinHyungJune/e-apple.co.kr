@@ -106,7 +106,6 @@ export default function page() {
     function mdGiftProductsIndex() {
         productsApi.index("md_packages", {}, (response) => {
             setMdGiftProducts(response.data);
-            console.log(response.data);
         })
     }
 

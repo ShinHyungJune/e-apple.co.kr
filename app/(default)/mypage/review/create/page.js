@@ -44,7 +44,6 @@ export default function page() {
             ordersApi.show_order_products(order_product_id, (response) => {
                 const data = response.data.data;
                 setOrderProduct(data);
-                console.log(data);
     
                 // form 업데이트
                 setForm((prevForm) => ({
@@ -55,8 +54,6 @@ export default function page() {
             });
         }
     }, [searchParams]);
-
-    console.log(form)
 
 
     const changeForm = (event) => {
@@ -91,7 +88,6 @@ export default function page() {
     const store = () => {
         if (id) {
             product_reviewApi.update(id, form, (response) => {
-                console.log(response);
                 router.back();
             },(error) => {
                 alert("수정 중 오류가 발생했습니다.");
@@ -99,7 +95,6 @@ export default function page() {
             });
         } else {
             product_reviewApi.store(form, (response) => {
-                console.log(response);
                 router.back();
             },(error) => {
                 alert("이미 해당 상품에 대한 리뷰를 작성하셨습니다.")

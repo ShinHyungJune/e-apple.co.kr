@@ -37,7 +37,6 @@ export default function page() {
     function index() {
         pointsApi.index(form, (response) => {
             setPoints(response.data);
-            console.log(response.data);
         })
     }
 

@@ -38,8 +38,6 @@ export default function page() {
         },
     });
 
-    console.log(storys)
-
 
     // 스토리 하위 카테고리
     useEffect(() => {

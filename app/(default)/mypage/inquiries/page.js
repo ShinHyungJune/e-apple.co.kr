@@ -36,7 +36,6 @@ export default function page() {
     function index() {
         inquiriesApi.index(form, (response) => {
             setInquirys(response.data);
-            console.log(response.data);
         })
     }
 

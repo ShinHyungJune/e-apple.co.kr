@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function ReviewPhotoItemType1({ review, onClick, viewMoreBtn }) {
-    // console.log(review);
+
     return (
         <div className="review-photo-item-type1" onClick={onClick}>
             <div className="img-wrap ratio-box">

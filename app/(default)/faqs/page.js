@@ -49,7 +49,6 @@ export default function page() {
         })
     }
 
-    console.log(faqs);
 
     useEffect(() => {
         boardsIndex()

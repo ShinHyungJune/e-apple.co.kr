@@ -36,7 +36,6 @@ export default function page() {
         if (order_product_id) {
             ordersApi.show_order_products(order_product_id, (response) => {
                 setOrderProduct(response.data.data);
-                console.log(response.data.data);
             });
         }
     }, [searchParams])

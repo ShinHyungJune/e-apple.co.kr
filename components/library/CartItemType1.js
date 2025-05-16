@@ -30,7 +30,6 @@ export default function CartItemType1({ cart, onSuccess, isSelected, onSelect })
 
     // 옵션삭제
     const DestroyProductOption = (cart_product_option_id) => {
-        console.log(cart.cart_product_options);
         if (cart.cart_product_options.length > 1) {
             cartProductOptionsApi.destroy(cart.id, cart_product_option_id, {}, (response) => {
                 alert("삭제되었습니다.");
@@ -46,7 +45,6 @@ export default function CartItemType1({ cart, onSuccess, isSelected, onSelect })
         cartProductOptionsApi.update(cart.id, cart_product_option_id, {
             quantity: quantity // 숫자를 문자열로 변환
         }, (response) => {
-            console.log(response);
             onSuccess();
         });
     };

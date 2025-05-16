@@ -47,7 +47,6 @@ export default function page() {
         // API 요청
         usersApi.findId(form, (response) => {
             let email = response.data.data.email
-            console.log(email)
             router.push(`/users/findId/success?email=${email}`);
         });
     };
