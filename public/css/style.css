@@ -51,7 +51,7 @@
 .bottomNav-type1 > ul > li { width: calc(100%); }
 .bottomNav-type1 > ul > li .bottomNav-button { display: flex; width: 100%; justify-content: center; align-items: center; }
 
-
+.bottomNav-type1 > ul > li .bottomNav-button img { width: 100%; }
 
 
 
@@ -109,7 +109,7 @@
 .footer .footer-top .businessHours { font-size: 14px; color: #303030; }
 .footer .footer-bt { padding: 25px 20px 140px; background-color: #F7F7F7; }
 .footer .footer-bt h2 { font-size: 14px; color: #303030; margin-bottom: 15px; }
-.footer .footer-bt .ft-tab { display: flex; gap: 15px; align-items: center; margin-bottom: 20px; }
+.footer .footer-bt .ft-tab { display: flex; gap: 8px; align-items: center; margin-bottom: 20px; }
 .footer .footer-bt .ft-tab a { color: #303030; font-size: 14px; font-weight: 500; }
 .footer .footer-bt .ft-tab span { width: 1px; height: 8px; display: block; background-color: #E4E4E4; }
 .footer .footer-information { line-height: 1.43; font-size: 14px; color: #303030; }
