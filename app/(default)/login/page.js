@@ -13,7 +13,7 @@ import Error from "@/components/Error";
 export default function Page() {
     const router = useRouter();
     // 상태 관리
-    const [ids, setIds] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const searchParams = useSearchParams();
     const [token, setToken] = useState(searchParams.get('token'));
@@ -30,7 +30,7 @@ export default function Page() {
         usersApi.login(
             {
                 token: token,
-                email: ids,
+                username: username,
                 password: password,
             },
             (response) => {
@@ -63,8 +63,8 @@ export default function Page() {
                                 <input
                                     type="text"
                                     placeholder="이메일(아이디)"
-                                    value={ids}
-                                    onChange={(e) => setIds(e.target.value)}
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
                                     onKeyDown={(e) => {
                                         if (e.key == 'Enter') {
                                             login(e); // 엔터키 누르면 login 함수 호출
@@ -72,7 +72,7 @@ export default function Page() {
                                     }}
                                 />
                             </div>
-                            <Error name={'email'} />
+                            <Error name={'username'} />
                         </div>
                         <div>
                             <div className="input-txt-box-type1">
@@ -99,18 +99,18 @@ export default function Page() {
                         <Link href="/users/findPassword" className="findPassword">비밀번호 찾기</Link>
                     </div>
                     <div className="input-list-type2 px-20">
-                        {/*<div>
+                        {/* <div>
                             <a href={`${process.env.NEXT_PUBLIC_API_URL}/openLoginPop/kakaoCustom`} className="btn ylw">
                                 <img src="/images/sns-login-kakao.png" alt="" />
                                 카카오 로그인
                             </a>
-                        </div>
-                        <div>
+                        </div> */}
+                        {/* <div>
                             <a href={`${process.env.NEXT_PUBLIC_API_URL}/openLoginPop/naverCustom`} className="btn grn">
                                 <img src="/images/sns-login-naver.png" alt="" />
                                 네이버 로그인
                             </a>
-                        </div>*/}
+                        </div> */}
                     </div>
                 </section>
 

@@ -16,6 +16,8 @@ import usersApi from "@/lib/api/usersApi";
 
 import ContactInput from "@/components/ContactInput"
 
+import AddressInput from "@/components/AddressInput";
+
 export default function page() {
     const dispatch = useDispatch();
     const router = useRouter();
@@ -26,6 +28,7 @@ export default function page() {
     const [verifyNumberState, setVerifyNumberState] = useState(false);
 
     const [form, setForm] = useState({
+        username: "",
         email: "",
         password: "",
         password_confirmation: "",
@@ -33,12 +36,18 @@ export default function page() {
         phone: "",
         nickname: "",
 
+        postal_code: "",
+        address: "",
+        address_detail: "",
+
         agreeAll: false,
         agreeTerms: false,
         agreePrivacy: false,
         // agreePayment: false,
         is_agree_promotion: false
     });
+
+    console.log(form)
 
     useEffect(() => {
         if(searchParams.get('socialUser')) {
@@ -106,23 +115,23 @@ export default function page() {
                     <div className="input-list-type2 mt-20 mb-20 px-20">
                         <div className="input-list-title-wrap">
                             <p className="input-list-title">
-                                이메일 <span className="required">*</span>
+                                아이디 <span className="required">*</span>
                             </p>
                         </div>
                         <div>
                             <div className="input-txt-box-type1">
                                 <input
                                     type="text"
-                                    name="email"
-                                    value={form.email}
+                                    name="username"
+                                    value={form.username}
                                     onChange={changeForm}
-                                    placeholder="이메일 (이메일은 아이디로 사용됩니다)"
+                                    placeholder="아이디"
                                 />
                             </div>
-                            <Error name={'email'} />
+                            <Error name={'username'} />
                         </div>
                     </div>
-                    <div className="input-list-type2 mb-20 px-20">
+                     <div className="input-list-type2 mb-20 px-20">
                         <div className="input-list-title-wrap">
                             <p className="input-list-title">
                                 비밀번호 <span className="required">*</span>
@@ -155,6 +164,26 @@ export default function page() {
                     <div className="input-list-type2 mt-20 mb-20 px-20">
                         <div className="input-list-title-wrap">
                             <p className="input-list-title">
+                                이메일 <span className="required">*</span>
+                            </p>
+                        </div>
+                        <div>
+                            <div className="input-txt-box-type1">
+                                <input
+                                    type="text"
+                                    name="email"
+                                    value={form.email}
+                                    onChange={changeForm}
+                                    placeholder="이메일"
+                                />
+                            </div>
+                            <Error name={'email'} />
+                        </div>
+                    </div>
+                   
+                    <div className="input-list-type2 mt-20 mb-20 px-20">
+                        <div className="input-list-title-wrap">
+                            <p className="input-list-title">
                                 연락처 <span className="required">*</span>
                             </p>
                         </div>
@@ -168,6 +197,21 @@ export default function page() {
                             />
                         </div>
                     </div>
+
+
+                    <div className="input-list-type2 mt-20 mb-20 px-20">
+                        <div className="input-list-title-wrap">
+                            <p className="input-list-title">
+                                주소 <span className="required">*</span>
+                            </p>
+                        </div>
+                        <div className="address-input-wrap-type1">
+                           <AddressInput form={form} setForm={setForm} />
+                        </div>
+                    </div>
+
+
+
                     <div className="input-list-type2 mt-20 mb-20 px-20">
                         <div className="input-list-title-wrap">
                             <p className="input-list-title">

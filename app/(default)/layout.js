@@ -42,8 +42,8 @@ export default function Layout({ children }) {
             usersApi.show();
     },[])
 
-
-
+   const errors = useSelector(state => state.app.errors);
+    console.log(errors)
 
     return (
         <>

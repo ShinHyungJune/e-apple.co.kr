@@ -83,6 +83,7 @@ export default function page() {
                                 onChange={changeForm}
                             />
                         </div>
+                        <Error name={'username'} />
                     </div>
                 </section>
             </div>
