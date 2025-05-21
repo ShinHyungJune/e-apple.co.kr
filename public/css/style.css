@@ -49,10 +49,10 @@
 .bottomNav-type1 { display: block; max-height: 56px; position: fixed; bottom: 0; left: calc(100vw / 2); transform: translateX(-50%); width: 100%; max-width: 475px; background-color: #fff; z-index: 99; }
 .bottomNav-type1 > ul { display: flex; gap: 9px; }
 .bottomNav-type1 > ul > li { width: calc(100%); height: 56px; }
-.bottomNav-type1 > ul > li .bottomNav-button { display: flex; width: 100%; height: 100%; justify-content: center; align-items: center; }
-.bottomNav-type1 > ul > li .bottomNav-button img { width: 100%; height: 100%; }
-
-
+.bottomNav-type1 > ul > li .bottomNav-button { display: flex; width: 100%; height: 100%; flex-direction: column; align-items: center; justify-content: center; }
+.bottomNav-type1 > ul > li .bottomNav-button img { width: auto; }
+.bottomNav-type1 > ul > li .bottomNav-button p { font-size: 12px; margin-top: 5px; color: #202020; font-weight: 500; }
+.bottomNav-type1 > ul > li.active .bottomNav-button p { color: #FF990D; }
 
 
 
@@ -61,7 +61,7 @@
 /* 해드 type1 */
 .header-type1 { width: 100%; }
 .header-type1 .header-box { width: 100%; height: 44px; display: flex; padding: 0 20px; justify-content: space-between; align-items: center; border-bottom: 2px solid #F7F7F7; }
-.header-type1 .header-box .logo { display: flex; width: 50px; }
+.header-type1 .header-box .logo { display: flex; width: 80px; }
 .header-type1 .header-box .logo img { width: 100%; }
 .header-type1 .header-box .header-btn-wrap { display: flex; gap: 16px; }
 .header-type1 .header-box .header-btn-wrap .header-btn { font-size: 24px; }
