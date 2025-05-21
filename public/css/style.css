@@ -61,7 +61,8 @@
 /* 해드 type1 */
 .header-type1 { width: 100%; }
 .header-type1 .header-box { width: 100%; height: 44px; display: flex; padding: 0 20px; justify-content: space-between; align-items: center; border-bottom: 2px solid #F7F7F7; }
-.header-type1 .header-box .logo { display: flex; }
+.header-type1 .header-box .logo { display: flex; width: 50px; }
+.header-type1 .header-box .logo img { width: 100%; }
 .header-type1 .header-box .header-btn-wrap { display: flex; gap: 16px; }
 .header-type1 .header-box .header-btn-wrap .header-btn { font-size: 24px; }
 .header-type1 .header-box .header-btn-wrap .header-btn.search-open-btn i { color: #FF990D; }
@@ -846,7 +847,8 @@
 
 /* 로그인 페이지 */
 .logo-wrap { height: 173px; display: flex; justify-content: center; align-items: center; }
-
+.logo-wrap h1 { display: flex; width: 160px; }
+.logo-wrap h1 img { width: 100%; }
 .findAccountOptions { display: flex; justify-content: flex-end; gap: 20px; }
 .findAccountOptions::before { content: ''; width: 1px; height: 12px; background-color: #e4e4e4; order: 2; }
 .findAccountOptions > a { font-size: 14px; font-weight: 300; color: #949599; }

@@ -57,7 +57,7 @@ export default function Page() {
             <div className="body login">
                 <section className="pb-30 bd-bt">
                     <div className="logo-wrap">
-                        <h1> <img src="/images/logo.png" alt="" /></h1>
+                        <h1> <img src="/images/loginLogo.png" alt="" /></h1>
                     </div>
                     <div className="input-list-type2 px-20 mb-60">
                         <div>
