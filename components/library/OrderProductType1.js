@@ -30,7 +30,7 @@ export default function OrderProductType1({ order, orderProduct, onSuccess }) {
                 <div className="order-product-item-type1 px-20">
                     <div className="order-status-wrap">
                         <div className="order-status-box">
-                            {orderProduct.exchangeReturns.length > 0 ? (() => {
+                            {orderProduct.exchangeReturns && orderProduct.exchangeReturns.length > 0 ? (() => {
                                 const lastReturn = orderProduct.exchangeReturns.at(-1); // 마지막 요소 가져오기 (안되면 length - 1 써도 돼)
                                 const typeText = lastReturn.type == "exchange" ? "교환" : "반품";
 
