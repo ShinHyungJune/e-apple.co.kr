@@ -79,7 +79,7 @@ const ProductInformation = ({ product }) => {
                         <li>
                             <p className="label">반품 배송지</p>
                             <p className="content">
-                                [12774] 서울특별시 가나구 다라로 123-4번지 108호
+                                [50147] 경상남도 거창군 거창읍 거함대로 3372 서북부경남거점산지유통센터
                             </p>
                         </li>
                     </ul>
