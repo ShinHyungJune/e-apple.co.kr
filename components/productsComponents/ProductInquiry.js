@@ -4,11 +4,17 @@ import productsApi from "@/lib/api/productsApi";
 import Pagination from "@/components/Pagination";
 import Swiper from "swiper";
 
+// 리덕스
+import { useDispatch, useSelector } from "react-redux";
+
 import NoListData from "@/components/NoListData";
 import PopupInquiry from "@/components/popups/PopupInquiry";
 import { formatDate } from "@/lib/util/formatDate";
+import maskName from "@/lib/util/maskName";
 
 const ProductInquiry = ({ product }) => {
+    const user = useSelector(state => state.app.user);
+
     const [openInquiryId, setOpenInquiryId] = useState(null);
 
     const [form, setForm] = useState({
@@ -16,6 +22,7 @@ const ProductInquiry = ({ product }) => {
         type: "",
         take: 4,
     });
+    
 
     const [inquirys, setInquirys] = useState({
         data: [],
@@ -59,6 +66,9 @@ const ProductInquiry = ({ product }) => {
                                                 className="qna-item-top"
                                                 onClick={() => {
                                                     if (inquiry.is_answered) {
+                                                        if (inquiry.is_visible == 0 && inquiry.user_id != user.id) {
+                                                            return; // 비밀글 + 작성자 아님 → 열지 마
+                                                        }
                                                         setOpenInquiryId((prevId) =>
                                                             prevId === inquiry.id ? null : inquiry.id
                                                         );
@@ -67,7 +77,7 @@ const ProductInquiry = ({ product }) => {
                                                 style={{ cursor: inquiry.is_answered ? "pointer" : "default" }} // 답변 미완료 시 클릭 불가 표시
                                             >
                                                 <div className="date-btn-wrap">
-                                                    <p className="date-txt">{formatDate(inquiry.created_at)}</p>
+                                                    <p className="date-txt">{maskName(inquiry.user.name)} | {formatDate(inquiry.created_at)}</p>
                                                     <p
                                                         className={`state-txt ${inquiry.is_answered ? "active" : null
                                                             }`}
