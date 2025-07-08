@@ -67,7 +67,8 @@ const ProductInquiry = ({ product }) => {
                                                 onClick={() => {
                                                     if (inquiry.is_answered) {
                                                         if (inquiry.is_visible == 0 && inquiry.user_id != user.id) {
-                                                            return; // 비밀글 + 작성자 아님 → 열지 마
+                                                            alert("본인 글만 확인할 수 있습니다.");
+                                                            return;
                                                         }
                                                         setOpenInquiryId((prevId) =>
                                                             prevId === inquiry.id ? null : inquiry.id
@@ -90,6 +91,7 @@ const ProductInquiry = ({ product }) => {
                                                         {inquiry.is_visible == 1 || openInquiryId === inquiry.id ? (
                                                             <p>
                                                                 제목: {inquiry.title} <br />
+                                                                <br />
                                                                 {inquiry.content}
                                                             </p>
                                                         ) : (
