@@ -47,9 +47,11 @@ export default function page() {
         coupon_discount_amount: 0, // 쿠폰으로 할인된금액
         user_coupon_discount_amount: "",
         user_coupon_discount_rate: "",
+        user_coupon_usage_limit_amount: 0,
 
         use_points: 0, // 적립금
         common_entrance_method: "", // 공동현관 출입방법
+        common_entrance_password :"",
 
         pay_method_method: "card", // 결제방법
 
@@ -134,62 +136,68 @@ export default function page() {
 
 
     const {
-        totalOriginalPrice,    // 총 상품 금액: original_price * quantity의 합
-        totalDiscountPrice,    // 총 상품 자체 할인 금액: (original_price - price) * quantity의 합
-        totalCouponDiscount,   // 상품 쿠폰 할인 금액
-        totalPointsUsed,       // 적립금 사용 금액
-        totalFinalPrice,       // 최종 상품 금액: 총 상품 금액 - 총 할인 금액 - 쿠폰 할인 금액 - 적립금 사용
-        totalDiscountAmount    // 총 할인 금액: 상품 자체 할인 금액 + 쿠폰 할인 금액 + 적립금
-    } = useMemo(() => {
-        if (!order) {
-            // order가 없으면 기본값 반환
-            return {
-                totalOriginalPrice: 0,
-                totalDiscountPrice: 0,
-                totalCouponDiscount: 0,
-                totalPointsUsed: 0,
-                totalFinalPrice: 0,
-                totalDiscountAmount: 0,
-            };
-        }
-
-        let totalOriginalPrice = 0; // 총 상품 금액
-        let totalDiscountPrice = 0; // 총 상품 자체 할인 금액
-
-        // 상품금액과 가격인하/할인 계산
-        order.orderProducts.forEach((product) => {
-            const { quantity, productOption } = product;
-            totalOriginalPrice += productOption.original_price * quantity;
-            totalDiscountPrice += (productOption.original_price - productOption.price) * quantity;
-        });
-
-        // 쿠폰 할인 금액 계산
-        let totalCouponDiscount = 0;
-        const discountedPrice = totalOriginalPrice - totalDiscountPrice; // 실제 할인된 가격 계산
-        if (form.user_coupon_discount_amount) {
-            totalCouponDiscount = form.user_coupon_discount_amount; // 고정 금액 쿠폰
-        } else if (form.user_coupon_discount_rate) {
-            totalCouponDiscount = Math.round(discountedPrice * (form.user_coupon_discount_rate / 100)); // 할인율 적용 (반올림)
-        }
-
-        // 적립금 사용 금액 처리 (숫자 변환)
-        const totalPointsUsed = parseInt(form.use_points, 10) || 0;
-
-        // 총 할인 금액 = 총 상품 자체 할인 금액 + 쿠폰 할인 금액 + 적립금
-        const totalDiscountAmount = totalDiscountPrice + totalCouponDiscount + totalPointsUsed;
-
-        // 최종 상품 금액 = 상품금액 - 총 할인 금액 + 배송비 
-        const totalFinalPrice = totalOriginalPrice - totalDiscountAmount + order.delivery_fee;
-
+    totalOriginalPrice,
+    totalDiscountPrice,
+    totalCouponDiscount,
+    totalPointsUsed,
+    totalFinalPrice,
+    totalDiscountAmount
+} = useMemo(() => {
+    if (!order) {
         return {
-            totalOriginalPrice,
-            totalDiscountPrice,
-            totalCouponDiscount,
-            totalPointsUsed,
-            totalFinalPrice,
-            totalDiscountAmount,
+            totalOriginalPrice: 0,
+            totalDiscountPrice: 0,
+            totalCouponDiscount: 0,
+            totalPointsUsed: 0,
+            totalFinalPrice: 0,
+            totalDiscountAmount: 0,
         };
-    }, [order, form]); // form도 의존성에 추가
+    }
+
+    let totalOriginalPrice = 0;
+    let totalDiscountPrice = 0;
+
+    order.orderProducts.forEach((product) => {
+        const { quantity, productOption } = product;
+        totalOriginalPrice += productOption.original_price * quantity;
+        totalDiscountPrice += (productOption.original_price - productOption.price) * quantity;
+    });
+
+    const deliveryFee = order.delivery_fee || 0;
+
+    // 퍼센트 할인 기준: 상품가 - 자체할인 + 배송비
+    const percentBasePrice = totalOriginalPrice - totalDiscountPrice + deliveryFee;
+
+    let totalCouponDiscount = 0;
+
+    // ✅ 퍼센트 쿠폰 적용 (문자열일 수 있으므로 !== "" 체크)
+    if (form.user_coupon_discount_rate !== "") {
+        const rate = parseFloat(form.user_coupon_discount_rate);
+        const percentDiscount = Math.round(percentBasePrice * (rate / 100));
+        const maxDiscount = form.user_coupon_usage_limit_amount || Infinity;
+        totalCouponDiscount = Math.min(percentDiscount, maxDiscount);
+    }
+    // ✅ 정액 쿠폰 적용
+    else if (form.user_coupon_discount_amount !== "") {
+        totalCouponDiscount = parseInt(form.user_coupon_discount_amount, 10) || 0;
+    }
+
+    const totalPointsUsed = parseInt(form.use_points, 10) || 0;
+
+    const totalDiscountAmount = totalDiscountPrice + totalCouponDiscount + totalPointsUsed;
+
+    const totalFinalPrice = totalOriginalPrice - totalDiscountAmount + deliveryFee;
+
+    return {
+        totalOriginalPrice,
+        totalDiscountPrice,
+        totalCouponDiscount,
+        totalPointsUsed,
+        totalFinalPrice,
+        totalDiscountAmount,
+    };
+}, [order, form]);
+
 
 
     useEffect(() => {
@@ -439,6 +447,7 @@ export default function page() {
                                                         user_coupon_id: selectedCouponId,
                                                         user_coupon_discount_amount: selectedCoupon?.type == "amount" ? selectedCoupon.discount_amount : "",
                                                         user_coupon_discount_rate: selectedCoupon?.type == "rate" ? selectedCoupon.discount_rate : "",
+                                                        user_coupon_usage_limit_amount: selectedCoupon?.type == "rate" ? selectedCoupon.usage_limit_amount : "",
                                                     }));
                                                 }}
                                             >
@@ -446,12 +455,12 @@ export default function page() {
                                                 {userCoupons.map((userCoupon) => (
                                                     <option key={userCoupon.user_coupon_id} value={userCoupon.user_coupon_id}>
                                                         {userCoupon.name}
-                                                        {
+                                                        {/* {
                                                             userCoupon.type == "rate" ?
                                                             ` ${userCoupon.discount_rate}% 할인`
                                                             : 
                                                             ` ${userCoupon.discount_amount.toLocaleString()}원 할인`
-                                                        }
+                                                        } */}
                                                     </option>
                                                 ))}
                                             </select>
@@ -472,23 +481,38 @@ export default function page() {
                                     <div>
                                         <div className="input-txt-box-type1">
                                             <input
-                                                type="number"
+                                                type="text"
                                                 name="use_points"
                                                 value={form.use_points}
                                                 onChange={(e) => {
-                                                    let value = e.target.value.replace(/^0+/, ''); // 앞의 0 제거
-                                                    value = parseInt(value, 10) || 0; // 숫자로 변환, NaN 방지
-                                                    if (value <= user.points) {
-                                                        setForm({
-                                                            ...form,
-                                                            use_points: value, // 변경된 값을 직접 설정
-                                                        });
+                                                    // 숫자만 허용
+                                                    let value = e.target.value.replace(/[^0-9]/g, "");
+                                                    let numericValue = parseInt(value, 10) || 0;
+
+                                                    const couponDiscount = totalCouponDiscount || 0;
+
+                                                    // 💡 최종 결제 금액이 최소 1000원은 되도록
+                                                    const maxUsable = Math.max(
+                                                        0,
+                                                        Math.min(
+                                                            user.points,
+                                                            totalOriginalPrice - totalDiscountPrice - couponDiscount + order.delivery_fee - 1000
+                                                        )
+                                                    );
+
+                                                    if (numericValue > maxUsable) {
+                                                        numericValue = maxUsable;
                                                     }
+
+                                                    setForm({
+                                                        ...form,
+                                                        use_points: numericValue,
+                                                    });
                                                 }}
                                                 placeholder="적립금"
                                             />
                                         </div>
-                                        <Error name={'use_points'} />
+                                        <Error name="use_points" />
                                     </div>
                                     <div className="input-list-sub-title-wrap mt-10">
                                         <p className="input-list-sub-title">
@@ -518,6 +542,23 @@ export default function page() {
                                     </div>
                                     <Error name={'common_entrance_method'} />
                                 </div>
+                                {
+                                    form.common_entrance_method == "공동현관 비밀번호 입력" ? (
+                                        <div>
+                                            <div className="input-txt-box-type1">
+                                                <input
+                                                    type="text"
+                                                    name="common_entrance_password"
+                                                    value={form.common_entrance_password}
+                                                    onChange={changeForm}
+                                                    placeholder="공동현관 비밀번호 입력해주세요."
+                                                />
+                                            </div>
+                                            <Error name="common_entrance_password" />
+                                        </div>
+                                    ) : null
+                                }
+
                             </div>
 
                             <div className="input-list-type2 pt-20 pb-20 px-20">

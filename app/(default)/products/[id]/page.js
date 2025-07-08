@@ -27,6 +27,8 @@ import ToastAlert from "@/components/ToastAlert";
 export default function page(params) {
     const router = useRouter();
 
+    const user = useSelector(state => state.app.user);
+    console.log(user)
     const [product, setProduct] = useState();
 
     const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
@@ -36,6 +38,7 @@ export default function page(params) {
 
     const [showToast, setShowToast] = useState(false);
 
+    
 
 
     const toggleDescription = () => {

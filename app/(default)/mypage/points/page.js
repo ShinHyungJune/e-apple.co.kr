@@ -64,7 +64,7 @@ export default function page() {
                             </div>
                             <div className="totalEarnablePoints-wrap type2 px-20">
                                 <p className="label">적립 가능한 적립금 합계</p>
-                                <p className="totalEarnablePoints">{user.available_deposit_point}p</p>
+                                <p className="totalEarnablePoints">{(user.available_deposit_point).toLocaleString()}p</p>
                             </div>
                         </section>
                         <section>

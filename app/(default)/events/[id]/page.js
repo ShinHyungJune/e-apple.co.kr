@@ -16,6 +16,7 @@ import boardsApi from "@/lib/api/boardsApi";
 import { formatDate } from "@/lib/util/formatDate";
 
 import InputFiles from "@/components/InputFiles";
+import InputImages from "@/components/InputImages";
 
 export default function page(props) {
     const router = useRouter();
@@ -48,7 +49,11 @@ export default function page(props) {
                             <div className="board-content-wrap">
                                 <EditorContent description={board.content} />
                                 <div className="mt-20 px-20">
-                                    <InputFiles onlyShow={true} defaultValue={board.files}/>
+                                    {/* <InputFiles onlyShow={true} defaultValue={board.files}/> */}
+                                    <InputImages
+                                        onlyShow={true}
+                                        defaultValue={board && board.files ? board.files : []}
+                                    />
                                 </div>
                             </div>
                         </section>

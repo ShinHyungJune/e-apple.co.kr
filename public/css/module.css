@@ -203,6 +203,7 @@
     font-weight: bold;
     color: #a7a7a7;
     border: dashed 1px #a7a7a7; cursor:pointer;
+    border-radius: 8px;
 }
 
 .m-input-images.type01 .m-input .m-btn i {
@@ -223,16 +224,48 @@
     position:relative;
     background-size:cover; background-position: center center;
     border:1px solid #e1e1e1;
+    border-radius: 8px;
 }
 .m-input-images.type01 .m-file .m-btn-remove {
     width: 20px; height:20px;
     position: absolute; top:10px; right:10px;
     border-radius:5px;
-    background-color:red;
+    background-color:#ff4d4f;
     box-shadow:0px 3px 6px rgba(0,0,0,0.16);
 }
 .m-input-images.type01 .m-file .m-btn-remove i {
     color:#fff;
+}
+.m-input-image-detail {
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; height:100%;
+    position: fixed; top:0; left:0;
+    z-index:10000;
+}
+.m-input-image-detail .m-input-image-detail-inner {
+    max-width:calc(100vw - 200px);
+    max-height:calc(100vh - 200px);
+    position:relative;
+    padding:40px;
+    background-color:#efefef;
+    border-radius:10px;
+}
+.m-input-image-detail .m-input-image-detail-inner img {
+    display: block;
+    max-width:calc(100vw - 280px);
+    max-height:calc(100vh - 280px);
+}
+.m-input-image-detail .m-input-image-detail-btn {
+    margin-left:auto; margin-bottom:24px;
+    position:absolute; top:-40px; right:0;
+}
+.m-input-image-detail .m-input-image-detail-btn i {
+    font-size:30px; font-weight:bold; color:#fff;
+}
+.m-input-image-detail .m-input-image-detail-base {
+    width: 100%; height:100%;
+    position: absolute; top:0; left:0;
+    background-color:rgba(0,0,0,0.4);
 }
 
 

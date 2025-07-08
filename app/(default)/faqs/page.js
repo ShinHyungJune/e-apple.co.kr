@@ -15,6 +15,7 @@ import NoListData from "@/components/NoListData";
 import Pagination from "@/components/Pagination";
 import { StateBoards } from "@/enums/stateBoards";
 import boardsApi from "@/lib/api/boardsApi";
+import EditorContent from "@/components/EditorContent";
 
 
 
@@ -148,13 +149,11 @@ export default function page() {
 
                                                     {isVisible && (
                                                         <div className="qna-item-bt">
-                                                            <div className="category-wrap">
+                                                            {/* <div className="category-wrap">
                                                                 <p className="category">A</p>
-                                                            </div>
+                                                            </div> */}
                                                             <div className="content-txt-wrap">
-                                                                <p>
-                                                                    {faq.content}
-                                                                </p>
+                                                                <EditorContent description={faq.content} />
                                                             </div>
                                                         </div>
                                                     )}

@@ -78,6 +78,16 @@ export default function page(props) {
     }, [order]); // form도 의존성에 추가
 
 
+     // 주문취소 버튼
+    function cancel(id) {
+        if (window.confirm("주문을 취소하시겠습니까?")) {
+            ordersApi.cancel(id, {}, (response) => {
+                index();
+                dispatch(actions.setMessage("주문취소가 완료되었습니다."));
+            });
+        }
+    }
+    
 
     return (
         <>
@@ -99,7 +109,7 @@ export default function page(props) {
                                             : <div></div>
                                     }
                                     {['주문접수', '주문완료', '결제대기중', '결제완료', '배송준비중'].includes(order.status) && (
-                                        <button className="order-product-btn">주문취소</button>
+                                        <button onClick={()=>{cancel(order.id)}} className="order-product-btn">주문취소</button>
                                     )}
                                 </div>
 

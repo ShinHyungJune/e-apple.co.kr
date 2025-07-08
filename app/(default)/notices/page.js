@@ -17,6 +17,7 @@ import { StateBoards } from "@/enums/stateBoards";
 import boardsApi from "@/lib/api/boardsApi";
 
 import { formatDate } from "@/lib/util/formatDate";
+import EditorContent from "@/components/EditorContent";
 
 export default function page() {
     const router = useRouter();
@@ -90,9 +91,7 @@ export default function page() {
                                                     {isVisible && ( // 항목이 열렸을 때만 보이게 함
                                                         <div className="qna-item-bt">
                                                             <div className="content-txt-wrap">
-                                                                <p style={{ whiteSpace: "pre-line"}}>
-                                                                    {notice.content}
-                                                                </p>
+                                                                <EditorContent description={notice.content} />
                                                             </div>
                                                         </div>
                                                     )}

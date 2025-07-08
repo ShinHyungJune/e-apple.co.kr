@@ -11,6 +11,7 @@ import Header from "@/components/Header";
 import NoListData from "@/components/NoListData";
 
 import inquiriesApi from "@/lib/api/inquiriesApi";
+import { formatDate } from "@/lib/util/formatDate";
 
 export default function page() {
     const router = useRouter();
@@ -104,7 +105,7 @@ export default function page() {
                                                             }} // 클릭 시 열고 닫기 (답변 있을 때만)
                                                         >
                                                             <div className="date-btn-wrap">
-                                                                <p className="date-txt">{inquiry.created_at}</p>
+                                                                <p className="date-txt">{formatDate(inquiry.created_at)}</p>
                                                                 {inquiry.is_answered ? (
                                                                     <p className="state-txt active">답변완료</p>
                                                                 ) : (

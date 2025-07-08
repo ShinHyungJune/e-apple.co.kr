@@ -39,11 +39,7 @@ export default function AddressItemType1({
                         }
                     </p>
                     <div className="btn-wrap">
-                        {
-                            deliveryAddresse.is_default != 1 ?
-                                <button className="add-option-btn" onClick={() => { destroy(deliveryAddresse.id) }}>삭제</button>
-                                : null
-                        }
+                        <button className="add-option-btn" onClick={() => { destroy(deliveryAddresse.id) }}>삭제</button>
                         {
                             !noEdit ?
                                 <a href={""} onClick={(e) => {
