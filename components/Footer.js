@@ -20,7 +20,7 @@ const Footer = () => {
                     <Link href="/contents/refundPolicy">배송/교환/취소/환불 규정</Link>
                 </div>
                 <p className="footer-information">
-                    주소: 경상남도 거창군 고제면 고제로 740-8<br />
+                    주소: 경남 거창군 거창읍 거함대로 3372 서북부경남거점산지유통센터(APC) <br />
                     대표자명: 오승철<br />
                     사업자등록번호: 125-87-01503<br />
                     통신판매신고: 제 2019-경남거창-00057 호<br />
