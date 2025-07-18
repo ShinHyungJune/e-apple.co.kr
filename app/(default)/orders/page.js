@@ -14,6 +14,7 @@ import AddressInput from "@/components/AddressInput";
 import couponsApi from "@/lib/api/couponsApi";
 import PopupOrdersDeliveryAddresses from "@/components/popups/PopupOrdersDeliveryAddresses";
 import deliveryAddressesApi from "@/lib/api/deliveryAddressesApi";
+import { safeToLocaleString } from "@/lib/util/safeToLocaleString";
 
 export default function page() {
     const router = useRouter();
@@ -765,43 +766,43 @@ export default function page() {
                                     <li>
                                         <div className="price-information">
                                             <p className="label">상품금액</p>
-                                            <p className="price">{totalOriginalPrice.toLocaleString()}원</p>
+                                            <p className="price">{safeToLocaleString(totalOriginalPrice)}원</p>
                                         </div>
                                     </li>
                                     <li>
                                         <div className="price-information">
                                             <p className="label">할인금액</p>
-                                            <p className="price minus">-{totalDiscountAmount.toLocaleString()}원</p>
+                                            <p className="price minus">-{safeToLocaleString(totalDiscountAmount)}원</p>
                                         </div>
                                     </li>
                                     <li>
                                         <div className="price-information sub">
                                             <p className="label">가격인하/할인</p>
-                                            <p className="price minus">-{totalDiscountPrice.toLocaleString()}원</p>
+                                            <p className="price minus">-{safeToLocaleString(totalDiscountPrice)}원</p>
                                         </div>
                                     </li>
                                     <li>
                                         <div className="price-information sub">
                                             <p className="label">상품쿠폰</p>
-                                            <p className="price minus">-{totalCouponDiscount.toLocaleString()}원</p>
+                                            <p className="price minus">-{safeToLocaleString(totalCouponDiscount)}원</p>
                                         </div>
                                     </li>
                                     <li>
                                         <div className="price-information sub">
                                             <p className="label">적립금 사용</p>
-                                            <p className="price minus">-{totalPointsUsed.toLocaleString()}원</p>
+                                            <p className="price minus">-{safeToLocaleString(totalPointsUsed)}원</p>
                                         </div>
                                     </li>
                                     <li>
                                         <div className="price-information">
                                             <p className="label">배송비</p>
-                                            <p className="price">{order.delivery_fee.toLocaleString()}원</p>
+                                            <p className="price">{safeToLocaleString(order.delivery_fee)}원</p>
                                         </div>
                                     </li>
                                 </ul>
                                 <div className="price-information final">
                                     <p className="label">총 상품금액</p>
-                                    <p className="price">{totalFinalPrice.toLocaleString()}원</p>
+                                    <p className="price">{safeToLocaleString(totalFinalPrice)}원</p>
                                 </div>
                             </div>
                         </section>
