@@ -875,3 +875,51 @@
 
 .page-popup-wrap { position: fixed; top: 0; left: 0; }
 
+/* Floating Kakao Channel Button */
+.floating-kakao-button {
+    position: fixed;
+    right: 20px;
+    bottom: 76px; /* 56px (bottomNav height) + 20px margin */
+    width: 60px;
+    height: 60px;
+    background-color: #FFE812;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    z-index: 98; /* Just below bottomNav (99) */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.floating-kakao-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.floating-kakao-button:active {
+    transform: scale(0.95);
+}
+
+.floating-kakao-button img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 475px) {
+    .floating-kakao-button {
+        right: 15px;
+        bottom: 70px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .floating-kakao-button img {
+        width: 30px;
+        height: 30px;
+    }
+}
+
