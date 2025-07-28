@@ -21,7 +21,7 @@ export default function page() {
             <div className="body">
                 {/* 로그인 버튼 */}
                 <div className="btn-wrap-fixed">
-                    <button className="btn org">로그인</button>
+                    <button className="btn org" onClick={()=>{router.push("/login")}}>로그인</button>
                 </div>
 
                 <section>

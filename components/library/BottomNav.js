@@ -24,7 +24,7 @@ const BottomNav = () => {
         <>
             <div className="bottomNav-type1">
                 <ul>
-                    <li className="active">
+                    <li className="">
                         <a href="/" className="bottomNav-button">
                             <img src="/images/bottomNav-home.png" alt="홈" />
                             <p>홈</p>

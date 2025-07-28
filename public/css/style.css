@@ -50,8 +50,8 @@
 .bottomNav-type1 > ul { display: flex; gap: 9px; }
 .bottomNav-type1 > ul > li { width: calc(100%); height: 56px; }
 .bottomNav-type1 > ul > li .bottomNav-button { display: flex; width: 100%; height: 100%; flex-direction: column; align-items: center; justify-content: center; }
-.bottomNav-type1 > ul > li .bottomNav-button img { width: auto; }
-.bottomNav-type1 > ul > li .bottomNav-button p { font-size: 12px; margin-top: 5px; color: #202020; font-weight: 500; }
+.bottomNav-type1 > ul > li .bottomNav-button img { width: auto; filter: invert(32%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(87%) contrast(90%); }
+.bottomNav-type1 > ul > li .bottomNav-button p { font-size: 12px; margin-top: 5px; color: #585858; font-weight: 500; }
 .bottomNav-type1 > ul > li.active .bottomNav-button p { color: #FF990D; }
 
 
@@ -66,7 +66,7 @@
 .header-type1 .header-box .header-btn-wrap { display: flex; gap: 16px; }
 .header-type1 .header-box .header-btn-wrap .header-btn { font-size: 24px; }
 .header-type1 .header-box .header-btn-wrap .header-btn.search-open-btn i { color: #FF990D; }
-.header-type1 .header-box .back-btn-wrap { display: flex; }
+.header-type1 .header-box .back-btn-wrap { display: flex; gap: 8px; }
 .header-type1 .header-box .back-btn-wrap button i { font-size: 24px; color: #202020; }
 .header-type1 .header-box .header-subTitle-wrap { position: absolute; left: 50%; transform: translateX(-50%); }
 .header-type1 .header-box .header-subTitle-wrap .header-subTitle { font-size: 17px; font-weight: 500; }
@@ -398,7 +398,7 @@
 .product-description-box .product-description-content-wrap .price-coupon-wrap { display: flex; justify-content: space-between; }
 .product-description-box .product-description-content-wrap .price-coupon-wrap .price-wrap { display: flex; gap: 10px; align-items: center; }
 .product-description-box .product-description-content-wrap .price-coupon-wrap .price-wrap .discounted-price { font-size: 25px; font-weight: 600; color: #ff990d; }
-.product-description-box .product-description-content-wrap .price-coupon-wrap .price-wrap .original-price { opacity: 0.5; font-size: 20px; color: #8e8e8e; }
+.product-description-box .product-description-content-wrap .price-coupon-wrap .price-wrap .original-price { opacity: 0.5; font-size: 20px; color: #8e8e8e; text-decoration: line-through; }
 .product-description-box .product-description-content-wrap .price-coupon-wrap .coupon-wrap { display: flex; gap: 5px; }
 .product-description-box .product-description-sub-content-wrap { display: block; padding: 20px 20px 26px; border-top: 1px solid #e4e4e4; }
 .product-description-box .product-description-sub-content-wrap > ul { display: flex; gap: 12px; flex-direction: column; }

@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
 import Link from 'next/link';
 
 export default function Header({ subTitle }) {
     const router = useRouter();
     const [showTopBanner, setShowTopBanner] = useState(true); // 초기값 설정
+
+    const token = useSelector(state => state.app.token);
+
+    // 서버와 클라이언트의 불일치를 방지하기 위해 초기 상태를 설정
+    const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+    React.useEffect(() => {
+        setIsLoggedIn(!!token);
+    }, [token]);
 
     // 컴포넌트가 마운트될 때 localStorage에서 상태를 복원
     useEffect(() => {
@@ -20,6 +30,7 @@ export default function Header({ subTitle }) {
         localStorage.setItem('showTopBanner', JSON.stringify(false)); // 상태를 저장
     };
 
+    
 
 
     return (
@@ -42,6 +53,7 @@ export default function Header({ subTitle }) {
                                 <button onClick={() => window.history.back()}>
                                     <i className="xi-arrow-left"></i>
                                 </button>
+                                <button onClick={()=>{router.push("/")}}><i className='xi-home-o'></i></button>
                             </div>
                             <div className='header-subTitle-wrap'>
                                 <p className='header-subTitle'>{subTitle}</p>
@@ -54,6 +66,12 @@ export default function Header({ subTitle }) {
                                 <Link href="/mypage/carts" className="header-btn">
                                     <i className="xi-cart-o"></i>
                                 </Link>
+                                {isLoggedIn ? (
+                                     <Link href={"/mypage"} className='header-btn'><i className='xi-user-o'></i></Link>
+                                ) : (
+                                    <Link href={"/login"} className='header-btn'><i className='xi-log-in'></i></Link>
+                                )}
+                                
                             </div>
                         </div>
                         :
@@ -69,6 +87,11 @@ export default function Header({ subTitle }) {
                                 <Link href="/mypage/carts" className="header-btn">
                                     <i className="xi-cart-o"></i>
                                 </Link>
+                                {isLoggedIn ? (
+                                     <Link href={"/mypage"} className='header-btn'><i className='xi-user-o'></i></Link>
+                                ) : (
+                                    <Link href={"/login"} className='header-btn'><i className='xi-log-in'></i></Link>
+                                )}
                             </div>
                         </div>
                 }
