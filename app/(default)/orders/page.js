@@ -52,7 +52,7 @@ export default function page() {
 
         use_points: 0, // 적립금
         common_entrance_method: "", // 공동현관 출입방법
-        common_entrance_password :"",
+        common_entrance_password: "",
 
         pay_method_method: "card", // 결제방법
 
@@ -89,7 +89,7 @@ export default function page() {
         }
     }, [order])
 
-  
+
 
     // 유저정보고 배송지 뿌리기
     useEffect(() => {
@@ -112,7 +112,7 @@ export default function page() {
                     delivery_address_detail: defaultAddress.address_detail,
                     delivery_request: defaultAddress.delivery_request,
                 }));
-            }else{
+            } else {
                 setForm(prevForm => ({
                     ...prevForm,
                     delivery_name: user.name || "",
@@ -137,67 +137,67 @@ export default function page() {
 
 
     const {
-    totalOriginalPrice,
-    totalDiscountPrice,
-    totalCouponDiscount,
-    totalPointsUsed,
-    totalFinalPrice,
-    totalDiscountAmount
-} = useMemo(() => {
-    if (!order) {
-        return {
-            totalOriginalPrice: 0,
-            totalDiscountPrice: 0,
-            totalCouponDiscount: 0,
-            totalPointsUsed: 0,
-            totalFinalPrice: 0,
-            totalDiscountAmount: 0,
-        };
-    }
-
-    let totalOriginalPrice = 0;
-    let totalDiscountPrice = 0;
-
-    order.orderProducts.forEach((product) => {
-        const { quantity, productOption } = product;
-        totalOriginalPrice += productOption.original_price * quantity;
-        totalDiscountPrice += (productOption.original_price - productOption.price) * quantity;
-    });
-
-    const deliveryFee = order.delivery_fee || 0;
-
-    // 퍼센트 할인 기준: 상품가 - 자체할인 + 배송비
-    const percentBasePrice = totalOriginalPrice - totalDiscountPrice + deliveryFee;
-
-    let totalCouponDiscount = 0;
-
-    // ✅ 퍼센트 쿠폰 적용 (문자열일 수 있으므로 !== "" 체크)
-    if (form.user_coupon_discount_rate !== "") {
-        const rate = parseFloat(form.user_coupon_discount_rate);
-        const percentDiscount = Math.round(percentBasePrice * (rate / 100));
-        const maxDiscount = form.user_coupon_usage_limit_amount || Infinity;
-        totalCouponDiscount = Math.min(percentDiscount, maxDiscount);
-    }
-    // ✅ 정액 쿠폰 적용
-    else if (form.user_coupon_discount_amount !== "") {
-        totalCouponDiscount = parseInt(form.user_coupon_discount_amount, 10) || 0;
-    }
-
-    const totalPointsUsed = parseInt(form.use_points, 10) || 0;
-
-    const totalDiscountAmount = totalDiscountPrice + totalCouponDiscount + totalPointsUsed;
-
-    const totalFinalPrice = totalOriginalPrice - totalDiscountAmount + deliveryFee;
-
-    return {
         totalOriginalPrice,
         totalDiscountPrice,
         totalCouponDiscount,
         totalPointsUsed,
         totalFinalPrice,
-        totalDiscountAmount,
-    };
-}, [order, form]);
+        totalDiscountAmount
+    } = useMemo(() => {
+        if (!order) {
+            return {
+                totalOriginalPrice: 0,
+                totalDiscountPrice: 0,
+                totalCouponDiscount: 0,
+                totalPointsUsed: 0,
+                totalFinalPrice: 0,
+                totalDiscountAmount: 0,
+            };
+        }
+
+        let totalOriginalPrice = 0;
+        let totalDiscountPrice = 0;
+
+        order.orderProducts.forEach((product) => {
+            const { quantity, productOption } = product;
+            totalOriginalPrice += productOption.original_price * quantity;
+            totalDiscountPrice += (productOption.original_price - productOption.price) * quantity;
+        });
+
+        const deliveryFee = order.delivery_fee || 0;
+
+        // 퍼센트 할인 기준: 상품가 - 자체할인 + 배송비
+        const percentBasePrice = totalOriginalPrice - totalDiscountPrice + deliveryFee;
+
+        let totalCouponDiscount = 0;
+
+        // ✅ 퍼센트 쿠폰 적용 (문자열일 수 있으므로 !== "" 체크)
+        if (form.user_coupon_discount_rate !== "") {
+            const rate = parseFloat(form.user_coupon_discount_rate);
+            const percentDiscount = Math.round(percentBasePrice * (rate / 100));
+            const maxDiscount = form.user_coupon_usage_limit_amount || Infinity;
+            totalCouponDiscount = Math.min(percentDiscount, maxDiscount);
+        }
+        // ✅ 정액 쿠폰 적용
+        else if (form.user_coupon_discount_amount !== "") {
+            totalCouponDiscount = parseInt(form.user_coupon_discount_amount, 10) || 0;
+        }
+
+        const totalPointsUsed = parseInt(form.use_points, 10) || 0;
+
+        const totalDiscountAmount = totalDiscountPrice + totalCouponDiscount + totalPointsUsed;
+
+        const totalFinalPrice = totalOriginalPrice - totalDiscountAmount + deliveryFee;
+
+        return {
+            totalOriginalPrice,
+            totalDiscountPrice,
+            totalCouponDiscount,
+            totalPointsUsed,
+            totalFinalPrice,
+            totalDiscountAmount,
+        };
+    }, [order, form]);
 
 
 
@@ -265,7 +265,7 @@ export default function page() {
                     const order = response.data.data;
 
                     router.push(`/orders/result?updated_at=${order.updated_at}&merchant_uid=${order.merchant_uid}&buyer_name=${order.buyer_name}`);
-                },(error)=>{
+                }, (error) => {
                     alert("결제에 실패하였습니다. 문의해 주시기 바랍니다.");
                 })
             } else {
@@ -311,7 +311,7 @@ export default function page() {
                                     isPopup={isPopupOrdersDeliveryAddresses}
                                     setIsPopup={setIsPopupOrdersDeliveryAddresses}
                                 />
-                            :null
+                                : null
                         }
 
                         <div className="buy-cart-items-btn-wrap">
@@ -745,13 +745,13 @@ export default function page() {
                                         <div className="radiobox">
                                             <input
                                                 type="radio"
-                                                id="transfer"
+                                                id="trans"
                                                 name="pay_method_method"
-                                                value="transfer"
-                                                checked={form.pay_method_method == "transfer"}
+                                                value="trans"
+                                                checked={form.pay_method_method == "trans"}
                                                 onChange={changeForm}
                                             />
-                                            <label htmlFor="transfer">계좌이체</label>
+                                            <label htmlFor="trans">계좌이체</label>
                                         </div>
                                     </div>
                                     <Error name={'pay_method_method'} />
