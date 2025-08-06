@@ -745,13 +745,13 @@ export default function page() {
                                         <div className="radiobox">
                                             <input
                                                 type="radio"
-                                                id="vbank"
+                                                id="transfer"
                                                 name="pay_method_method"
-                                                value="vbank"
-                                                checked={form.pay_method_method == "vbank"}
+                                                value="transfer"
+                                                checked={form.pay_method_method == "transfer"}
                                                 onChange={changeForm}
                                             />
-                                            <label htmlFor="vbank">계좌이체</label>
+                                            <label htmlFor="transfer">계좌이체</label>
                                         </div>
                                     </div>
                                     <Error name={'pay_method_method'} />
