@@ -48,7 +48,7 @@ export default function Page() {
 
 5. 고객센터 안내
 운영 시간: 평일 9:00 ~ 18:00 (주말 및 공휴일 제외)
-연락처: 055-944-3533
+연락처: 055-945-3204
 이메일: bezzangecp@naver.com
 
 6. 유의 사항

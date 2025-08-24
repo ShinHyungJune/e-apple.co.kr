@@ -64,7 +64,7 @@ const ProductInformation = ({ product }) => {
                         </li>
                         <li>
                             <p className="label">전화 상담</p>
-                            <p className="content">055-944-3533</p>
+                            <p className="content">055-945-3204</p>
                         </li>
                         <li>
                             <p className="label">상담 시간</p>

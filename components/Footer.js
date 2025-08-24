@@ -5,7 +5,7 @@ const Footer = () => {
         <div className="footer">
             <div className="footer-top">
                 <h3>고객센터</h3>
-                <p className="contact">055-944-3533</p>
+                <p className="contact">055-945-3204</p>
                 <p className="businessHours">평일 09:00~ 18:00 (주말 및 공휴일 휴무)</p>
             </div>
             <div className="footer-bt">
@@ -25,7 +25,7 @@ const Footer = () => {
                     사업자등록번호: 125-87-01503<br />
                     통신판매신고: 제 2019-경남거창-00057 호<br />
                     이메일: bezzangecp@naver.com<br/>
-                    고객센터: 055-944-3533<br/>
+                    고객센터: 055-945-3204<br/>
                     팩스: 0504-436-4104 <br />
                     <br/>
                     모든 거래에 대한 책임과 배송, 환불, 민원등의 처리는 [농업회사법인 열매나무 주식회사]에서 진행합니다
