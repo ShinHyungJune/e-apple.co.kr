@@ -115,22 +115,30 @@ const ProductDescription = ({ product }) => {
                     {/* 상세 정보 */}
                     <div className="product-description-sub-content-wrap">
                         <ul>
-                            <li>
-                                <p className="label">배송비</p>
-                                <p className="content">{product.delivery_fee != 0 ? product.delivery_fee.toLocaleString() + "원" : "무료배송"}</p>
-                            </li>
-                            <li>
-                                <p className="label">출고지</p>
-                                <p className="content">{product.shipping_origin}</p>
-                            </li>
-                            <li>
-                                <p className="label">과일 크기</p>
-                                <p className="content">{product.fruit_size}</p>
-                            </li>
-                            <li>
-                                <p className="label">당도</p>
-                                <p className="content">{product.sugar_content} Brit</p>
-                            </li>
+                            {product.delivery_fee !== null && product.delivery_fee !== undefined && (
+                                <li>
+                                    <p className="label">배송비</p>
+                                    <p className="content">{product.delivery_fee != 0 ? product.delivery_fee.toLocaleString() + "원" : "무료배송"}</p>
+                                </li>
+                            )}
+                            {product.shipping_origin && (
+                                <li>
+                                    <p className="label">출고지</p>
+                                    <p className="content">{product.shipping_origin}</p>
+                                </li>
+                            )}
+                            {product.fruit_size && (
+                                <li>
+                                    <p className="label">과일 크기</p>
+                                    <p className="content">{product.fruit_size}</p>
+                                </li>
+                            )}
+                            {product.sugar_content && (
+                                <li>
+                                    <p className="label">당도</p>
+                                    <p className="content">{product.sugar_content} Brit</p>
+                                </li>
+                            )}
                         </ul>
                     </div>
 
