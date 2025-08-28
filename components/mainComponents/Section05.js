@@ -9,6 +9,10 @@ export default function Section05({ monthlySuggestionProducts = [] }) {
     const swiperRef = useRef(null); // Swiper 인스턴스를 관리하기 위한 Ref
 
     useEffect(() => {
+        // DOM이 준비되었는지 확인
+        const swiperElement = document.querySelector(".mySwiperMonthlySuggestionProducts");
+        if (!swiperElement || monthlySuggestionProducts.length === 0) return;
+
         // Swiper 초기화
         swiperRef.current = new Swiper(".mySwiperMonthlySuggestionProducts", {
             slidesPerView: 1,
@@ -24,7 +28,10 @@ export default function Section05({ monthlySuggestionProducts = [] }) {
         });
 
         return () => {
-            if (swiperRef.current) swiperRef.current.destroy(true, true); // 언마운트 시 삭제
+            if (swiperRef.current && typeof swiperRef.current.destroy === 'function') {
+                swiperRef.current.destroy(true, true); // 언마운트 시 삭제
+                swiperRef.current = null;
+            }
         };
     }, [monthlySuggestionProducts]);
 
