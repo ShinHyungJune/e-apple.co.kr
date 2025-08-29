@@ -136,7 +136,7 @@ const ProductDescription = ({ product }) => {
                             {product.sugar_content && (
                                 <li>
                                     <p className="label">당도</p>
-                                    <p className="content">{product.sugar_content} Brit</p>
+                                    <p className="content">{product.sugar_content} Brix</p>
                                 </li>
                             )}
                         </ul>
