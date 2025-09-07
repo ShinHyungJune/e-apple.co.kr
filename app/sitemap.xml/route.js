@@ -1,11 +1,13 @@
-import { api } from '@/lib/api/api';
+import axios from 'axios';
 
 export async function GET() {
     try {
         const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://e-apple.co.kr';
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
         
         // Get all products for sitemap
-        const products = await api('/api/products?itemsPerPage=1000');
+        const response = await axios.get(`${apiUrl}/api/products?itemsPerPage=1000`);
+        const products = response.data;
         
         // Static pages
         const staticPages = [

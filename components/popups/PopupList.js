@@ -26,31 +26,58 @@ const PopupList = ({ isPopup, setIsPopup }) => {
     if(isPopup)
     return (
         <>
-            <div className="popup-wrap add-bottomNav">
-                <div className="popup-wrap-bg" onClick={() => { setIsPopup(false) }}></div>
+            <div className="popup-wrap add-bottomNav" role="dialog" aria-modal="true" aria-label="카테고리 목록">
+                <div 
+                    className="popup-wrap-bg" 
+                    onClick={() => { setIsPopup(false) }}
+                    aria-label="팝업 닫기"
+                ></div>
                 <div className="popup-box-type1 no-x-padding">
                     <div className="popup-close-btn-wrap">
-                        <button className="popup-close-btn" onClick={() => { setIsPopup(false) }}></button>
+                        <button 
+                            className="popup-close-btn" 
+                            onClick={() => { setIsPopup(false) }}
+                            aria-label="팝업 닫기"
+                            type="button"
+                        ></button>
                     </div>
                     <div className="popup-content-wrap">
-                        <div className="category-list-type1 pb-20">
+                        <nav className="category-list-type1 pb-20" aria-label="상품 카테고리 네비게이션">
                             {
                                 categories.map((category) => (
                                     <div className="category-main" key={category.value}>
                                         <div className="category-main-btn">
-                                            <button onClick={() => handleCategoryClick(category.value, "")}>
+                                            <button 
+                                                onClick={() => handleCategoryClick(category.value, "")}
+                                                aria-label={`${category.text} 카테고리 전체 보기`}
+                                                type="button"
+                                            >
                                                 {category.text}
                                             </button>
                                         </div>
                                         {category.items && (
-                                            <ul className="category-sub">
-                                                <li onClick={() => handleCategoryClick(category.value, "")}>전체보기</li>
+                                            <ul className="category-sub" role="list">
+                                                <li role="listitem">
+                                                    <button 
+                                                        onClick={() => handleCategoryClick(category.value, "")}
+                                                        aria-label={`${category.text} 전체보기`}
+                                                        type="button"
+                                                    >
+                                                        전체보기
+                                                    </button>
+                                                </li>
                                                 {category.items.map((subCategory) => (
                                                     <li
                                                         key={subCategory.value}
-                                                        onClick={() => handleCategoryClick(category.value, subCategory.value)}
+                                                        role="listitem"
                                                     >
-                                                        {subCategory.text}
+                                                        <button
+                                                            onClick={() => handleCategoryClick(category.value, subCategory.value)}
+                                                            aria-label={`${category.text} - ${subCategory.text}`}
+                                                            type="button"
+                                                        >
+                                                            {subCategory.text}
+                                                        </button>
                                                     </li>
                                                 ))}
                                             </ul>
@@ -58,7 +85,7 @@ const PopupList = ({ isPopup, setIsPopup }) => {
                                     </div>
                                 ))
                             }
-                        </div>
+                        </nav>
                     </div>
                 </div>
             </div>

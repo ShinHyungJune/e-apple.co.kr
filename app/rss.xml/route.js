@@ -1,9 +1,11 @@
-import { api } from '@/lib/api/api';
+import axios from 'axios';
 
 export async function GET() {
     try {
         // Get recent products for RSS feed
-        const recentProducts = await api('/api/products?itemsPerPage=30&sortBy=created_at&sortDesc=true');
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+        const response = await axios.get(`${apiUrl}/api/products?itemsPerPage=30&sortBy=created_at&sortDesc=true`);
+        const recentProducts = response.data;
         
         const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://e-apple.co.kr';
         
