@@ -40,14 +40,21 @@ export async function GET() {
         </url>
     `).join('');
         
-        const productUrls = products.data.map(product => `
+        const productUrls = products.data.map(product => {
+            const date = product.updated_at || product.created_at;
+            const lastmod = date && !isNaN(new Date(date).getTime()) 
+                ? new Date(date).toISOString() 
+                : new Date().toISOString();
+            
+            return `
         <url>
             <loc>${baseUrl}/products/${product.category}/${product.slug || product.id}</loc>
-            <lastmod>${new Date(product.updated_at || product.created_at).toISOString()}</lastmod>
+            <lastmod>${lastmod}</lastmod>
             <changefreq>weekly</changefreq>
             <priority>0.6</priority>
         </url>
-    `).join('');
+    `;
+        }).join('');
 
         const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

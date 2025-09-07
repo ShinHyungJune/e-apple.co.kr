@@ -21,7 +21,7 @@ const nextConfig = {
     
     // 불필요한 페이지 사전 렌더링 방지
     experimental: {
-        optimizeCss: true,
+        optimizeCss: false, // critters 모듈 없어서 비활성화
         scrollRestoration: true,
     },
     
