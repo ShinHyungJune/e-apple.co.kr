@@ -16,32 +16,47 @@ export default function ProductItemType1({ product }) {
         return (
             <>
                 {isPopupOrder ? <PopupOrder product={product} setIsPopupOrder={setIsPopupOrder} onlyCart={true} onSuccess={() => {setShowToast(true);}} /> : null}
-                <div className="item-type1">
+                <article className="item-type1" role="article">
                     <div className="item-img-wrap">
-                        <Link href={`/products/${product.id}`} className="img">
-                            <img src={product.img?.url} alt={product.name} />
+                        <Link href={`/products/${product.id}`} className="img" aria-label={`${product.name} 상품 상세 페이지로 이동`}>
+                            <img src={product.img?.url} alt={`${product.name} 상품 이미지`} />
                         </Link>
                         {product.is_new ?
-                            <div className="new">
+                            <div className="new" aria-label="신상품">
                                 NEW
                             </div>
                             : null}
-                        <button className="cart-btn active" onClick={()=>{setIsPopupOrder(true)}}></button>
+                        <button 
+                            className="cart-btn active" 
+                            onClick={()=>{setIsPopupOrder(true)}}
+                            aria-label={`${product.name} 장바구니에 담기`}
+                            type="button"
+                        ></button>
                     </div>
                     <div className="item-content-wrap">
-                        <Link href={`/products/${product.id}`} className="item-name">
+                        <Link href={`/products/${product.id}`} className="item-name" aria-label={`${product.name} 상품 상세 보기`}>
                             {product.name}
                         </Link>
                         <div className="price-wrap">
-                            <p className="discounted-price">{product.price.toLocaleString()}원</p>
-                            <p className="original-price">{product.original_price.toLocaleString()}원</p>
+                            <p className="discounted-price" aria-label={`할인가 ${product.price.toLocaleString()}원`}>
+                                {product.price.toLocaleString()}원
+                            </p>
+                            <p className="original-price" aria-label={`원가 ${product.original_price.toLocaleString()}원`}>
+                                {product.original_price.toLocaleString()}원
+                            </p>
                         </div>
                         <div className="sub-content">
-                            <p><i className="xi-star-o"></i>{product.average_rating ? parseFloat(product.average_rating).toFixed(1) : "0"}</p>
-                            <p><i className="xi-eye-o"></i>{product.view_count}</p>
+                            <p aria-label={`평점 ${product.average_rating ? parseFloat(product.average_rating).toFixed(1) : "0"}점`}>
+                                <i className="xi-star-o" aria-hidden="true"></i>
+                                {product.average_rating ? parseFloat(product.average_rating).toFixed(1) : "0"}
+                            </p>
+                            <p aria-label={`조회수 ${product.view_count}회`}>
+                                <i className="xi-eye-o" aria-hidden="true"></i>
+                                {product.view_count}
+                            </p>
                         </div>
                     </div>
-                </div>
+                </article>
                 {/* 장바구니 추가 완료 팝업 */}
                 {showToast && (
                     <ToastAlert

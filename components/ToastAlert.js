@@ -21,18 +21,25 @@ export default function ToastAlert({
     if (!visible) return null; // 알림이 사라졌을 때 렌더링 안 함
 
     return (
-        <div className="toastAlert-type1">
+        <div 
+            className="toastAlert-type1" 
+            role="alert" 
+            aria-live="polite" 
+            aria-atomic="true"
+        >
             <div className="toastAlert-le">
                 <p>
-                    <i className="xi-check-circle"></i> {message}
+                    <i className="xi-check-circle" aria-hidden="true"></i> {message}
                 </p>
             </div>
             <div className="toastAlert-ri">
                 <button
+                    type="button"
                     className="link-button"
                     onClick={() => {
                         if (onNavigate) onNavigate(); // 클릭 시 외부 동작 실행
                     }}
+                    aria-label={navigateText}
                 >
                     {navigateText}
                 </button>

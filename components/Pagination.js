@@ -68,18 +68,30 @@ export default function Pagination({ meta, form, setForm, noScroll = false }) {
     }
 
     return (
-        <div className="m-pagination type02">
+        <nav className="m-pagination type02" role="navigation" aria-label="페이지 네비게이션">
             <div className="m-pages">
                 <div className="m-page-wrap">
-                    <button type="button" className="m-page" onClick={first}>
-                        <i className="xi-angle-left"></i>
-                        <i className="xi-angle-left"></i>
+                    <button 
+                        type="button" 
+                        className="m-page" 
+                        onClick={first}
+                        aria-label="첫 번째 페이지로 이동"
+                        disabled={meta.current_page === 1}
+                    >
+                        <i className="xi-angle-left" aria-hidden="true"></i>
+                        <i className="xi-angle-left" aria-hidden="true"></i>
                     </button>
                 </div>
 
                 <div className="m-page-wrap">
-                    <button type="button" className="m-page" onClick={prev}>
-                        <i className="xi-angle-left"></i>
+                    <button 
+                        type="button" 
+                        className="m-page" 
+                        onClick={prev}
+                        aria-label="이전 페이지로 이동"
+                        disabled={meta.current_page === 1}
+                    >
+                        <i className="xi-angle-left" aria-hidden="true"></i>
                     </button>
                 </div>
 
@@ -90,6 +102,8 @@ export default function Pagination({ meta, form, setForm, noScroll = false }) {
                             type="button"
                             className={pageClass(page)}
                             onClick={() => paginate(page)}
+                            aria-label={`${page}페이지로 이동`}
+                            aria-current={meta.current_page === page ? "page" : undefined}
                         >
                             {page}
                         </button>
@@ -97,18 +111,30 @@ export default function Pagination({ meta, form, setForm, noScroll = false }) {
                 ))}
 
                 <div className="m-page-wrap">
-                    <button type="button" className="m-page" onClick={next}>
-                        <i className="xi-angle-right"></i>
+                    <button 
+                        type="button" 
+                        className="m-page" 
+                        onClick={next}
+                        aria-label="다음 페이지로 이동"
+                        disabled={meta.current_page === meta.last_page}
+                    >
+                        <i className="xi-angle-right" aria-hidden="true"></i>
                     </button>
                 </div>
 
                 <div className="m-page-wrap">
-                    <button type="button" className="m-page" onClick={last}>
-                        <i className="xi-angle-right"></i>
-                        <i className="xi-angle-right"></i>
+                    <button 
+                        type="button" 
+                        className="m-page" 
+                        onClick={last}
+                        aria-label="마지막 페이지로 이동"
+                        disabled={meta.current_page === meta.last_page}
+                    >
+                        <i className="xi-angle-right" aria-hidden="true"></i>
+                        <i className="xi-angle-right" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
-        </div>
+        </nav>
     );
 }

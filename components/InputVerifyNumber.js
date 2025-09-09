@@ -42,7 +42,9 @@ function InputVerifyNumber({ contactValue, authCodeValue, verifyNumberState, set
         <div>
             <div className="flex flex-vc">
                 <div className={`input-box flex-1 mx560 mr8 ${verifyNumberState ? "readonly" : "" }`}>
+                    <label htmlFor="contact-input" className="sr-only">연락처</label>
                     <input
+                        id="contact-input"
                         type="text"
                         name="contact"
                         value={contactValue}
@@ -56,16 +58,22 @@ function InputVerifyNumber({ contactValue, authCodeValue, verifyNumberState, set
                         placeholder="연락처"
                         readOnly={verifyNumberState}
                         inputMode="numeric" // 모바일에서 숫자 키패드가 나오도록 설정
+                        aria-label="전화번호 입력"
+                        aria-describedby={verifyNumberState ? "verify-complete-message" : "contact-help"}
                     />
                 </div>
                 {
                     !verifyNumberState ?
                         <div className="button-box w120 w-lg-90">
-                            <a href="#" className={`btn ${ contactValue ? "btn-bd-black" : "btn-lightgray"} h40 px0 flex-1` }
+                            <button 
+                                type="button" 
+                                className={`btn ${ contactValue ? "btn-bd-black" : "btn-lightgray"} h40 px0 flex-1` }
                                 onClick={store}
+                                aria-label="연락처 인증번호 발송"
+                                disabled={!contactValue}
                             >
                                 연락처 확인
-                            </a>
+                            </button>
                         </div>
                     :""
                 }
@@ -74,27 +82,37 @@ function InputVerifyNumber({ contactValue, authCodeValue, verifyNumberState, set
                 state == 2 ?
                     <div className="flex flex-vc mt8">
                         <div className="input-box flex-1 mx560 mr8">
+                            <label htmlFor="auth-code-input" className="sr-only">인증번호</label>
                             <input
+                                id="auth-code-input"
                                 type="text"
                                 name="authCode"
                                 value={authCodeValue}
                                 onChange={onChange}
                                 placeholder="인증번호"
+                                aria-label="인증번호 입력"
+                                aria-describedby="auth-code-help"
+                                inputMode="numeric"
                             />
                         </div>
                         <div className="button-box w120 w-lg-90">
-                            <a href="#" className="btn btn-bd-black h40 px0 flex-1"
-                            onClick={update}
+                            <button 
+                                type="button" 
+                                className="btn btn-bd-black h40 px0 flex-1"
+                                onClick={update}
+                                aria-label="인증번호 확인"
                             >
                                 확인
-                            </a>
+                            </button>
                         </div>
                     </div>
                     : ""
             }
             {
                 verifyNumberState ?
-                    <div className="m-input-help type01">*인증이 완료되었습니다.</div>
+                    <div id="verify-complete-message" className="m-input-help type01" role="status" aria-live="polite">
+                        *인증이 완료되었습니다.
+                    </div>
                 :""
             }
             <Error name={'contact'} />

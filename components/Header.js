@@ -37,62 +37,72 @@ export default function Header({ subTitle }) {
         <>
             <div className="header-type1">
                 {showTopBanner && ( // showTopBanner가 true일 때만 렌더링
-                    <div className="topBanner">
-                        <Link href="/">
+                    <div className="topBanner" role="banner" aria-label="프로모션 배너">
+                        <Link href="/" aria-label="회원가입 페이지로 이동">
                             회원가입하고 열매나무의 신선한 상품을 할인받아보세요!
                         </Link>
-                        <button onClick={handleCloseBanner}>
-                            <i className="xi-close"></i>
+                        <button onClick={handleCloseBanner} aria-label="배너 닫기">
+                            <i className="xi-close" aria-hidden="true"></i>
                         </button>
                     </div>
                 )}
                 {
                     subTitle ?
-                        <div className='header-box'>
+                        <div className='header-box' role="banner">
                             <div className="back-btn-wrap">
-                                <button onClick={() => window.history.back()}>
-                                    <i className="xi-arrow-left"></i>
+                                <button onClick={() => window.history.back()} aria-label="이전 페이지로 돌아가기">
+                                    <i className="xi-arrow-left" aria-hidden="true"></i>
                                 </button>
-                                <button onClick={()=>{router.push("/")}}><i className='xi-home-o'></i></button>
+                                <button onClick={()=>{router.push("/")}} aria-label="홈페이지로 이동">
+                                    <i className='xi-home-o' aria-hidden="true"></i>
+                                </button>
                             </div>
                             <div className='header-subTitle-wrap'>
-                                <p className='header-subTitle'>{subTitle}</p>
+                                <h1 className='header-subTitle'>{subTitle}</h1>
                             </div>
 
-                            <div className="header-btn-wrap">
-                                <button onClick={()=>{router.push("/products/search")}} className="header-btn search-open-btn">
-                                    <i className="xi-search"></i>
+                            <nav className="header-btn-wrap" aria-label="주요 기능 메뉴">
+                                <button onClick={()=>{router.push("/products/search")}} className="header-btn search-open-btn" aria-label="상품 검색">
+                                    <i className="xi-search" aria-hidden="true"></i>
                                 </button>
-                                <Link href="/mypage/carts" className="header-btn">
-                                    <i className="xi-cart-o"></i>
+                                <Link href="/mypage/carts" className="header-btn" aria-label="장바구니">
+                                    <i className="xi-cart-o" aria-hidden="true"></i>
                                 </Link>
                                 {isLoggedIn ? (
-                                     <Link href={"/mypage"} className='header-btn'><i className='xi-user-o'></i></Link>
+                                     <Link href={"/mypage"} className='header-btn' aria-label="마이페이지">
+                                        <i className='xi-user-o' aria-hidden="true"></i>
+                                     </Link>
                                 ) : (
-                                    <Link href={"/login"} className='header-btn'><i className='xi-log-in'></i></Link>
+                                    <Link href={"/login"} className='header-btn' aria-label="로그인">
+                                        <i className='xi-log-in' aria-hidden="true"></i>
+                                    </Link>
                                 )}
                                 
-                            </div>
+                            </nav>
                         </div>
                         :
-                        <div className="header-box">
-                            <Link href="/" className="logo">
-                                <img src="/images/logo.png" alt="" />
+                        <div className="header-box" role="banner">
+                            <Link href="/" className="logo" aria-label="열매나무 홈페이지로 이동">
+                                <img src="/images/logo.png" alt="열매나무 로고" />
                             </Link>
 
-                            <div className="header-btn-wrap">
-                                <button onClick={()=>{router.push("/products/search")}} className="header-btn search-open-btn">
-                                    <i className="xi-search"></i>
+                            <nav className="header-btn-wrap" aria-label="주요 기능 메뉴">
+                                <button onClick={()=>{router.push("/products/search")}} className="header-btn search-open-btn" aria-label="상품 검색">
+                                    <i className="xi-search" aria-hidden="true"></i>
                                 </button>
-                                <Link href="/mypage/carts" className="header-btn">
-                                    <i className="xi-cart-o"></i>
+                                <Link href="/mypage/carts" className="header-btn" aria-label="장바구니">
+                                    <i className="xi-cart-o" aria-hidden="true"></i>
                                 </Link>
                                 {isLoggedIn ? (
-                                     <Link href={"/mypage"} className='header-btn'><i className='xi-user-o'></i></Link>
+                                     <Link href={"/mypage"} className='header-btn' aria-label="마이페이지">
+                                        <i className='xi-user-o' aria-hidden="true"></i>
+                                     </Link>
                                 ) : (
-                                    <Link href={"/login"} className='header-btn'><i className='xi-log-in'></i></Link>
+                                    <Link href={"/login"} className='header-btn' aria-label="로그인">
+                                        <i className='xi-log-in' aria-hidden="true"></i>
+                                    </Link>
                                 )}
-                            </div>
+                            </nav>
                         </div>
                 }
             </div>

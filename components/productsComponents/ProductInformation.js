@@ -103,7 +103,7 @@ const ProductInformation = ({ product }) => {
                         <li>
                             <p className="label">반품 배송지</p>
                             <p className="content">
-                                [50147] 경남 거창군 거창읍 거함대로 3372 서북부경남거점산지유통센터(APC) 
+                                [{product.return_postal_code || '50147'}] {product.return_address || '경남 거창군 거창읍 거함대로 3372'} {product.return_address_detail || '서북부경남거점산지유통센터(APC)'} 
                             </p>
                         </li>
                     </ul>
