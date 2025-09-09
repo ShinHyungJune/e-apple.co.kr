@@ -892,6 +892,7 @@
     cursor: pointer;
     z-index: 98; /* Just below bottomNav (99) */
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    font-size: 0;
 }
 
 .floating-kakao-button:hover {
