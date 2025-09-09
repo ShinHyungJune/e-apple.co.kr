@@ -44,7 +44,7 @@ const AddressInput = ({ form, setForm, addressType }) => {
             <div>
                 <div className="input-txt-btn-box">
                     <div className="input-txt-box-type1 disabled">
-                        <label htmlFor={`${postalCodeField}-input`} className="sr-only">우편번호</label>
+                        {/* <label htmlFor={`${postalCodeField}-input`} className="sr-only">우편번호</label> */}
                         <input
                             id={`${postalCodeField}-input`}
                             type="text"
@@ -73,7 +73,7 @@ const AddressInput = ({ form, setForm, addressType }) => {
             {/* 주소 */}
             <div>
                 <div className="input-txt-box-type1 disabled">
-                    <label htmlFor={`${addressField}-input`} className="sr-only">주소</label>
+                    {/* <label htmlFor={`${addressField}-input`} className="sr-only">주소</label> */}
                     <input
                         id={`${addressField}-input`}
                         type="text"
@@ -90,7 +90,7 @@ const AddressInput = ({ form, setForm, addressType }) => {
             {/* 상세주소 */}
             <div>
                 <div className="input-txt-box-type1">
-                    <label htmlFor={`${addressDetailField}-input`} className="sr-only">상세주소</label>
+                    {/* <label htmlFor={`${addressDetailField}-input`} className="sr-only">상세주소</label> */}
                     <input
                         id={`${addressDetailField}-input`}
                         type="text"
