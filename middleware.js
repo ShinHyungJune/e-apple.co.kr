@@ -13,8 +13,10 @@ export function middleware(request){
             return NextResponse.redirect(new URL('/admin/login?redirect=' + pathnameWithParams, request.url));
     }
 
-    if (!user)
-        return NextResponse.redirect(new URL('/login?redirect=' + pathnameWithParams, request.url));
+    if (pathname.startsWith('/mypage')) {
+        if (!user)
+            return NextResponse.redirect(new URL('/login?redirect=' + pathnameWithParams, request.url));
+    }
 
     return NextResponse.next();
 }
