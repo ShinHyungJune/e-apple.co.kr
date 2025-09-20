@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Header from "@/components/Header";
 import MainTabMenu from "@/components/library/MainTabMenu";
+import PopBanner from "@/components/PopBanner";
+import "@/styles/popBanner.css";
 import Section01 from "@/components/mainComponents/Section01";
 import Section02 from "@/components/mainComponents/Section02";
 import Section03 from "@/components/mainComponents/Section03";
@@ -41,6 +43,7 @@ export default function Start() {
             <div className="gradient-bg"></div>
 
             <Header />
+            <PopBanner />
             <div className="body main-page">
                 {
                     data

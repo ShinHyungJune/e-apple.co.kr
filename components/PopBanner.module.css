@@ -1,0 +1,254 @@
+/* PC 사이드 팝업 배너 */
+.pcPopBanner {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    z-index: 999;
+    width: 400px;
+}
+
+.bannerContainer {
+    position: relative;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    overflow: visible;
+}
+
+.closeBtn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #333;
+    color: white;
+    border: 2px solid white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.closeBtn:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.bannerContent {
+    cursor: pointer;
+}
+
+.indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+    z-index: 10;
+}
+
+.indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.indicator.active {
+    background: white;
+}
+
+.pcNavigation {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+    z-index: 10;
+}
+
+.prevBtn, .nextBtn {
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.prevBtn:hover, .nextBtn:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* 모바일 오버레이 */
+.mobileOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 모바일 팝업 */
+.mobilePopBanner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    width: 90%;
+    max-width: 400px;
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.mobileContainer {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.mobileHeader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    z-index: 10;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), transparent);
+}
+
+.mobileCloseBtn {
+    display: none;
+}
+
+
+
+/* Mobile image with overlay indicators */
+.mobileBannerImage {
+    line-height: 0;
+    position: relative;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    overflow: hidden;
+}
+
+.mobileSwiper {
+    width: 100%;
+    height: auto;
+}
+
+.mobileSwiper .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.mobileImageIndicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 5;
+}
+
+.mobileImageDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mobileImageDot.active {
+    background: white;
+    width: 24px;
+    border-radius: 4px;
+}
+
+
+.mobileOption {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border-top: 1px solid #f0f0f0;
+    background: white;
+}
+
+.todayCloseBtn, .closeTextBtn {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.todayCloseBtn:hover, .closeTextBtn:hover {
+    color: #333;
+    text-decoration: underline;
+}
+
+/* 768px 이하에서 모바일 뷰 */
+@media (max-width: 768px) {
+    .pcPopBanner {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    .mobilePopBanner {
+        display: none;
+    }
+}
+
+/* 1200px 이하에서 PC 배너 크기 조정 */
+@media (max-width: 1400px) {
+    .pcPopBanner {
+        width: 300px;
+        right: 20px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .pcPopBanner {
+        width: 250px;
+        right: 15px;
+        bottom: 15px;
+    }
+}

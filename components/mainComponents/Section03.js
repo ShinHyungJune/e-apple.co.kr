@@ -1,27 +1,38 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import Swiper from "swiper";
 export default function Section03({sweetness=[], standard_datetime}) {
+    const swiperRef = useRef(null);
 
     useEffect(() => {
-        let swiper;
-
-        // Swiper 초기화 함수
-        const initializeSwiper2 = () => {
-            if (swiper) {
-                swiper.destroy(true, true); // 기존 Swiper 인스턴스가 있으면 삭제
+        // 기존 Swiper 인스턴스가 있으면 삭제
+        if (swiperRef.current && swiperRef.current.destroy) {
+            try {
+                swiperRef.current.destroy(true, true);
+                swiperRef.current = null;
+            } catch (e) {
+                console.error("Failed to destroy existing swiper:", e);
             }
-            swiper = new Swiper(".mySwiperSweetness", {
+        }
+
+        // 새 Swiper 인스턴스 생성
+        if (sweetness.length > 0) {
+            swiperRef.current = new Swiper(".mySwiperSweetness", {
                 slidesPerView: 3.5,
                 spaceBetween: 10,
             });
-        };
-
-        initializeSwiper2();
+        }
 
         // 컴포넌트 언마운트 시 Swiper 인스턴스 삭제
         return () => {
-            if (swiper) swiper.destroy(true, true);
+            if (swiperRef.current && swiperRef.current.destroy) {
+                try {
+                    swiperRef.current.destroy(true, true);
+                    swiperRef.current = null;
+                } catch (e) {
+                    console.error("Failed to destroy swiper on unmount:", e);
+                }
+            }
         };
     }, [sweetness]);
 

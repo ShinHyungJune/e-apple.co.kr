@@ -1,28 +1,39 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import Swiper from "swiper";
 import ProductItemType1 from "../library/ProductItemType1";
 export default function Section06({Products=[]}) {
+    const swiperRef = useRef(null);
 
     useEffect(() => {
-        let swiper;
-
-        // Swiper 초기화 함수
-        const initializeSwiper2 = () => {
-            if (swiper) {
-                swiper.destroy(true, true); // 기존 Swiper 인스턴스가 있으면 삭제
+        // 기존 Swiper 인스턴스가 있으면 삭제
+        if (swiperRef.current && swiperRef.current.destroy) {
+            try {
+                swiperRef.current.destroy(true, true);
+                swiperRef.current = null;
+            } catch (e) {
+                console.error("Failed to destroy existing swiper:", e);
             }
-            swiper = new Swiper(".mySwiperBestProducts", {
+        }
+
+        // 새 Swiper 인스턴스 생성
+        if (Products.length > 0) {
+            swiperRef.current = new Swiper(".mySwiperBestProducts", {
                 slidesPerView: 2.3,
                 spaceBetween: 10,
             });
-        };
-
-        initializeSwiper2();
+        }
 
         // 컴포넌트 언마운트 시 Swiper 인스턴스 삭제
         return () => {
-            if (swiper) swiper.destroy(true, true);
+            if (swiperRef.current && swiperRef.current.destroy) {
+                try {
+                    swiperRef.current.destroy(true, true);
+                    swiperRef.current = null;
+                } catch (e) {
+                    console.error("Failed to destroy swiper on unmount:", e);
+                }
+            }
         };
     }, [Products]);
 

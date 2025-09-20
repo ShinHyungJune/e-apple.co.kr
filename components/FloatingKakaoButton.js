@@ -13,7 +13,6 @@ const FloatingKakaoButton = () => {
             type="button"
         >
             <img src="/images/sns-kakao.png" alt="카카오톡 아이콘" aria-hidden="true" />
-            <span className="sr-only">카카오톡 상담</span>
         </button>
     );
 };

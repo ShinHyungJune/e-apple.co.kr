@@ -1,0 +1,160 @@
+/* 팝업 배너 공통 스타일 */
+.popBanner {
+    position: fixed;
+    z-index: 999;
+    width: 90%;
+    max-width: 400px;
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+/* 모바일: 중앙 모달 */
+@media (max-width: 768px) {
+    .popBanner {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* PC: 우측 하단 - wrap(최대 475px)에서 50px 떨어진 위치 */
+@media (min-width: 769px) {
+    .popBanner {
+        left: calc(50% + 237.5px + 50px); /* wrap의 절반(237.5px) + 50px 간격 */
+        bottom: 30px;
+        width: 400px;
+    }
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* PC용 애니메이션 */
+@media (min-width: 769px) {
+    @keyframes modalSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+.popBannerContainer {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.popBannerHeader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    z-index: 10;
+    border-radius: 20px 20px 0 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), transparent);
+}
+
+.popBannerCloseBtn {
+    display: none;
+}
+
+/* 배너 이미지 영역 */
+.popBannerImage {
+    line-height: 0;
+    position: relative;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    overflow: hidden;
+}
+
+.popBannerSwiper {
+    width: 100%;
+    height: auto;
+}
+
+.popBannerSwiper .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* 도트 인디케이터 */
+.popBannerIndicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 5;
+}
+
+.popBannerDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.popBannerDot.active {
+    background: white;
+    width: 24px;
+    border-radius: 4px;
+}
+
+/* 하단 옵션 영역 */
+.popBannerOption {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border-top: 1px solid #f0f0f0;
+    background: white;
+}
+
+.popBannerTodayCloseBtn, .popBannerCloseTextBtn {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.popBannerTodayCloseBtn:hover, .popBannerCloseTextBtn:hover {
+    color: #333;
+    text-decoration: underline;
+}
+
+/* 화면이 좋아서 wrap + 팝업이 화면에 다 안들어오면 오른쪽 가장자리로 */
+@media (max-width: 1200px) and (min-width: 769px) {
+    .popBanner {
+        width: 350px;
+        left: auto;
+        right: 20px;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+    .popBanner {
+        width: 300px;
+        left: auto;
+        right: 15px;
+        bottom: 15px;
+    }
+}
