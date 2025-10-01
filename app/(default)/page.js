@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "@/components/Header";
 import MainTabMenu from "@/components/library/MainTabMenu";
 import PopBanner from "@/components/PopBanner";
+import DeliveryPopup from "@/components/DeliveryPopup";
 import "@/styles/popBanner.css";
 import Section01 from "@/components/mainComponents/Section01";
 import Section02 from "@/components/mainComponents/Section02";
@@ -44,6 +45,7 @@ export default function Start() {
 
             <Header />
             <PopBanner />
+            <DeliveryPopup />
             <div className="body main-page">
                 {
                     data
