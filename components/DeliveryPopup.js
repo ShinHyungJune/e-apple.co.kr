@@ -42,7 +42,7 @@ export default function DeliveryPopup() {
                     {/* 이미지 */}
                     <div className={styles.imageWrapper}>
                         <Image
-                            src="/images/delivery.png?v=2"
+                            src="/images/delivery.png?v=3"
                             alt="배송휴무안내"
                             width={400}
                             height={600}
