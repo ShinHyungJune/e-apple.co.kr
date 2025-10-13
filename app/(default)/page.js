@@ -45,7 +45,7 @@ export default function Start() {
 
             <Header />
             <PopBanner />
-            <DeliveryPopup />
+            {/*<DeliveryPopup />*/}
             <div className="body main-page">
                 {
                     data
