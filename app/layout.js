@@ -19,7 +19,7 @@ export const metadata = {
         siteName: '열매나무',
         locale: 'ko_KR',
         type: 'website',
-        // images: ['/image/thumbnail-wide.png'],
+        images: ['/image/thumb.png'],
     },
     alternates: {
         canonical: 'https://e-apple.co.kr',
